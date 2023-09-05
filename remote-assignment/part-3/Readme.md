@@ -1,4 +1,4 @@
-# 🌐 Remote Learning Assignment - Week 4
+# 🌐 Remote Learning Assignment - Week 3
 
 ## 🚀 Getting Started
 
@@ -32,7 +32,7 @@ https://github.com/AppWorks-School-Materials/Campus-Program04/assets/61413679/ff
    > **🔔 Note:** We'll be skipping app routing for now. Ensure your settings mirror the given example.
    <img width="757" alt="Screen Shot 2023-09-03 at 3 05 12 AM" src="https://github.com/AppWorks-School-Materials/Campus-Program04/assets/61413679/fa29df42-c6ba-4821-ada1-b7e7f0d14614">
 
-2. Integrate [Tailwind CSS](https://tailwindcss.com/docs/installation) seamlessly into your project.
+2. Integrate [Tailwind CSS](https://tailwindcss.com/docs/installation) into your project.
 3. Design your page with Next.js and Tailwind CSS, using the provided video as a guide.
 4. Again, use `getPostData.js` mock data to show post details.
 
