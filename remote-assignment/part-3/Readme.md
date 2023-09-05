@@ -8,7 +8,14 @@
 
 ## 📌 Overview
 
-In this assignment, we'll use React and Next.js to create a webpage. We'll also try out different styling methods with Styled-Components and Tailwind.
+In this assignment, we'll use React and Next.js to create a simple interactive post. We'll also explore different styling methods with Styled-Components and Tailwind.
+1. Realize post layout
+2. Like the post or retract the like.
+3. Provide answers to the listed "Questions to Ponder" directly on the post.
+
+https://github.com/AppWorks-School-Materials/Campus-Program04/assets/61413679/ff279ba8-27a8-4e64-9387-018b45688739
+
+
 
 > **🔔 Reminder:** Adhering to naming conventions is important. Ensure you're in sync with widely recognized practices. For guidance, consult the [Airbnb Coding Style Guide](https://github.com/airbnb/javascript/tree/master/react#naming). Focus especially on: `Naming`, `Quotes`, `Spacing`, `Props`, `Parentheses`, `Tags`.
 
@@ -23,13 +30,15 @@ In this assignment, we'll use React and Next.js to create a webpage. We'll also 
 
 1. Kickstart with [Create Next.js App - Getting Started](https://nextjs.org/docs/getting-started/installation).
    > **🔔 Note:** We'll be skipping app routing for now. Ensure your settings mirror the given example.
+   <img width="757" alt="Screen Shot 2023-09-03 at 3 05 12 AM" src="https://github.com/AppWorks-School-Materials/Campus-Program04/assets/61413679/fa29df42-c6ba-4821-ada1-b7e7f0d14614">
+
 2. Integrate [Tailwind CSS](https://tailwindcss.com/docs/installation) seamlessly into your project.
 3. Design your page with Next.js and Tailwind CSS, using the provided video as a guide.
 4. Again, use `getPostData.js` mock data to show post details.
 
 ## ❓ Questions to Ponder
 
-Answer the questions and add them to your post (replace "This is a sample IG post."):
+Answer the questions and add them to your post (under "This is a sample post."):
 
 - Why do we use Node.js? What does it do?
 - Explain the Styled-Component you made. What's CSS-in-JS, and how does it help compared to regular CSS?
