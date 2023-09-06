@@ -144,7 +144,6 @@ You need to answer the quesions above in the PR description (including the obser
    - Elastic IP address
    - Database name
    - Change summary
-   - Pull request will like this:
-![](images/r2-1.png)
+   - Pull request will like this: ![](images/r1-4.png)
 
 1. Bravo! 🎉 Having wrapped up this week's tasks, alert your mentor for a review of your GitHub repository.
