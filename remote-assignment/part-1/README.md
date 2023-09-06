@@ -125,7 +125,7 @@ requestAsyncAwait(url);
 
 ## ❓ Understanding Check
 
-1. How do you make sure that you can connect into your RDS?
+1. How do you make sure that you can connect into your RDS? And please post the successfully connected screen shot.
 2. If we stop the EC2 instance and start it again, would the IP address change? Why?
 3. What's the purpose of using Elastic IP?
 
