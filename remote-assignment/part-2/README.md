@@ -202,8 +202,10 @@ Passwords should contain at least three of the four character types:
     | :---: | :---: | :--- |
     | error | String | Error message. |
 
-### Advanced Optional
+### 📌 Advanced Optional
 The website url we visit in our daily life is **NOT** with the port number. How could we do this?
+
+**Hint:** What is the default port number of HTTP/HTTPS?
 
 ## ❓ Understanding Check
 
@@ -212,6 +214,8 @@ The website url we visit in our daily life is **NOT** with the port number. How 
 3. How and what tools did you use to test your APIs?
 4. How and what tools did you use to make sure the app would not shut down even if you exit the ssh connection?
 5. What are the interactions between `client`, `firewall`, `EC2` and `RDS` when you send a request to you app server and get the response? You can use sequence diagram to describe it more clearly.
+6. (advanced optional) What did you do to make clients access your APIs without the certain port number?
+7. (advanced optional) Compare to the application server, what's the web server?
 
 You need to answer the quesions above in the PR description.
 
