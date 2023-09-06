@@ -1,5 +1,8 @@
 # 🌐 Remote Learning Assignment - Week 3
 
+## 📍 Goal
+This week, we aim for everyone to practice front-end slicing and get familiar with tools like ChatGPT, Google, and Chrome DevTools.
+
 ## 🚀 Getting Started
 
 - Set up **VSCode** as your IDE.
