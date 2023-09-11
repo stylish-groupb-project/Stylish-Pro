@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -a students=(brandon carol cynthia erin henry lsabelle jade jerome jessie jonathan kevin louis michael_ho michael_wang michelle morrison sean victor vincent) 
+declare -a students=() 
 
 # dir=workspace
 # rm -r ./${dir}
