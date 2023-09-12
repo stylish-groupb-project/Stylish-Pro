@@ -17,7 +17,7 @@ At first, we'll need to prepare infrastructure on AWS. Here's some official docu
 Refer to ducuments above, we'll need to prepare one `EC2` instance and one `RDS` Database with following spec:
 
 - EC2 (free tier plan)
-  - OS Images: `Amazon Linux 2 AMI`
+  - OS Images: `Amazon Linux 2023 AMI` or `Ubuntu Server 22.04 LTS`
   - Instance type: `t2.micro`
   - Storage size: `8 GiB`
 
@@ -90,7 +90,7 @@ Let's do an experiment and see what happended.
 ```javascript
 // requestSync.js
 
-const url = "WIP";
+const url = "https://ec2-54-64-246-136.ap-northeast-1.compute.amazonaws.com/delay-clock";
 
 function requestSync(url) {
     // write code to request url synchronously
@@ -103,7 +103,7 @@ requestSync(url)
 ```javascript
 // requestAsync.js
 
-const url = "WIP";
+const url = "https://ec2-54-64-246-136.ap-northeast-1.compute.amazonaws.com/delay-clock";
 
 function requestCallback(url, callback) {
     // write code to request url asynchronously
@@ -126,7 +126,7 @@ requestAsyncAwait(url);
 ## ❓ Understanding Check
 
 1. How do you make sure that you can connect into your RDS? And please post the successfully connected screen shot.
-2. If we stop the EC2 instance and start it again, would the IP address change? Why?
+2. Without Elastic IP, if we stop the EC2 instance and start it again, would the IP address change? Why?
 3. What's the purpose of using Elastic IP?
 
 You need to answer the quesions above in the PR description (including the observation in the Assignment 3).
