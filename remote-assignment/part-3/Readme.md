@@ -15,7 +15,7 @@ This week, we aim for everyone to practice front-end slicing and get familiar wi
 In this assignment, we'll use React and Next.js to create a simple interactive post. We'll also explore different styling methods with Styled-Components and Tailwind.
 1. Realize post layout
 2. Like the post or retract the like.
-3. Provide answers to the listed "Understanding Check" directly on the post.
+3. **Provide answers to the listed "Understanding Check" directly on the post.**
 
 https://github.com/AppWorks-School-Materials/Campus-Program04/assets/61413679/ff279ba8-27a8-4e64-9387-018b45688739
 
@@ -57,15 +57,19 @@ Answer the questions and add them to your post (under "This is a sample post."):
 
 ## 📤 Submission Guidelines
 
-1. Save changes to the `dev` branch. Use this commit message format:
+1. Separate React and Next.js work to 2 folders and to 2 commits then create 2 pull requests from `dev` to `main`:
  ```
-   # e.g. remote-week3: initial commit
-   remote-week<week number>: <commit description>
- ```  
+   - Folder: react-file -> <your code>
+   - Commit: remote-week3: React_post_commit
+   - PR: remote-week3: React_post_commit
+ ```
+ ```
+   - Folder: nextjs-file -> <your code>
+   - Commit: remote-week3: Nextjs_post_commit
+   - PR: remote-week3: Nextjs_post_commit
+ ```
    > 🚫 **NOTICE:** Incorrect commit messages won't be accepted.
-2. Create a pull request from `dev` to `main`. Include:
-- Elastic IP address
-- Database name
-- Change summary
 
-3. Bravo! 🎉 Having wrapped up this week's tasks, alert your mentor for a review of your GitHub repository.
+   > 🚫 **NOTICE:** Please make sure you had answered "Understanding Check" on whichever post.
+
+2. Bravo! 🎉 Having wrapped up this week's tasks, alert your mentor for a review of your GitHub repository.
