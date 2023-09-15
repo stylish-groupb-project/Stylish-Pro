@@ -58,6 +58,10 @@ Answer the questions and add them to your post (under "This is a sample post."):
 ## 📤 Submission Guidelines
 
 1. Save changes to the `dev` branch. Use this commit message format:
+ ```
+   # e.g. remote-week3: initial commit
+   remote-week<week number>: <commit description>
+ ```  
    > 🚫 **NOTICE:** Incorrect commit messages won't be accepted.
 2. Create a pull request from `dev` to `main`. Include:
 - Elastic IP address
