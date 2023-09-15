@@ -2,6 +2,7 @@
 
 ## 📍 Goal
 This week, we aim for everyone to practice front-end slicing and get familiar with tools like ChatGPT, Google, and Chrome DevTools.
+> **🔔 Note:** Utilizing ChatGPT can significantly enhance our learning and development efficiency. I highly recommend you spend some time learning how to make the most of this tool.
 
 ## 🚀 Getting Started
 
