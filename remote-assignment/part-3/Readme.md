@@ -26,7 +26,7 @@ https://github.com/AppWorks-School-Materials/Campus-Program04/assets/61413679/ff
 ## 📚 React
 
 1. Start your journey with [Create React App - Getting Started](https://create-react-app.dev/docs/getting-started) and the [React Tutorial](https://reactjs.org/tutorial/tutorial.html).
-2. Incorporate Styled Components [Install Styled Components](https://styled-components.com/)[Styled Components - Getting Started](https://styled-components.com/docs/basics#getting-started) into your project.
+2. Utilize Styled Components [Install Styled Components](https://styled-components.com/)[Styled Components - Getting Started](https://styled-components.com/docs/basics#getting-started) to style your project.
 3. Design your page with React and Styled-Component using the provided video as a guide.
 4. Use mock data from `getPostData.js` to show post details.
 
@@ -36,7 +36,7 @@ https://github.com/AppWorks-School-Materials/Campus-Program04/assets/61413679/ff
    > **🔔 Note:** We'll be skipping app routing for now. Ensure your settings mirror the given example.
    <img width="757" alt="Screen Shot 2023-09-03 at 3 05 12 AM" src="https://github.com/AppWorks-School-Materials/Campus-Program04/assets/61413679/fa29df42-c6ba-4821-ada1-b7e7f0d14614">
 
-2. Integrate [Tailwind CSS](https://tailwindcss.com/docs/installation) into your project.
+2. Utilize [Tailwind CSS](https://tailwindcss.com/docs/installation) to style your project.
 3. Design your page with Next.js and Tailwind CSS, using the provided video as a guide.
 4. Again, use `getPostData.js` mock data to show post details.
 
@@ -53,7 +53,7 @@ Answer the questions and add them to your post (under "This is a sample post."):
 ## 🌟 Advanced Tasks (Optional)
 
 - Think of a website with great user experience. What makes it good? Highlight three front-end aspects.
-- Try adding TypeScript to your Next.js project.
+- Utilize TypeScript in your Next.js project.
 
 ## 📤 Submission Guidelines
 
@@ -61,15 +61,15 @@ Answer the questions and add them to your post (under "This is a sample post."):
  ```
    - Folder: react-file -> <your code>
    - Commit: remote-week3: React_post_commit
-   - PR: remote-week3: React_post_commit
+   - PR: remote-week3: React_post_commit (with Elastic IP)
  ```
  ```
    - Folder: nextjs-file -> <your code>
    - Commit: remote-week3: Nextjs_post_commit
-   - PR: remote-week3: Nextjs_post_commit
+   - PR: remote-week3: Nextjs_post_commit (with Elastic IP)
  ```
    > 🚫 **NOTICE:** Incorrect commit messages won't be accepted.
-
+   > 🚫 **NOTICE:** Please deploy your 2 projects to EC2 and provide the Elastic IP with the pull request.
    > 🚫 **NOTICE:** Please make sure you had answered "Understanding Check" on whichever post.
 
 2. Bravo! 🎉 Having wrapped up this week's tasks, alert your mentor for a review of your GitHub repository.
