@@ -73,7 +73,7 @@ Let's do an experiment and see what happended.
 
 1. Create 2 files by the templates below: requestSync.js and requestAsync.js
 2. Write function to request synchronously / asynchronously
-3. Print out the execution time(ms) of each function call 
+3. Print out the execution time(ms) of each function call.  
    Optional: you can try to get the response body, and use the timestamp in it as the end time directly.
 4. Monitor the total execution time of the 2 files
 5. Take a screenshot of each in step 4. and put them in PR description  
@@ -85,7 +85,9 @@ Let's do an experiment and see what happended.
     * We've known the 3 ways to implement async functions, how do we choose from them and what are their pros and cons?
     * Any other observations
 
-**Note:** It's free to use any third party modules, but you need to describe why to use it in PR description
+**Note:** 
+1. Please remember to commit these 2 files in your dev branch
+2. It's free to use any third party modules, but you need to describe why to use it in PR description
 
 ```javascript
 // requestSync.js
