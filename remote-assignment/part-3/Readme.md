@@ -17,24 +17,23 @@ In this assignment, we'll use React and Next.js to create a simple interactive p
 2. Like the post or retract the like.
 3. **Provide answers to the listed "Understanding Check" directly on the post.**
 
-https://github.com/AppWorks-School-Materials/Campus-Program04/assets/61413679/ff279ba8-27a8-4e64-9387-018b45688739
+[Post Demo](https://drive.google.com/file/d/1jvhWhwktC5aoH6GdwVYEguDFaM3oH0B3/view?usp=sharing)
 
 
 
-> **🔔 Reminder:** Adhering to naming conventions is important. Ensure you're in sync with widely recognized practices. For guidance, consult the [Airbnb Coding Style Guide](https://github.com/airbnb/javascript/tree/master/react#naming). Focus especially on: `Naming`, `Quotes`, `Spacing`, `Props`, `Parentheses`, `Tags`.
+> **🔔 Reminder:** Adhering to coding conventions is important. Ensure you're in sync with widely recognized practices. For guidance, consult the [Airbnb Coding Style Guide](https://github.com/airbnb/javascript/tree/master/react#naming). Focus especially on: `Naming`, `Quotes`, `Spacing`, `Props`, `Parentheses`, `Tags`.
 
 ## 📚 React
 
 1. Start your journey with [Create React App - Getting Started](https://create-react-app.dev/docs/getting-started) and the [React Tutorial](https://reactjs.org/tutorial/tutorial.html).
 2. Utilize Styled Components [Install Styled Components](https://styled-components.com/)[Styled Components - Getting Started](https://styled-components.com/docs/basics#getting-started) to style your project.
 3. Design your page with React and Styled-Component using the provided video as a guide.
-4. Use mock data from `getPostData.js` to show post details.
+4. Design mock data from `getPostData.js` to show post details.
 
 ## 📘 Next.js
 
 1. Kickstart with [Create Next.js App - Getting Started](https://nextjs.org/docs/getting-started/installation).
-   > **🔔 Note:** We'll be skipping app routing for now. Ensure your settings mirror the given example.
-   <img width="757" alt="Screen Shot 2023-09-03 at 3 05 12 AM" src="https://github.com/AppWorks-School-Materials/Campus-Program04/assets/61413679/fa29df42-c6ba-4821-ada1-b7e7f0d14614">
+   > **🔔 Note:** We'll be skipping app routing for now. Ensure your settings mirror [the given example](https://drive.google.com/file/d/1T5dJi5z2M4809rMif5K-IWJQXAtjgfwo/view?usp=sharing).
 
 2. Utilize [Tailwind CSS](https://tailwindcss.com/docs/installation) to style your project.
 3. Design your page with Next.js and Tailwind CSS, using the provided video as a guide.
@@ -69,7 +68,7 @@ Answer the questions and add them to your post (under "This is a sample post."):
    - PR: remote-week3: Nextjs_post_commit (with Elastic IP)
  ```
    🚫 **NOTICE:** Incorrect commit messages won't be accepted.  
-   🚫 **NOTICE:** Please deploy your 2 projects to EC2 and provide the Elastic IP with the pull request for mentor to visit.  
+   🚫 **NOTICE:** Please deploy your 2 projects to EC2 and provide the Elastic IP with the pull requests for mentor to visit.  
    🚫 **NOTICE:** Please make sure you had answered "Understanding Check" on whichever post.  
 
 2. Bravo! 🎉 Having wrapped up this week's tasks, alert your mentor for a review of your GitHub repository.
