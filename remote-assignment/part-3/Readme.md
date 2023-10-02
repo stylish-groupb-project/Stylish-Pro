@@ -48,7 +48,7 @@ Answer the questions and add them to your post (under "This is a sample post."):
 - Explain the Styled-Component you made. What's CSS-in-JS, and how does it help compared to regular CSS?
 - Discuss `useState` and `useEffect`. How did you use them?
 - Describe Client-Side Rendering vs. Server-Side Rendering. How did you achieve Server-Side Rendering in Next.js? Think about `getServerSideProps`.
-- Which naming rules did you follow when coding?
+- Which coding styles did you follow when coding?
 
 ## 🌟 Advanced Tasks (Optional)
 
