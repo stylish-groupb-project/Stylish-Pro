@@ -41,15 +41,6 @@
 | size | String | Size. |
 | stock | Number | Stock. |
 
-* `User Object`
-
-| Field | Type | Description |
-| :---: | :---: | :--- |
-| id | Number | User's id. |
-| provider | String | Service provider. |
-| name | String | User's name. |
-| email | String | User's email. |
-| picture | String | User's picture. |
 
 ### Product List API
 
