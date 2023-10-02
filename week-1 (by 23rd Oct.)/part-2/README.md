@@ -60,7 +60,7 @@ Refer to [Stylish UI](https://www.figma.com/file/sKhc4A0Gi427u1I5leT5ug/STYLiSH)
 ## Advanced Optional
 
 ### Cache
-   Cache mechanism is very suitable for rarely updating data. For example, our Detail API usually response the same data to the front-end. If we store data in the web server memory, we can get it directly rather than database.  
+   Cache mechanism is very suitable for rarely updating data. For example, our Detail API usually response the same data to the front-end (except for the variants). If we store data in the web server memory, we can get it directly rather than database.  
    Follow the logics below to build a cache mechanism:
    1. Every time we need detail data, check cache first.
    2. If data existed in the cache, get it.
