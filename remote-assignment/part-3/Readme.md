@@ -69,7 +69,7 @@ Answer the questions and add them to your post (under "This is a sample post."):
    - PR: remote-week3: Nextjs_post_commit (with Elastic IP)
  ```
    🚫 **NOTICE:** Incorrect commit messages won't be accepted.  
-   🚫 **NOTICE:** Please deploy your 2 projects to EC2 and provide the Elastic IP with the pull request.  
+   🚫 **NOTICE:** Please deploy your 2 projects to EC2 and provide the Elastic IP with the pull request for mentor to visit.  
    🚫 **NOTICE:** Please make sure you had answered "Understanding Check" on whichever post.  
 
 2. Bravo! 🎉 Having wrapped up this week's tasks, alert your mentor for a review of your GitHub repository.
