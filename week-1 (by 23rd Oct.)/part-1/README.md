@@ -64,4 +64,4 @@ When user upload an image file, you can store it on [AWS Simple Storage Service 
 2. What is database normalization? How did you do to implement it?
 3. What is RESTful API? What does it for?
 4. What does the API doc and the API version for?
-5. What is reverse proxy?
+5. What is a web server, and what functions can it serve?
