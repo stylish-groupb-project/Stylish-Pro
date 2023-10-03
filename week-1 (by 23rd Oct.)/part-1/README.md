@@ -52,8 +52,10 @@ Please note that you need to write down the proper config including, but not lim
 
 ## Advanced Optional
 
-### Run your app on port 80 (highly recommended)
-We've discussed the default port number of both HTTP and HTTPS. Try to let the app server run on the port 80 via [nginx](https://nginx.org/en/docs/beginners_guide.html) or any other web server.
+### Serve your app on port 80 (highly recommended)
+We've discussed the default port number of both HTTP and HTTPS. Try to serve the app server on the port 80 via [nginx](https://nginx.org/en/docs/beginners_guide.html) or any other web server.
+
+**Hint:** Your app would not run on the port 80 but a abtrary number, and use reverse proxy to let clients can access the app on port 80. 
 
 ### S3
 When user upload an image file, you can store it on [AWS Simple Storage Service (S3)](https://aws.amazon.com/tw/s3/). It's a good place to store large files.
