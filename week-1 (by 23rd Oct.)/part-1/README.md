@@ -35,7 +35,7 @@ For the mockdata, you need to create a database named `stylish` and define the t
 
 ### Build Product Create API for Management
 
-Sometimes, you have to build API for internal use. It's now the time :)!
+Sometimes, you have to build API for internal use. It's now the time :) !
 You need to parse the products data (which may be like [Products Object](../README.md#response-object)) in the form from clients and find a way to handle both text input and file uploading (e.g. `images`).
 
 Use [multer module](https://github.com/expressjs/multer) to handle file uploading.
@@ -52,6 +52,9 @@ Please note that you need to write down the proper config including, but not lim
 
 ## Advanced Optional
 
+### Run your app on port 80 (highly recommended)
+We've discussed the default port number of both HTTP and HTTPS. Try to let the app server run on the port 80 via [nginx](https://nginx.org/en/docs/beginners_guide.html) or any other web server.
+
 ### S3
 When user upload an image file, you can store it on [AWS Simple Storage Service (S3)](https://aws.amazon.com/tw/s3/). It's a good place to store large files.
 
@@ -61,3 +64,4 @@ When user upload an image file, you can store it on [AWS Simple Storage Service 
 2. What is database normalization? How did you do to implement it?
 3. What is RESTful API? What does it for?
 4. What does the API doc and the API version for?
+5. What is reverse proxy?
