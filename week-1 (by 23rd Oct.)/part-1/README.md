@@ -47,15 +47,16 @@ Use [multer module](https://github.com/expressjs/multer) to handle file uploadin
 
 ### Prepare API Document for Current APIs
 
-Use [swagger](https://swagger.io/docs/specification/about/) and [swagger-ui](https://www.npmjs.com/package/swagger-ui) to build the api-docs page of above 2 APIs.  
+Use [swagger](https://swagger.io/docs/specification/about/) and [swagger-ui](https://www.npmjs.com/package/swagger-ui) to build the api-docs page of each API.
+You should serve the document at the endpoint `/docs` which means clients can see the page at url `http://<elastic-ip>/docs`.
 Please note that you need to write down the proper config including, but not limited to `parameters`(with example), `requestBody`(with example) and `responses`.
 
+### Serve your app on port 80
+We've discussed the default port number of both HTTP and HTTPS. It's highly recommended to serve the app server on the port 80 via [nginx](https://nginx.org/en/docs/beginners_guide.html) or any other web server.
+
+**Hint:** Your app wouldn't run on port 80 directly, but on an arbitrary port number. Then, it uses a reverse proxy to allow clients to access the app on port 80.
+
 ## Advanced Optional
-
-### Serve your app on port 80 (highly recommended)
-We've discussed the default port number of both HTTP and HTTPS. Try to serve the app server on the port 80 via [nginx](https://nginx.org/en/docs/beginners_guide.html) or any other web server.
-
-**Hint:** Your app would not run on the port 80 but a abtrary number, and use reverse proxy to let clients can access the app on port 80. 
 
 ### S3
 When user upload an image file, you can store it on [AWS Simple Storage Service (S3)](https://aws.amazon.com/tw/s3/). It's a good place to store large files.
