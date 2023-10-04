@@ -23,6 +23,6 @@ What to Do:
 
 ## 💡 Recap
 
-1. What is CORS policy? How do we deal with it if we've been blocked by it?
-2. What is a web server (e.g. Nginx), and what functions can it serve?
-3. In what kind of situations, do we need to use container orchestration tool (docker swarm)?
+1. Assuming that we need to deploy three backend containers on two VMs, what potential issues may arise, and how can we address them?
+2. What is a web server, such as Nginx, and what functions can it perform?
+3. In what situations do we require the use of a container orchestration tool like Docker Swarm?
