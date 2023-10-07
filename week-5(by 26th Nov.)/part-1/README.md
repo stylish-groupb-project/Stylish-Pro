@@ -24,4 +24,3 @@ Create a product page with responsive design (set the breakpoint to 1280px).
 - What's different between var, let, const? What is Closure?
 - What's different between primitive type and reference type?
 - What is Event Propagation, Event Loop, PrototypeChain?
-- What is SOLID Principle in FE Development?
