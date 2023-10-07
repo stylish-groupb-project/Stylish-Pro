@@ -39,3 +39,4 @@ Here's some features to improve our user experience of page:
 - What is fetch api and how React Query improve fetching data?
 - What is elastic search? Is there any way to improve searching?
 - What is Data-Driven UI? How did you utilize that in your project?
+- What is SOLID Principle in FE Development?
