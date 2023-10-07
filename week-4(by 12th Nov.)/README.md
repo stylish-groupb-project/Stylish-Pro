@@ -38,6 +38,3 @@ Here's some features to improve our user experience of page:
 - When will you use setInterval, and how about setTimeout?
 - What is fetch api and how React Query improve fetching data?
 - What is elastic search? Is there any way to improve searching?
-- What's different between var, let, const? What is Closure?
-- What's different between primitive type and reference type?
-- What is Event Propagation, Event Loop, PrototypeChain?
