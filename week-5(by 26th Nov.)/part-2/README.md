@@ -17,3 +17,7 @@ Create a checkout page with responsive design (set the breakpoint to 1280px).
   + Mask phone numbers, card numbers, and CCV codes when the input is not in focus.
 - Payment:
   + After payment is complete, design a `Thank You` page that displays the order number and payment time.
+
+## 💡 Recap
+- Make sure you keep in mind error handling, credential data mask are key features for FE development
+- What is Data-Driven UI? How did you utilize that in your project?
