@@ -18,6 +18,9 @@ Create a product page with responsive design (set the breakpoint to 1280px).
   + Use localStorage to temporarily store the products users add to their cart before they check out, without using the backend service.
   + Display the number of items in the cart icon.
 
-## Advanced Optional
+## 💡 Recap
 
-Study about localStorage, sessionStorage and cookie.
+- What's localStorage, sessionStorage and cookie? Which one you use here? Please be able to explain why.
+- What's different between var, let, const? What is Closure?
+- What's different between primitive type and reference type?
+- What is Event Propagation, Event Loop, PrototypeChain?
