@@ -18,5 +18,5 @@ Finish the final part of our website.
 
 ## Advanced Optional
 
-- Pick one of these login guides ([Facebook](https://developers.facebook.com/docs/facebook-login/web), [Google](https://developers.google.com/identity/gsi/web/guides/display-button#html)) and add the login button to our page where people log in.
+- Pick one of these login guides  [Google](https://developers.google.com/identity/gsi/web/guides/display-button#html)) and add the login button to our page where people log in.
 - Once someone logs in, we need to retrieve their profile.
