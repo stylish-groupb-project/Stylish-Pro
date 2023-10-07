@@ -20,4 +20,3 @@ Create a checkout page with responsive design (set the breakpoint to 1280px).
 
 ## 💡 Recap
 - Make sure you keep in mind error handling, credential data mask are key features for FE development
-- What is Data-Driven UI? How did you utilize that in your project?
