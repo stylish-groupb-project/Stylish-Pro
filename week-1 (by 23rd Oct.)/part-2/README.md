@@ -8,12 +8,12 @@ Refer to [Stylish UI](https://www.figma.com/file/sKhc4A0Gi427u1I5leT5ug/STYLiSH)
 
 Based on your design of data schema. It's your job to create appropriate tables in MySQL server to support all the APIs.
 
-* **Product APIs.**
-  * Product Create API.
-  * Product List API.
-  * Product Search API.
-  * Product Details API.
-  
+- **Product APIs.**
+  - Product Create API.
+  - Product List API.
+  - Product Search API.
+  - Product Details API.
+
 ### Prepare API Document
 
 APIs are the way to communicate between back-end and frond-end, which you have already learned in the past few weeks.  
@@ -56,18 +56,21 @@ Refer to [Stylish UI](https://www.figma.com/file/sKhc4A0Gi427u1I5leT5ug/STYLiSH)
 
 Refer to [Stylish UI](https://www.figma.com/file/sKhc4A0Gi427u1I5leT5ug/STYLiSH) and [API-Doc](../README.md), build this API for front-end.
 
-
 ## Advanced Optional
 
 ### Cache
-   Cache mechanism is very suitable for rarely updating data. For example, our Detail API usually response the same data to the front-end (except for the variants). If we store data in the web server memory, we can get it directly rather than database.  
-   Follow the logics below to build a cache mechanism:
-   1. Every time we need detail data, check cache first.
-   2. If data existed in the cache, get it.
-   3. If there is no data in the cache, get it from database and store in the cache.
-   4. If data is updated from database, clear cache.
+
+Cache mechanism is very suitable for rarely updating data. For example, our Detail API usually response the same data to the front-end (except for the variants). If we store data in the web server memory, we can get it directly rather than database.  
+For the sake of convenience and consistency in our discussion, please consider using **Redis** as the cache server.  
+Follow the logics below to build a cache mechanism:
+
+1.  Every time we need detail data, check cache first.
+2.  If data existed in the cache, get it.
+3.  If there is no data in the cache, get it from database and store in the cache.
+4.  If data is updated from database, clear cache.
 
 ## 💡 Recap
+
 1. What is SQL injection? How do we prevent from it?
 2. What is connection pool? Why is recommended to use it?
 3. What should we notice when accecpting uploaded file?
