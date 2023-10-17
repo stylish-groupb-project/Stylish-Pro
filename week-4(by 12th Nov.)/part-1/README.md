@@ -20,23 +20,12 @@ We also have logos and icons ready to use, which you can download from [this lin
    - Change to the next slide every 5 seconds automatically.
    - Stop the timer when users hover over a dot.
    - Restart the timer when users move their cursor out of the dot.
-4. Connect to our backend service and add the following features to the index page using React Query:
-   - `List Products`: Display products from your backend.
-   - `Filter Products by Category`: Allow users to select categories and display the corresponding products after filtering.
-   - `Search Products`: Allow users to search for products based on their title.
 
 ## Advanced Optional
 
-Here's some features to improve our user experience of page:
-
-- Display the product list with infinite scrolling. When users scroll down to the bottom of the page, we'll automatically load and show the next page.
-- Add a skeleton loader to show that the page is loading while waiting for the network response.
 - If you haven't use Typescript in your project, you can try utilize Typescript for better typing precision.
 
 ## 💡 Recap
-- Understanding HTML, CSS, JavaScript basic usage.
+
+- Get familiar with component-based development.
 - When will you use setInterval, and how about setTimeout?
-- What is fetch api and how React Query improve fetching data?
-- What is elastic search? Is there any way to improve searching?
-- What is Data-Driven UI? How did you utilize that in your project?
-- What is SOLID Principle in FE Development?
