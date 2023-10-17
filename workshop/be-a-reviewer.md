@@ -10,15 +10,12 @@ About 1 hours
 ## Activity flow
 1. **Everyone is a reviewer**. Please find your partner in the discord.
 2. Choose one person to start reviewing first
-3. For each group, please choose two of the following three modules for code review
-- week1 (product APIs)
-- week2 (user APIs)
-4. **Peer Review**, 12 minutes for each group, and arrange each other to explain the operation logic of the code.
-5. **Code Review**, 25 minutes per group, on Github, and leave a comment.
+3. **Peer Review**, 10 minutes for each group, and arrange each other to explain the operation logic of the code( week1 + week2 ).
+4. **Code Review**, 25 minutes per group to leave comments on Github.
 - Please make sure **no discussion** in this stage.
 - Please mention with the part which is associated with google code review guideline.
-6. **Review Comment**, 5 minutes per group, discuss with the review results
-7. Recap
+5. **Review Comment**, 5 minutes per group, discuss with the review results
+6. Recap
 
 ## Materials
 1. Read Code review guideline [How to do a code review on Google](https://google.github.io/eng-practices/review/reviewer/)
