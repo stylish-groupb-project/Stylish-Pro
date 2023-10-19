@@ -23,6 +23,6 @@ app.get('/test', (req, res) => {
     res.send('Helloo');
 });
 
-app.listen(3000,'0.0.0.0', () => {
+app.listen(3000, () => {
     console.log(`Server is running`);
 });
