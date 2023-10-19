@@ -11,7 +11,7 @@ app.use('/api/1.0/products',product_router);
 
 app.use('/static',express.static(__dirname+'/static'));
 app.use(
-    '/doc',
+    '/docs',
     swaggerUi.serve,
     swaggerUi.setup(swaggerDocument)
 );
