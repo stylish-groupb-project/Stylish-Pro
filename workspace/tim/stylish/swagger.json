@@ -1,0 +1,156 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Doc",
+        "description": "RESTful API for Stylish",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://13.55.37.107:3000/api/1.0",
+            "description": "Local server"
+        }
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "summary": "just try",
+                "description": "just try",
+                "responses": {
+                    "200": {
+                        "description": "try success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/products/addProduct": {
+            "post": {
+                "summary": "Create a new product.",
+                "description": "Create a new product with images and other information.",
+                "requestBody": {
+                  "required": true,
+                  "content": {
+                    "multipart/form-data": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "pictures": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "format": "binary"
+                            }
+                          },
+                          "data": {
+                            "$ref": "#/components/schemas/ProductInput"
+                          }
+                        },
+                        "required": ["pictures", "data"]
+                      }
+                    }
+                  }
+                },
+                "responses": {
+                  "201": {
+                    "description": "Success create product.",
+                    "content": {
+                      "text/plain": {
+                        "schema": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+        }
+    },
+    "components": {
+        "schemas": {
+          "ProductInput": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "price": {
+                "type": "number"
+              },
+              "texture": {
+                "type": "string"
+              },
+              "wash": {
+                "type": "string"
+              },
+              "place": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              },
+              "story": {
+                "type": "string"
+              },
+              "colors": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/Color"
+                }
+              },"sizes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "variants": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Variant"
+                }
+              }
+            },
+            "required": ["category", "title", "description", "price", "texture", "wash", "place", "note", "story", "colors", "sizes", "variants"]
+          },
+          "Variant": {
+            "type": "object",
+            "properties": {
+              "color_code": {
+                "type": "string"
+              },
+              "size": {
+                "type": "string"
+              },
+              "stock": {
+                "type": "integer"
+              }
+            },
+            "required": ["color_code", "size", "stock"]
+          },
+          "Color": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": ["code", "name"]
+          }
+        }
+      }
+}
