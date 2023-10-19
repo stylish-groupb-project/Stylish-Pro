@@ -1,5 +1,6 @@
 const connectionPromise = require('../utils/db').connectionPromise;
 module.exports = {
+    //
     addProduct: async (res, data, filenames) => {
         const connection = await connectionPromise;
         const datas = JSON.parse(data);
