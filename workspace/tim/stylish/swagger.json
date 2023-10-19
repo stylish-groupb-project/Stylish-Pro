@@ -35,122 +35,147 @@
                 "summary": "Create a new product.",
                 "description": "Create a new product with images and other information.",
                 "requestBody": {
-                  "required": true,
-                  "content": {
-                    "multipart/form-data": {
-                      "schema": {
-                        "type": "object",
-                        "properties": {
-                          "pictures": {
-                            "type": "array",
-                            "items": {
-                              "type": "string",
-                              "format": "binary"
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "pictures": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    },
+                                    "data": {
+                                        "type": "string",
+                                        "format": "json"
+                                    }
+                                },
+                                "required": [
+                                    "pictures",
+                                    "data"
+                                ]
                             }
-                          },
-                          "data": {
-                            "$ref": "#/components/schemas/ProductInput"
-                          }
-                        },
-                        "required": ["pictures", "data"]
-                      }
+                        }
                     }
-                  }
                 },
                 "responses": {
-                  "201": {
-                    "description": "Success create product.",
-                    "content": {
-                      "text/plain": {
-                        "schema": {
-                          "type": "string"
+                    "201": {
+                        "description": "Success create product.",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
                         }
-                      }
                     }
-                  }
                 }
-              }
+            }
         }
     },
     "components": {
         "schemas": {
-          "ProductInput": {
-            "type": "object",
-            "properties": {
-              "category": {
-                "type": "string"
-              },
-              "title": {
-                "type": "string"
-              },
-              "description": {
-                "type": "string"
-              },
-              "price": {
-                "type": "number"
-              },
-              "texture": {
-                "type": "string"
-              },
-              "wash": {
-                "type": "string"
-              },
-              "place": {
-                "type": "string"
-              },
-              "note": {
-                "type": "string"
-              },
-              "story": {
-                "type": "string"
-              },
-              "colors": {
-                "type": "array",
-                "items": {
-                    "$ref": "#/components/schemas/Color"
-                }
-              },"sizes": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "variants": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Variant"
-                }
-              }
+            "ProductInput": {
+                "type": "object",
+                "properties": {
+                    "category": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "number"
+                    },
+                    "texture": {
+                        "type": "string"
+                    },
+                    "wash": {
+                        "type": "string"
+                    },
+                    "place": {
+                        "type": "string"
+                    },
+                    "note": {
+                        "type": "string"
+                    },
+                    "story": {
+                        "type": "string"
+                    },
+                    "colors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Color"
+                        }
+                    },
+                    "sizes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "variants": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Variant"
+                        }
+                    }
+                },
+                "required": [
+                    "category",
+                    "title",
+                    "description",
+                    "price",
+                    "texture",
+                    "wash",
+                    "place",
+                    "note",
+                    "story",
+                    "colors",
+                    "sizes",
+                    "variants"
+                ]
             },
-            "required": ["category", "title", "description", "price", "texture", "wash", "place", "note", "story", "colors", "sizes", "variants"]
-          },
-          "Variant": {
-            "type": "object",
-            "properties": {
-              "color_code": {
-                "type": "string"
-              },
-              "size": {
-                "type": "string"
-              },
-              "stock": {
-                "type": "integer"
-              }
+            "Variant": {
+                "type": "object",
+                "properties": {
+                    "color_code": {
+                        "type": "string"
+                    },
+                    "size": {
+                        "type": "string"
+                    },
+                    "stock": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "color_code",
+                    "size",
+                    "stock"
+                ]
             },
-            "required": ["color_code", "size", "stock"]
-          },
-          "Color": {
-            "type": "object",
-            "properties": {
-              "code": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              }
-            },
-            "required": ["code", "name"]
-          }
+            "Color": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "code",
+                    "name"
+                ]
+            }
         }
-      }
+    }
 }
