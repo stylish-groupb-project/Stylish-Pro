@@ -8,7 +8,7 @@ app.use(express.json());
 
 app.use('/api/1.0/products',product_router);
 
-app.use(express.static(__dirname+'/static'));
+app.use('/static',express.static(__dirname+'/static'));
 app.use(
     '/apidoc',
     swaggerUi.serve,
