@@ -8,7 +8,8 @@ module.exports = {
             const main_img = `${baseUrl}/static/${filenames[0]}`;
             console.log(main_img);
             const addProductQuery = 'INSERT INTO product(category,title,description,price,texture, wash, place, note, story ,main_image) VALUES(?,?,?,?,?,?,?,?,?,?)';
-            console.log(`${data}`)
+            console.log(`${data}`);
+            console.log(category);
             const [results] = await connection.execute(addProductQuery, [category, title, description, price, texture, wash, place, note, story, main_img]);
             const productId = results.insertId;
             for (let i = 0; i < colors.length; i++) {
