@@ -15,7 +15,7 @@ app.use(
     swaggerUi.setup(swaggerDocument)
 );
 
-app.get('/api/1.0', (req, res) => {
+app.get('/api/1.0/test', (req, res) => {
     res.send('Hello');
 });
 

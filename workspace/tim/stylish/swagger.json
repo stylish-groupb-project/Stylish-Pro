@@ -12,7 +12,7 @@
         }
     ],
     "paths": {
-        "/": {
+        "/test": {
             "get": {
                 "summary": "just try",
                 "description": "just try",
