@@ -1,4 +1,5 @@
 const multer = require('multer'); // 引入 multer 套件，用於處理上傳檔案
+const path = require('path');
 module.exports = {
     uploadPicture: () => {
         const storage = multer.diskStorage({
