@@ -2,8 +2,9 @@ const connectionPromise = require('../utils/db').connectionPromise;
 module.exports = {
     addProduct: async (res, data, filenames) => {
         const connection = await connectionPromise;
+        const datas = JSON.parse(data);
         try {
-            const { category, title, description, price, texture, wash, place, note, story, colors, sizes, variants } = data;
+            const { category, title, description, price, texture, wash, place, note, story, colors, sizes, variants } = datas;
             const baseUrl = 'http://13.55.47.107';
             const main_img = `${baseUrl}/static/${filenames[0]}`;
             console.log(main_img);
