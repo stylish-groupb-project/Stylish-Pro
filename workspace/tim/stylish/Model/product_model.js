@@ -19,7 +19,7 @@ module.exports = {
             }
             for (let i = 0; i < sizes.length; i++) {
                 const addSizeQuery = 'INSERT INTO product_size(product_id,size) VALUES(?,?)';
-                const [sizeResult] = await connection.execute(addSizeQuery, [productId,sizes[i].size]);
+                const [sizeResult] = await connection.execute(addSizeQuery, [productId,sizes[i]]);
             }
             for (let i = 0; i < variants.length; i++) {
                 const addVariantQuery = 'INSERT INTO variant(color_code,size,stock,product_id) VALUES(?,?,?,?)';
