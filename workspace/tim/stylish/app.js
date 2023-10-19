@@ -20,6 +20,6 @@ app.get('/api/1.0/test', (req, res) => {
     res.send('Hello');
 });
 
-app.listen(3000, () => {
+app.listen(3000,'0.0.0.0', () => {
     console.log(`Server is running`);
 });
