@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "http://13.55.47.107:3000/api/1.0",
+            "url": "http://13.55.47.107/api/1.0",
             "description": "Local server"
         }
     ],
@@ -46,11 +46,13 @@
                                         "items": {
                                             "type": "string",
                                             "format": "binary"
-                                        }
+                                        },
+                                        "example": ["base64-encoded-image-1", "base64-encoded-image-2"]
                                     },
                                     "data": {
                                         "type": "string",
-                                        "format": "json"
+                                        "format": "json",
+                                        "example": "{\"category\":\"clothing\",\"title\":\"T-shirt\",\"description\":\"Comfortable cotton T-shirt\",\"price\":20.0,\"texture\":\"cotton\",\"wash\":\"machine wash\",\"place\":\"China\",\"note\":\"Handle with care\",\"story\":\"The story of the T-shirt\",\"colors\":[{\"code\":\"#FF0000\",\"name\":\"Red\"}],\"sizes\":[\"S\",\"M\",\"L\"],\"variants\":[{\"color_code\":\"#FF0000\",\"size\":\"M\",\"stock\":100}]}"
                                     }
                                 },
                                 "required": [
