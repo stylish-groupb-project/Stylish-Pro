@@ -61,7 +61,7 @@ module.exports = {
     getProductDetail: async(req,res)=>{
         try {
             const {id} = req.query;
-            const result=await product.search(res,id);
+            const result=await product.getProductDetail(res,id);
             res.status(200).json(result);
         } catch (error) {
             console.log(error)
