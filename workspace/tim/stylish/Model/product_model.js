@@ -43,24 +43,29 @@ module.exports = {
             console.log('connection release');
         }
     },
-    getProduct: async (res, type ,paging) => {
+    getProduct: async (res, type, paging) => {
         const connection = await connectionPromise;
         try {
             //init
             const limit = 6;
             let next_page = null;
-            let response =null;
+            let response = null;
 
             // operation
-            const getProductQuery = await sql_view.getProducts(null,type,limit,paging);
+            const sql_condition_obj = {
+                detail: null,
+                searchkeyword: null,
+                filter: type,
+            }
+            const getProductQuery = await sql_view.getProducts(sql_condition_obj, limit, paging);
             console.log(getProductQuery);
             const [result] = await connection.execute(getProductQuery);
-            console.log("result.length: "+result.length);
-            const totalData =[];
-            for(let i=0;i<result.length-1;i++){
+            console.log("result.length: " + result.length);
+            const totalData = [];
+            for (let i = 0; i < result.length - 1; i++) {
                 const sizesArray = result[i].sizes.split(',');
                 const imagesArray = result[i].images.split(',');
-                let res ={
+                let res = {
                     id: result[i].id,
                     category: result[i].category,
                     title: result[i].title,
@@ -79,14 +84,14 @@ module.exports = {
                 };
                 totalData.push(res);
             }
-            if(result.length>limit){
+            if (result.length > limit) {
                 next_page = paging + 1;
             }
-            if(next_page === null){
+            if (next_page === null) {
                 response = {
                     data: totalData
                 }
-            }else{
+            } else {
                 response = {
                     data: totalData,
                     next_page: next_page
@@ -100,23 +105,28 @@ module.exports = {
             console.log('connection release');
         }
     },
-    search: async(res,keyword,paging)=>{
+    search: async (res, keyword, paging) => {
         const connection = await connectionPromise;
         try {
             //init
             const limit = 6;
             let next_page = null;
-            let response =null;
-            
+            let response = null;
+
             //operation
-            const searchQuery = await sql_view.getProducts(keyword,"all",limit,paging);
+            const sql_condition_obj = {
+                detail: null,
+                searchkeyword: keyword,
+                filter: "all",
+            }
+            const searchQuery = await sql_view.getProducts(sql_condition_obj, limit, paging);
             console.log(searchQuery);
             const [result] = await connection.execute(searchQuery);
-            const totalData =[];
-            for(let i=0;i<result.length-1;i++){
+            const totalData = [];
+            for (let i = 0; i < result.length - 1; i++) {
                 const sizesArray = result[i].sizes.split(',');
                 const imagesArray = result[i].images.split(',');
-                let res ={
+                let res = {
                     id: result[i].id,
                     category: result[i].category,
                     title: result[i].title,
@@ -135,27 +145,76 @@ module.exports = {
                 };
                 totalData.push(res);
             }
-            if(result.length>limit){
+            if (result.length > limit) {
                 next_page = paging + 1;
             }
-            if(next_page === null){
+            if (next_page === null) {
                 response = {
                     data: totalData
                 }
-            }else{
+            } else {
                 response = {
                     data: totalData,
                     next_page: next_page
                 }
             }
             return response;
-            
+
         } catch (error) {
             console.error(error);
         }
         finally {
             console.log('connection release');
         }
+    },
+    getProductDetail: async (res, product_id) => {
+        const connection = await connectionPromise;
+        try {
+            //init
+            const limit = 0;
+            let response = null;
+
+            //operation
+            const sql_condition_obj = {
+                detail: product_id,
+                searchkeyword: null,
+                filter: null
+            }
+            const searchQuery = await sql_view.getProducts(sql_condition_obj, limit, 0);
+            console.log(searchQuery);
+            const [result] = await connection.execute(searchQuery);
+            if (result.length == 0) return res.status(403).json("product doesn't exist");
+            const sizesArray = result[0].sizes.split(',');
+            const imagesArray = result[0].images.split(',');
+            const totalData = {
+                id: result[0].id,
+                category: result[0].category,
+                title: result[0].title,
+                description: result[0].description,
+                price: result[0].price,
+                texture: result[0].texture,
+                wash: result[0].wash,
+                place: result[0].place,
+                note: result[0].note,
+                story: result[0].story,
+                colors: result[0].colors,
+                sizes: sizesArray,
+                variants: result[0].variants,
+                main_image: result[0].main_image,
+                images: imagesArray
+            };
+            response = {
+                data: totalData
+            }
+            return response;
+
+        } catch (error) {
+            console.error(error);
+        }
+        finally {
+            console.log('connection release');
+        }
+
     }
 
 
