@@ -52,9 +52,9 @@ module.exports = {
             let response =null;
 
             // operation
-            const getAllProductQuery = await sql_view.getProducts(type,limit,paging);
-            console.log(getAllProductQuery);
-            const [result] = await connection.execute(getAllProductQuery);
+            const getProductQuery = await sql_view.getProducts(null,type,limit,paging);
+            console.log(getProductQuery);
+            const [result] = await connection.execute(getProductQuery);
             console.log("result.length: "+result.length);
             const totalData =[];
             for(let i=0;i<result.length-1;i++){
@@ -79,28 +79,6 @@ module.exports = {
                 };
                 totalData.push(res);
             }
-            //  totalData = result.map((data)=>{
-                
-            //     const sizesArray = data.sizes.split(',');
-            //     const imagesArray = data.images.split(',');
-            //     return {
-            //         id: data.id,
-            //         category: data.category,
-            //         title: data.title,
-            //         description: data.description,
-            //         price: data.price,
-            //         texture: data.texture,
-            //         wash: data.wash,
-            //         place: data.place,
-            //         note: data.note,
-            //         story: data.story,
-            //         colors: data.colors,
-            //         sizes: sizesArray,
-            //         variants: data.variants,
-            //         main_image: data.main_image,
-            //         images: imagesArray
-            //     }
-            // });
             if(result.length>limit){
                 next_page = paging + 1;
             }
@@ -115,6 +93,62 @@ module.exports = {
                 }
             }
             return response;
+        } catch (error) {
+            console.error(error);
+        }
+        finally {
+            console.log('connection release');
+        }
+    },
+    search: async(res,keyword,paging)=>{
+        const connection = await connectionPromise;
+        try {
+            //init
+            const limit = 6;
+            let next_page = null;
+            let response =null;
+            
+            //operation
+            const searchQuery = await sql_view.getProducts(keyword,"all",limit,paging);
+            const [result] = await connection.execute(searchQuery);
+            const totalData =[];
+            for(let i=0;i<result.length-1;i++){
+                const sizesArray = result[i].sizes.split(',');
+                const imagesArray = result[i].images.split(',');
+                let res ={
+                    id: result[i].id,
+                    category: result[i].category,
+                    title: result[i].title,
+                    description: result[i].description,
+                    price: result[i].price,
+                    texture: result[i].texture,
+                    wash: result[i].wash,
+                    place: result[i].place,
+                    note: result[i].note,
+                    story: result[i].story,
+                    colors: result[i].colors,
+                    sizes: sizesArray,
+                    variants: result[i].variants,
+                    main_image: result[i].main_image,
+                    images: imagesArray
+                };
+                totalData.push(res);
+            }
+            if(result.length>limit){
+                next_page = paging + 1;
+            }
+            if(next_page === null){
+                response = {
+                    data: totalData
+                }
+            }else{
+                response = {
+                    data: totalData,
+                    next_page: next_page
+                }
+            }
+            return response;
+            
         } catch (error) {
             console.error(error);
         }

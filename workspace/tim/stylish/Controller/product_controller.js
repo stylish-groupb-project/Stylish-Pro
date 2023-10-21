@@ -47,5 +47,15 @@ module.exports = {
         } catch (error) {
             console.log(error)
         }
+    },
+    search: async(req,res)=>{
+        try {
+            const {keyword,paging} = req.query;
+            const result=await product.search(res,keyword,paging ? paging : 0);
+            res.status(200).json(result);
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 }
