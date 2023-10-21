@@ -63,7 +63,7 @@ module.exports = {
             FROM add_image_data
             `;
         if(condition !== "all"){
-            getAllProductQuery = getAllProductQuery+' '+`WHERE category = '${condition}'`;
+            getAllProductQuery = getAllProductQuery+`WHERE category = '${condition}'`;
         }
         return getAllProductQuery;
     }
