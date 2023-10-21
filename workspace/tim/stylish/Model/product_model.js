@@ -113,6 +113,7 @@ module.exports = {
             FROM add_image_data
             `;
             const [result] = await connection.execute(getAllProductQuery);
+            console.log(result)
             const totalData = result.map((data)=>{
                 const sizesArray = data.sizes.split(',');
                 const imagesArray = data.images.split(',');
