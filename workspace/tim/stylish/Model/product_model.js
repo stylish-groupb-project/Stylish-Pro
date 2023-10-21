@@ -49,7 +49,7 @@ module.exports = {
             //init
             const limit = 6;
             let next_page = null;
-            let response
+            let response =null;
 
             // operation
             const getAllProductQuery = await sql_view.getProducts(type,limit,paging);
@@ -81,16 +81,12 @@ module.exports = {
             }
             if(next_page === null){
                 response = {
-                    data: {
-                        totalData
-                    }
+                    data: totalData
                 }
             }else{
                 response = {
-                    data: {
-                        totalData,
-                        next_page: next_page
-                    }
+                    data: totalData,
+                    next_page: next_page
                 }
             }
             return response;
