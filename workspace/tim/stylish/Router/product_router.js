@@ -9,6 +9,7 @@ router.get('/women',productController.getWomenProduct);
 router.get('/men',productController.getMenProduct);
 router.get('/accessories',productController.getAccessories);
 router.get('/search',productController.search);
+router.get('/details',productController.getProductDetail);
 
 //post
 router.post('/addProduct',tool.uploadPicture().array('pictures', Infinity),productController.addProduct);

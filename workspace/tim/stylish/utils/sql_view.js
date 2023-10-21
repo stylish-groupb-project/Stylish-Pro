@@ -1,14 +1,21 @@
 module.exports = {
-    getProducts: async(searchKeyword,condition,limit,paging)=>{
+    getProducts: async(sql_condition_obj,limit,paging)=>{
         //init
         let insert =null;
 
         //operation
+        //detail is to store the target prodoct detail id
+        
+        const {searchKeyword,filter,detail} = sql_condition_obj;
+        console.log(searchKeyword);
         if(searchKeyword!==null){
             insert = `WHERE P.title like '%${searchKeyword}%'`;
         }
-        if(condition !== "all"){
-            insert = `WHERE P.category = '${condition}'`;
+        if(filter !== "all" || filter !== null){
+            insert = `WHERE P.category = '${filter}'`;
+        }
+        if(detail!==null){
+            insert = `WHERE P.id = ${detail}`;
         }
 
         let getAllProductQuery = `
