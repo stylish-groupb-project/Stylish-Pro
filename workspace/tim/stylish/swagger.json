@@ -47,7 +47,10 @@
                                             "type": "string",
                                             "format": "binary"
                                         },
-                                        "example": ["base64-encoded-image-1", "base64-encoded-image-2"]
+                                        "example": [
+                                            "base64-encoded-image-1",
+                                            "base64-encoded-image-2"
+                                        ]
                                     },
                                     "data": {
                                         "type": "string",
@@ -70,6 +73,45 @@
                             "text/plain": {
                                 "schema": {
                                     "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/products/all": {
+            "get": {
+                "summary": "Get all products",
+                "parameters": [
+                    {
+                        "name": "paging",
+                        "in": "query",
+                        "description": "Paging for request next page.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Product"
+                                            }
+                                        },
+                                        "next_paging": {
+                                            "type": "number",
+                                            "description": "Next page number. If there are no more pages, server won't return next_paging parameter."
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -177,6 +219,107 @@
                     "code",
                     "name"
                 ]
+            },
+            "Product": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "description": "Product ID"
+                    },
+                    "category": {
+                        "type": "string",
+                        "description": "Product category"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "Product title"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Product description"
+                    },
+                    "price": {
+                        "type": "number",
+                        "description": "Product price"
+                    },
+                    "texture": {
+                        "type": "string",
+                        "description": "Product texture"
+                    },
+                    "wash": {
+                        "type": "string",
+                        "description": "Washing instructions"
+                    },
+                    "place": {
+                        "type": "string",
+                        "description": "Place of origin"
+                    },
+                    "note": {
+                        "type": "string",
+                        "description": "Product notes"
+                    },
+                    "story": {
+                        "type": "string",
+                        "description": "Product story"
+                    },
+                    "colors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": "Color code"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "description": "Color name"
+                                }
+                            }
+                        },
+                        "description": "Array of colors"
+                    },
+                    "sizes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Available sizes"
+                    },
+                    "variants": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "color_code": {
+                                    "type": "string",
+                                    "description": "Color code for the variant"
+                                },
+                                "size": {
+                                    "type": "string",
+                                    "description": "Size of the variant"
+                                },
+                                "stock": {
+                                    "type": "number",
+                                    "description": "Stock quantity"
+                                }
+                            }
+                        },
+                        "description": "Array of variants"
+                    },
+                    "main_image": {
+                        "type": "string",
+                        "description": "URL of the main image"
+                    },
+                    "images": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Array of image URLs"
+                    }
+                }
             }
         }
     }
