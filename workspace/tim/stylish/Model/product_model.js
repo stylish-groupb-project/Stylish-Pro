@@ -95,7 +95,7 @@ module.exports = {
             } else {
                 response = {
                     data: totalData,
-                    next_page: next_page
+                    next_paging: next_page
                 }
             }
             return response;
@@ -157,7 +157,7 @@ module.exports = {
             } else {
                 response = {
                     data: totalData,
-                    next_page: next_page
+                    next_paging: next_page
                 }
             }
             return response;
