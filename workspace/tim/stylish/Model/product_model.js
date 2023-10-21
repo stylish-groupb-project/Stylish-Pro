@@ -110,6 +110,7 @@ module.exports = {
             
             //operation
             const searchQuery = await sql_view.getProducts(keyword,"all",limit,paging);
+            console.log(searchQuery);
             const [result] = await connection.execute(searchQuery);
             const totalData =[];
             for(let i=0;i<result.length-1;i++){
