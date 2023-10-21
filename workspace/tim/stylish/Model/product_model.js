@@ -54,7 +54,7 @@ module.exports = {
 
 
             // operation
-            const getAllProductQuery = await sql_view("all",limit,paging);
+            const getAllProductQuery = await sql_view.getProducts("all",limit,paging);
             
             const [result] = await connection.execute(getAllProductQuery);
             console.log(result)
