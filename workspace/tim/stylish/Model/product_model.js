@@ -76,7 +76,7 @@ module.exports = {
                             'size', size,
                             'stock', stock
                         )
-                    ) AS variant
+                    ) AS variants
                 FROM variant
                 GROUP BY product_id
             ),
@@ -92,7 +92,7 @@ module.exports = {
                 FROM product AS P LEFT JOIN colorData AS C
                 ON P.id = C.product_id
                 ORDER BY P.id DESC
-                LIMIT ${limit+1} OFFSET ${paging * 6};
+                LIMIT ${limit+1} OFFSET ${paging * 6}
             ),
             add_sizes_data AS (
                 SELECT P.*, S.sizes AS sizes
@@ -113,6 +113,7 @@ module.exports = {
             FROM add_image_data
             `;
             const [result] = await connection.execute(getAllProductQuery);
+            console.log(result)
             const totalData = result.map((data)=>{
                 const sizesArray = data.sizes.split(',');
                 const imagesArray = data.images.split(',');
