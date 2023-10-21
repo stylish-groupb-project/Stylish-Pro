@@ -116,7 +116,7 @@ module.exports = {
             //operation
             const sql_condition_obj = {
                 detail: null,
-                searchkeyword: keyword,
+                searchKeyword: keyword,
                 filter: "null",
             }
             const searchQuery = await sql_view.getProducts(sql_condition_obj, limit, paging);
