@@ -3,14 +3,12 @@ module.exports = {
     //
     addProduct: async (res, data, filenames) => {
         const connection = await connectionPromise;
-        const datas = JSON.parse(data);
+        const data_json = JSON.parse(data);
         try {
-            const { category, title, description, price, texture, wash, place, note, story, colors, sizes, variants } = datas;
+            const { category, title, description, price, texture, wash, place, note, story, colors, sizes, variants } = data_json;
             const baseUrl = 'http://13.55.47.107';
             const main_img = `${baseUrl}/static/${filenames[0]}`;
-            console.log(main_img);
             const addProductQuery = 'INSERT INTO product(category,title,description,price,texture, wash, place, note, story ,main_image) VALUES(?,?,?,?,?,?,?,?,?,?)';
-            console.log(`${data}`);
             console.log(category);
             const [results] = await connection.execute(addProductQuery, [category, title, description, price, texture, wash, place, note, story, main_img]);
             const productId = results.insertId;
@@ -26,6 +24,11 @@ module.exports = {
                 const addVariantQuery = 'INSERT INTO variant(color_code,size,stock,product_id) VALUES(?,?,?,?)';
                 const [variantResult] = await connection.execute(addVariantQuery, [variants[i].color_code, variants[i].size, variants[i].stock, productId]);
             }
+            for (let i = 1; i < filenames.length; i++) {
+                const addImageQuery = 'INSERT INTO images(url,product_id) VALUES(?,?)';
+                const [imageResult] = await connection.execute(addImageQuery, [filenames[i], productId]);
+            }
+
             const response = {
                 data: {
                     product: productId
