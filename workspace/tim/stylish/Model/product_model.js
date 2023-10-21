@@ -1,5 +1,6 @@
 const connectionPromise = require('../utils/db').connectionPromise;
 const sql_view = require('../utils/sql_view');
+const tool = require('../utils/tool');
 // const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 // require('dotenv').config();
 
@@ -13,8 +14,8 @@ module.exports = {
 
             const mainImage = uploadedPictures['main_image'][0];
             const otherImages = uploadedPictures['other_images'];
-            const mainImageUrl = await uploadToS3(mainImage);
-            const otherImageUrls = await Promise.all(otherImages.map(uploadToS3));
+            const mainImageUrl = await tool.uploadToS3(mainImage);
+            const otherImageUrls = await Promise.all(otherImages.map(tool.uploadToS3));
             console.log(mainImage);
             console.log(otherImageUrls);
             console.log("檔案全部上傳到S3成功");
