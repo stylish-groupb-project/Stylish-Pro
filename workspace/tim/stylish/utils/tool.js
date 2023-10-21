@@ -11,13 +11,18 @@ const {
 
 module.exports = {
     uploadPicture: () => {
-        const storage = multer.diskStorage({
-            // /home/ubuntu/my-member-system/students/wei-ting/Canchu/static/
+        // const storage = multer.diskStorage({
+        //     // /home/ubuntu/my-member-system/students/wei-ting/Canchu/static/
+        //     filename: (req, file, cb) => {
+        //         cb(null, `${Date.now()}${path.extname(file.originalname)}`);
+        //     }
+        // });
+        const upload = multer({ 
+            storage: multer.memoryStorage(),
             filename: (req, file, cb) => {
                 cb(null, `${Date.now()}${path.extname(file.originalname)}`);
-            }
+            } 
         });
-        const upload = multer({ storage: multer.memoryStorage });
         return upload;
     },
     uploadToS3: async (file) => {
