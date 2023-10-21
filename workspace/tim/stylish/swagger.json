@@ -163,7 +163,7 @@
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "type": "object",
+                                            "type": "array",
                                             "items": {
                                                 "$ref": "#/components/schemas/Product"
                                             }
@@ -195,9 +195,28 @@
                   }
                 ],
                 "responses": {
-                  "200": {
-                    "$ref": "#/components/schemas/ProductResponse"
-                  }
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Product"
+                                            }
+                                        },
+                                        "next_paging": {
+                                            "type": "number",
+                                            "description": "Next page number. If there are no more pages, server won't return next_paging parameter."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
               }
         }
