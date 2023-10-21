@@ -1,9 +1,12 @@
 module.exports = {
-    getProducts: async(condition,limit,paging)=>{
+    getProducts: async(searchKeyword,condition,limit,paging)=>{
         //init
         let insert =null;
 
         //operation
+        if(searchKeyword!==null){
+            insert = `WHERE P.title like '%${searchKeyword}%'`;
+        }
         if(condition !== "all"){
             insert = `WHERE P.category = '${condition}'`;
         }
@@ -72,5 +75,8 @@ module.exports = {
             FROM add_image_data
             `;
         return getAllProductQuery;
+    },
+    searchByTitle: async(keyword)=>{
+
     }
 }
