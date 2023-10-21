@@ -19,9 +19,6 @@ module.exports = {
         // });
         const upload = multer({ 
             storage: multer.memoryStorage(),
-            // filename: (req, file, cb) => {
-            //     cb(null, `${Date.now()}${path.extname(file.originalname)}`);
-            // } 
         });
         return upload;
     },
@@ -34,7 +31,6 @@ module.exports = {
                 secretAccessKey: AWS_SECRET_ACCESS_KEY,
             },
         });
-        console.log(file.filename);
         const command = new PutObjectCommand({
             Bucket: BUCKET_NAME,
             Key: key,
