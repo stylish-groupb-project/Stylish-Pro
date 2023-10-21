@@ -127,11 +127,11 @@ module.exports = {
                     place: result[i].place,
                     note: result[i].note,
                     story: result[i].story,
-                    colors: result[i].colors,
-                    sizes: sizesArray,
-                    variants: result[i].variants,
                     main_image: result[i].main_image,
-                    images: imagesArray
+                    images: imagesArray,
+                    variants: result[i].variants,
+                    colors: result[i].colors,
+                    sizes: sizesArray
                 };
                 totalData.push(res);
             }
