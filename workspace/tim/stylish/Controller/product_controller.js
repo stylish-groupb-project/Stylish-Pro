@@ -6,7 +6,7 @@ module.exports = {
             const uploadedPictures = req.files;
             const filenames = uploadedPictures.map((img) => img.filename);
             console.log(filenames[0]);
-            const result=await product.addProduct(res,data,filenames);
+            const result=await product.addProduct(res,data,filenames,uploadedPictures);
             res.status(200).json(result);
         } catch (error) {
             console.log(error)

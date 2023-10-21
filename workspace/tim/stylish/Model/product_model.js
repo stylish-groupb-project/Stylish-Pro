@@ -1,16 +1,26 @@
 const connectionPromise = require('../utils/db').connectionPromise;
 const sql_view = require('../utils/sql_view');
+// const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+// require('dotenv').config();
+
 module.exports = {
-    addProduct: async (res, data, filenames) => {
+    addProduct: async (res, data, filenames, uploadedPictures) => {
         const connection = await connectionPromise;
         const data_json = JSON.parse(data);
+
         try {
             const { category, title, description, price, texture, wash, place, note, story, colors, sizes, variants } = data_json;
-            const baseUrl = 'http://13.55.47.107/static';
-            const main_img = `${baseUrl}/${filenames[0]}`;
+
+            const mainImage = req.files['main_image'][0];
+            const otherImages = req.files['other_images'];
+            const mainImageUrl = await uploadToS3(mainImage);
+            const otherImageUrls = await Promise.all(otherImages.map(uploadToS3));
+            console.log(mainImage);
+            console.log(otherImageUrls);
+            console.log("檔案全部上傳到S3成功");
+
             const addProductQuery = 'INSERT INTO product(category,title,description,price,texture, wash, place, note, story ,main_image) VALUES(?,?,?,?,?,?,?,?,?,?)';
-            console.log(category);
-            const [results] = await connection.execute(addProductQuery, [category, title, description, price, texture, wash, place, note, story, main_img]);
+            const [results] = await connection.execute(addProductQuery, [category, title, description, price, texture, wash, place, note, story, mainImageUrl]);
             const productId = results.insertId;
             for (let i = 0; i < colors.length; i++) {
                 const addColorQuery = 'INSERT INTO color(name,code,product_id) VALUES(?,?,?)';
@@ -24,9 +34,9 @@ module.exports = {
                 const addVariantQuery = 'INSERT INTO variant(color_code,size,stock,product_id) VALUES(?,?,?,?)';
                 const [variantResult] = await connection.execute(addVariantQuery, [variants[i].color_code, variants[i].size, variants[i].stock, productId]);
             }
-            for (let i = 1; i < filenames.length; i++) {
+            for (let i = 0; i < otherImageUrls.length; i++) {
                 const addImageQuery = 'INSERT INTO images(url,product_id) VALUES(?,?)';
-                const [imageResult] = await connection.execute(addImageQuery, [`${baseUrl}/${filenames[i]}`, productId]);
+                const [imageResult] = await connection.execute(addImageQuery, [otherImageUrls[i], productId]);
             }
 
             const response = {
