@@ -81,6 +81,18 @@
             }
         },
         "/products/all": {
+            "$ref": "#/paths/~productList"
+        },
+        "/products/men": {
+            "$ref": "#/paths/~productList"
+        },
+        "/products/women": {
+            "$ref": "#/paths/~productList"
+        },
+        "/products/accessories": {
+            "$ref": "#/paths/~productList"
+        },
+        "productList": {
             "get": {
                 "summary": "Get all products",
                 "parameters": [
