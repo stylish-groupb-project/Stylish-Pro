@@ -15,7 +15,7 @@ module.exports = {
     getAllProduct: async (req, res) => {
         try {
             const {paging} = req.query;
-            const result=await product.getProduct(res, "null" ,paging ? paging : 0);
+            const result=await product.getProduct(res, "null" ,Number(paging) ? paging : 0);
             res.status(200).json(result);
         } catch (error) {
             console.log(error)
@@ -24,7 +24,7 @@ module.exports = {
     getMenProduct: async (req, res) => {
         try {
             const {paging} = req.query;
-            const result=await product.getProduct(res, "men" ,paging ? paging : 0);
+            const result=await product.getProduct(res, "men" ,Number(paging) ? paging : 0);
             res.status(200).json(result);
         } catch (error) {
             console.log(error)
@@ -33,7 +33,7 @@ module.exports = {
     getWomenProduct: async (req, res) => {
         try {
             const {paging} = req.query;
-            const result=await product.getProduct(res, "women" ,paging ? paging : 0);
+            const result=await product.getProduct(res, "women" ,paging ? Number(paging) : 0);
             res.status(200).json(result);
         } catch (error) {
             console.log(error)
@@ -42,7 +42,7 @@ module.exports = {
     getAccessories: async (req, res) => {
         try {
             const {paging} = req.query;
-            const result=await product.getProduct(res, "accessories" ,paging ? paging : 0);
+            const result=await product.getProduct(res, "accessories" ,paging ? Number(paging) : 0);
             res.status(200).json(result);
         } catch (error) {
             console.log(error)
@@ -51,7 +51,7 @@ module.exports = {
     search: async(req,res)=>{
         try {
             const {keyword,paging} = req.query;
-            const result=await product.search(res,keyword,paging ? paging : 0);
+            const result=await product.search(res,keyword,paging ? Number(paging) : 0);
             res.status(200).json(result);
         } catch (error) {
             console.log(error)
