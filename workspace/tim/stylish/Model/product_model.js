@@ -54,28 +54,52 @@ module.exports = {
             // operation
             const getAllProductQuery = await sql_view.getProducts(type,limit,paging);
             const [result] = await connection.execute(getAllProductQuery);
-            const totalData = result.map((data)=>{
-                const sizesArray = data.sizes.split(',');
-                const imagesArray = data.images.split(',');
-                return {
-                    id: data.id,
-                    category: data.category,
-                    title: data.title,
-                    description: data.description,
-                    price: data.price,
-                    texture: data.texture,
-                    wash: data.wash,
-                    place: data.place,
-                    note: data.note,
-                    story: data.story,
-                    colors: data.colors,
+            
+            const totalData =[];
+            for(let i=0;i<result.length-1;i++){
+                const sizesArray = result[i].sizes.split(',');
+                const imagesArray = result[i].images.split(',');
+                let res ={
+                    id: result[i].id,
+                    category: result[i].category,
+                    title: result[i].title,
+                    description: result[i].description,
+                    price: result[i].price,
+                    texture: result[i].texture,
+                    wash: result[i].wash,
+                    place: result[i].place,
+                    note: result[i].note,
+                    story: result[i].story,
+                    colors: result[i].colors,
                     sizes: sizesArray,
-                    variants: data.variants,
-                    main_image: data.main_image,
+                    variants: result[i].variants,
+                    main_image: result[i].main_image,
                     images: imagesArray
-                }
-            });
-            console.log(totalData);
+                };
+                totalData.push(res);
+            }
+            //  totalData = result.map((data)=>{
+                
+            //     const sizesArray = data.sizes.split(',');
+            //     const imagesArray = data.images.split(',');
+            //     return {
+            //         id: data.id,
+            //         category: data.category,
+            //         title: data.title,
+            //         description: data.description,
+            //         price: data.price,
+            //         texture: data.texture,
+            //         wash: data.wash,
+            //         place: data.place,
+            //         note: data.note,
+            //         story: data.story,
+            //         colors: data.colors,
+            //         sizes: sizesArray,
+            //         variants: data.variants,
+            //         main_image: data.main_image,
+            //         images: imagesArray
+            //     }
+            // });
             if(result.length>limit){
                 next_page = paging + 1;
             }
