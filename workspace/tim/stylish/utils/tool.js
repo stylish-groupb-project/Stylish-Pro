@@ -33,6 +33,7 @@ module.exports = {
                 secretAccessKey: AWS_SECRET_ACCESS_KEY,
             },
         });
+        console.log(file.filename);
         const command = new PutObjectCommand({
             Bucket: BUCKET_NAME,
             Key: file.filename,
