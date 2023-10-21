@@ -1,7 +1,6 @@
 const connectionPromise = require('../utils/db').connectionPromise;
 const sql_view = require('../utils/sql_view');
 module.exports = {
-    //
     addProduct: async (res, data, filenames) => {
         const connection = await connectionPromise;
         const data_json = JSON.parse(data);
@@ -44,7 +43,7 @@ module.exports = {
             console.log('connection release');
         }
     },
-    getAllProduct: async (res, paging) => {
+    getProduct: async (res, type ,paging) => {
         const connection = await connectionPromise;
         try {
             //init
@@ -52,17 +51,12 @@ module.exports = {
             let next_page = null;
             let response
 
-
             // operation
-            const getAllProductQuery = await sql_view.getProducts("all",limit,paging);
-            
+            const getAllProductQuery = await sql_view.getProducts(type,limit,paging);
             const [result] = await connection.execute(getAllProductQuery);
-            console.log(result)
             const totalData = result.map((data)=>{
                 const sizesArray = data.sizes.split(',');
                 const imagesArray = data.images.split(',');
-                console.log(sizesArray);
-                console.log(imagesArray);
                 return {
                     id: data.id,
                     category: data.category,
