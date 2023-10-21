@@ -1,20 +1,23 @@
 const connectionPromise = require('../utils/db').connectionPromise;
 const sql_view = require('../utils/sql_view');
+const tool = require('../utils/tool');
 // const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 // require('dotenv').config();
 
 module.exports = {
-    addProduct: async (res, data, filenames, uploadedPictures) => {
+    addProduct: async (res, data,uploadedPictures) => {
         const connection = await connectionPromise;
         const data_json = JSON.parse(data);
 
         try {
             const { category, title, description, price, texture, wash, place, note, story, colors, sizes, variants } = data_json;
 
-            const mainImage = req.files['main_image'][0];
-            const otherImages = req.files['other_images'];
-            const mainImageUrl = await uploadToS3(mainImage);
-            const otherImageUrls = await Promise.all(otherImages.map(uploadToS3));
+            const mainImage = uploadedPictures['main_image'][0];
+            console.log(mainImage);
+            const otherImages = uploadedPictures['other_images'];
+            console.log(otherImages);
+            const mainImageUrl = await tool.uploadToS3(mainImage);
+            const otherImageUrls = await Promise.all(otherImages.map(tool.uploadToS3));
             console.log(mainImage);
             console.log(otherImageUrls);
             console.log("檔案全部上傳到S3成功");

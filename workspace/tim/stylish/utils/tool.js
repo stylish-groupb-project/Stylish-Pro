@@ -19,13 +19,14 @@ module.exports = {
         // });
         const upload = multer({ 
             storage: multer.memoryStorage(),
-            filename: (req, file, cb) => {
-                cb(null, `${Date.now()}${path.extname(file.originalname)}`);
-            } 
+            // filename: (req, file, cb) => {
+            //     cb(null, `${Date.now()}${path.extname(file.originalname)}`);
+            // } 
         });
         return upload;
     },
     uploadToS3: async (file) => {
+        const key = Date.now().toString() + '-' + file.originalname;
         const s3Client = new S3Client({
             region: S3_BUCKET_REGION,
             credentials: {
@@ -33,14 +34,15 @@ module.exports = {
                 secretAccessKey: AWS_SECRET_ACCESS_KEY,
             },
         });
+        console.log(file.filename);
         const command = new PutObjectCommand({
             Bucket: BUCKET_NAME,
-            Key: file.filename,
+            Key: key,
             Body: file.buffer,
             ContentType: file.mimetype,
         });
         await s3Client.send(command);
-        return `https://${BUCKET_NAME}.s3.${S3_BUCKET_REGION}.amazonaws.com/${file.filename}`;
+        return `https://${BUCKET_NAME}.s3.${S3_BUCKET_REGION}.amazonaws.com/${key}`;
     }
 
 }
