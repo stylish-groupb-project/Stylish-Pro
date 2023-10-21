@@ -1,5 +1,13 @@
 module.exports = {
     getProducts: async(condition,limit,paging)=>{
+        //init
+        let insert =null;
+
+        //operation
+        if(condition !== "all"){
+            insert = `WHERE P.category = '${condition}'`;
+        }
+
         let getAllProductQuery = `
             WITH colorData AS (
                 SELECT
@@ -41,6 +49,7 @@ module.exports = {
                 SELECT P.*, C.colors
                 FROM product AS P LEFT JOIN colorData AS C
                 ON P.id = C.product_id
+                ${insert === null ? '':insert}
                 ORDER BY P.id DESC
                 LIMIT ${limit+1} OFFSET ${paging * 6}
             ),
@@ -62,9 +71,6 @@ module.exports = {
             SELECT * 
             FROM add_image_data
             `;
-        if(condition !== "all"){
-            getAllProductQuery = getAllProductQuery+`WHERE category = '${condition}'`;
-        }
         return getAllProductQuery;
     }
 }
