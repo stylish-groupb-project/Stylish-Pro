@@ -76,7 +76,7 @@ module.exports = {
                             'size', size,
                             'stock', stock
                         )
-                    ) AS variant
+                    ) AS variants
                 FROM variant
                 GROUP BY product_id
             ),
