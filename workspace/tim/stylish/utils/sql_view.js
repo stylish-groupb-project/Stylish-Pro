@@ -5,13 +5,13 @@ module.exports = {
 
         //operation
         //detail is to store the target prodoct detail id
-        
+
         const {searchKeyword,filter,detail} = sql_condition_obj;
         console.log(searchKeyword);
         if(searchKeyword!==null){
             insert = `WHERE P.title like '%${searchKeyword}%'`;
         }
-        if(filter !== "all" || filter !== null){
+        if(filter !== "all"){
             insert = `WHERE P.category = '${filter}'`;
         }
         if(detail!==null){
