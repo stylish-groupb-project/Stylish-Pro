@@ -41,15 +41,20 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "pictures": {
+                                    "main_image": {
+                                        "type": "string",
+                                        "format": "binary",
+                                        "example": "base64-encoded-main-image"
+                                    },
+                                    "other_images": {
                                         "type": "array",
                                         "items": {
-                                            "type": "string",
-                                            "format": "binary"
+                                          "type": "string",
+                                          "format": "binary"
                                         },
                                         "example": [
-                                            "base64-encoded-image-1",
-                                            "base64-encoded-image-2"
+                                          "base64-encoded-image-1",
+                                          "base64-encoded-image-2"
                                         ]
                                     },
                                     "data": {
