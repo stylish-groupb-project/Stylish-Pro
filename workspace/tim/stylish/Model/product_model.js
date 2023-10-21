@@ -85,7 +85,7 @@ module.exports = {
                 totalData.push(res);
             }
             if (result.length > limit) {
-                next_page = 0
+                next_page = paging
                 next_page++;
             }
             if (next_page === null) {
@@ -147,7 +147,7 @@ module.exports = {
                 totalData.push(res);
             }
             if (result.length > limit) {
-                next_page = 0
+                next_page = paging
                 next_page++;
             }
             if (next_page === null) {
