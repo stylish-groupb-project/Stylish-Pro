@@ -64,7 +64,8 @@
                                     }
                                 },
                                 "required": [
-                                    "pictures",
+                                    "main_image",
+                                    "other_images",
                                     "data"
                                 ]
                             }
