@@ -54,7 +54,7 @@ module.exports = {
             // operation
             const sql_condition_obj = {
                 detail: null,
-                searchkeyword: null,
+                searchKeyword: null,
                 filter: type,
             }
             const getProductQuery = await sql_view.getProducts(sql_condition_obj, limit, paging);
@@ -116,8 +116,8 @@ module.exports = {
             //operation
             const sql_condition_obj = {
                 detail: null,
-                searchkeyword: keyword,
-                filter: "all",
+                searchKeyword: keyword,
+                filter: "null",
             }
             const searchQuery = await sql_view.getProducts(sql_condition_obj, limit, paging);
             console.log(searchQuery);
@@ -177,9 +177,9 @@ module.exports = {
             //operation
             const sql_condition_obj = {
                 detail: product_id,
-                searchkeyword: null,
+                searchKeyword: null,
                 filter: null
-            }
+            };
             const searchQuery = await sql_view.getProducts(sql_condition_obj, limit, 0);
             console.log(searchQuery);
             const [result] = await connection.execute(searchQuery);

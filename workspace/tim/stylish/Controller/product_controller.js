@@ -15,7 +15,7 @@ module.exports = {
     getAllProduct: async (req, res) => {
         try {
             const {paging} = req.query;
-            const result=await product.getProduct(res, "all" ,paging ? paging : 0);
+            const result=await product.getProduct(res, "null" ,paging ? paging : 0);
             res.status(200).json(result);
         } catch (error) {
             console.log(error)
@@ -61,7 +61,7 @@ module.exports = {
     getProductDetail: async(req,res)=>{
         try {
             const {id} = req.query;
-            const result=await product.search(res,id);
+            const result=await product.getProductDetail(res,id);
             res.status(200).json(result);
         } catch (error) {
             console.log(error)
