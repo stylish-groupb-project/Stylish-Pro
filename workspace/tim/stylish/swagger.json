@@ -92,6 +92,7 @@
         "/products/accessories": {
             "$ref": "#/paths/productList"
         },
+
         "productList": {
             "get": {
                 "summary": "Get all products",
@@ -130,6 +131,75 @@
                     }
                 }
             }
+        },
+        "/products/search": {
+            "get": {
+                "summary": "Search products",
+                "parameters": [
+                  {
+                    "name": "keyword",
+                    "in": "query",
+                    "description": "Search keyword",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "name": "paging",
+                    "in": "query",
+                    "description": "Paging for request next page.",
+                    "schema": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Product"
+                                            }
+                                        },
+                                        "next_paging": {
+                                            "type": "number",
+                                            "description": "Next page number. If there are no more pages, server won't return next_paging parameter."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+              }
+        },
+        "/products/details":{
+            "get": {
+                "summary": "Get product details",
+                "parameters": [
+                  {
+                    "name": "id",
+                    "in": "query",
+                    "description": "Product ID",
+                    "required": true,
+                    "schema": {
+                      "type": "number"
+                    }
+                  }
+                ],
+                "responses": {
+                  "200": {
+                    "$ref": "#/components/schemas/ProductResponse"
+                  }
+                }
+              }
         }
     },
     "components": {
