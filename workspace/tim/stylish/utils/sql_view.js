@@ -11,7 +11,7 @@ module.exports = {
         if(searchKeyword!==null){
             insert = `WHERE P.title like '%${searchKeyword}%'`;
         }
-        if(filter !== "all"){
+        if(filter !== "null"){
             insert = `WHERE P.category = '${filter}'`;
         }
         if(detail!==null){
