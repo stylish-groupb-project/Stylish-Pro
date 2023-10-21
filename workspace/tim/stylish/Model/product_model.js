@@ -92,7 +92,7 @@ module.exports = {
                 FROM product AS P LEFT JOIN colorData AS C
                 ON P.id = C.product_id
                 ORDER BY P.id DESC
-                LIMIT ${limit+1} OFFSET ${paging * 6};
+                LIMIT ${limit+1} OFFSET ${paging * 6}
             ),
             add_sizes_data AS (
                 SELECT P.*, S.sizes AS sizes
