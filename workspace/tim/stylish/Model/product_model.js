@@ -13,7 +13,9 @@ module.exports = {
             const { category, title, description, price, texture, wash, place, note, story, colors, sizes, variants } = data_json;
 
             const mainImage = uploadedPictures['main_image'][0];
+            console.log(mainImage);
             const otherImages = uploadedPictures['other_images'];
+            console.log(otherImages);
             const mainImageUrl = await tool.uploadToS3(mainImage);
             const otherImageUrls = await Promise.all(otherImages.map(tool.uploadToS3));
             console.log(mainImage);
