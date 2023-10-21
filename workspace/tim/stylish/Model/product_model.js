@@ -53,8 +53,9 @@ module.exports = {
 
             // operation
             const getAllProductQuery = await sql_view.getProducts(type,limit,paging);
+            console.log(getAllProductQuery);
             const [result] = await connection.execute(getAllProductQuery);
-            
+            console.log("result.length: "+result.length);
             const totalData =[];
             for(let i=0;i<result.length-1;i++){
                 const sizesArray = result[i].sizes.split(',');
