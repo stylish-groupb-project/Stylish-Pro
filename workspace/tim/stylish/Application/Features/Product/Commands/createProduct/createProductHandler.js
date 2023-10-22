@@ -23,11 +23,11 @@ module.exports = {
         const result = await productService.insertNewProduct(res,data_json,mainImageUrl);
         console.log(data_json.colors);
         const productId = result.insertId;
-        await colorService.addColorIntoProduct(data_json.colors,productId);
-        await sizeService.addSizeIntoProduct(data_json.sizes,productId);
-        await variantService.addVariantIntoProduct(data_json.variants,productId);
-        await imageService.addImageIntoProduct(otherImageUrls,productId);
-
+        await colorService.addColorIntoProduct(res,data_json.colors,productId);
+        await sizeService.addSizeIntoProduct(res,data_json.sizes,productId);
+        await variantService.addVariantIntoProduct(res,data_json.variants,productId);
+        await imageService.addImageIntoProduct(res,otherImageUrls,productId);
+        
         response = await createProductResponse.customize(result);
         return response;
     }
