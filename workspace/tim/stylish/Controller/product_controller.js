@@ -1,4 +1,3 @@
-const product = require('../Model/product_model');
 const getProductDetailHandler = require('../Application/Features/Product/Queries/GetProductDetail/getProductDetailHandler');
 const searchProductHandler = require('../Application/Features/Product/Queries/SearchProduct/searchProductHandler');
 const getFileredProductHandler = require('../Application/Features/Product/Queries/getFilteredProduct/getFilteredProductHandler');
