@@ -1,13 +1,12 @@
 module.exports = {
-    getProducts: async(sql_condition_obj,limit,paging)=>{
+    getProducts: async(sql_condition_obj)=>{
         //init
         let insert =null;
 
         //operation
         //detail is to store the target prodoct detail id
 
-        const {searchKeyword,filter,detail} = sql_condition_obj;
-        console.log(searchKeyword);
+        const {searchKeyword,filter,detail,limit,paging} = sql_condition_obj;
         if(searchKeyword!==null){
             insert = `WHERE P.title like '%${searchKeyword}%'`;
         }

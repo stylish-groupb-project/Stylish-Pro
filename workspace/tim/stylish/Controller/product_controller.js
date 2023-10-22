@@ -1,11 +1,15 @@
 const product = require('../Model/product_model');
+const getProductDetailHandler = require('../Application/Features/Product/Queries/GetProductDetail/getProductDetailHandler');
+const searchProductHandler = require('../Application/Features/Product/Queries/SearchProduct/searchProductHandler');
+const getFileredProductHandler = require('../Application/Features/Product/Queries/getFilteredProduct/getFilteredProductHandler');
+const createProductHandler = require('../Application/Features/Product/Commands/createProduct/createProductHandler');
 module.exports = {
     addProduct: async (req, res) => {
         try {
             const { data} = req.body;
             const uploadedPictures = req.files;
-            const result=await product.addProduct(res,data,uploadedPictures);
-            res.status(200).json(result);
+            const response=await createProductHandler.handle(res,data,uploadedPictures);
+            res.status(200).json(response);
         } catch (error) {
             console.log(error)
         }
@@ -13,8 +17,8 @@ module.exports = {
     getAllProduct: async (req, res) => {
         try {
             const {paging} = req.query;
-            const result=await product.getProduct(res, "null" ,Number(paging) ? paging : 0);
-            res.status(200).json(result);
+            const response=await getFileredProductHandler.handle(res, "null" ,Number(paging) ? paging : 0);
+            res.status(200).json(response);
         } catch (error) {
             console.log(error)
         }
@@ -22,8 +26,8 @@ module.exports = {
     getMenProduct: async (req, res) => {
         try {
             const {paging} = req.query;
-            const result=await product.getProduct(res, "men" ,Number(paging) ? paging : 0);
-            res.status(200).json(result);
+            const response=await getFileredProductHandler.handle(res, "men" ,Number(paging) ? paging : 0);
+            res.status(200).json(response);
         } catch (error) {
             console.log(error)
         }
@@ -31,8 +35,8 @@ module.exports = {
     getWomenProduct: async (req, res) => {
         try {
             const {paging} = req.query;
-            const result=await product.getProduct(res, "women" ,paging ? Number(paging) : 0);
-            res.status(200).json(result);
+            const response=await getFileredProductHandler.handle(res, "women" ,paging ? Number(paging) : 0);
+            res.status(200).json(response);
         } catch (error) {
             console.log(error)
         }
@@ -40,8 +44,8 @@ module.exports = {
     getAccessories: async (req, res) => {
         try {
             const {paging} = req.query;
-            const result=await product.getProduct(res, "accessories" ,paging ? Number(paging) : 0);
-            res.status(200).json(result);
+            const response=await getFileredProductHandler.handle(res, "accessories" ,paging ? Number(paging) : 0);
+            res.status(200).json(response);
         } catch (error) {
             console.log(error)
         }
@@ -49,8 +53,8 @@ module.exports = {
     search: async(req,res)=>{
         try {
             const {keyword,paging} = req.query;
-            const result=await product.search(res,keyword,paging ? Number(paging) : 0);
-            res.status(200).json(result);
+            const response=await searchProductHandler.handle(res,keyword,paging ? Number(paging) : 0);
+            res.status(200).json(response);
         } catch (error) {
             console.log(error)
         }
@@ -59,8 +63,8 @@ module.exports = {
     getProductDetail: async(req,res)=>{
         try {
             const {id} = req.query;
-            const result=await product.getProductDetail(res,id);
-            res.status(200).json(result);
+            const response=await getProductDetailHandler.handle(res,id);
+            res.status(200).json(response);
         } catch (error) {
             console.log(error)
         }

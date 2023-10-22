@@ -66,8 +66,10 @@ module.exports = {
                 detail: null,
                 searchKeyword: null,
                 filter: type,
-            }
-            const getProductQuery = await sql_view.getProducts(sql_condition_obj, limit, paging);
+                limit: limit,
+                paging: paging
+            };
+            const getProductQuery = await sql_view.getProducts(sql_condition_obj);
             console.log(getProductQuery);
             const [result] = await connection.execute(getProductQuery);
             console.log("result.length: " + result.length);
@@ -129,8 +131,10 @@ module.exports = {
                 detail: null,
                 searchKeyword: keyword,
                 filter: "null",
+                limit: limit,
+                paging: paging
             }
-            const searchQuery = await sql_view.getProducts(sql_condition_obj, limit, paging);
+            const searchQuery = await sql_view.getProducts(sql_condition_obj);
             console.log(searchQuery);
             const [result] = await connection.execute(searchQuery);
             const totalData = [];
@@ -190,9 +194,11 @@ module.exports = {
             const sql_condition_obj = {
                 detail: product_id,
                 searchKeyword: null,
-                filter: null
+                filter: null,
+                limit: limit,
+                paging: 0
             };
-            const searchQuery = await sql_view.getProducts(sql_condition_obj, limit, 0);
+            const searchQuery = await sql_view.getProducts(sql_condition_obj);
             console.log(searchQuery);
             const [result] = await connection.execute(searchQuery);
             if (result.length == 0) return res.status(403).json("product doesn't exist");
