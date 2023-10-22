@@ -1,10 +1,12 @@
+const errorMsg = require('../../../../../utils/error');
 module.exports = {
-    customize: async (result, limit,paging) => {
+    customize: async (res, result, limit,paging) => {
         let next_page = null;
         let response = null;
         const totalData = [];
         for (let i = 0; i < result.length - 1; i++) {
             //要多判斷image是否為空 TODO: add error message
+            if(result[i].sizes === null || result[i].images === null) return errorMsg.inputEmpty(res);
             const sizesArray = result[i].sizes.split(',');
             const imagesArray = result[i].images.split(',');
             let res = {

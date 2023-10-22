@@ -17,7 +17,7 @@ module.exports = {
         };
         const result = await productService.getFilteredProductList(res,sql_condition_obj);
         console.log(result);
-        response = await fileredProductResponse.customize(result,limit,paging);
+        response = await fileredProductResponse.customize(res, result,limit,paging);
         return response
 
     }

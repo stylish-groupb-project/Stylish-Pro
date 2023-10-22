@@ -1,8 +1,8 @@
 const connectionPromise = require('../utils/db').connectionPromise;
 const tool = require('../utils/tool');
-
+const errorMsg = require('../utils/error');
 module.exports = {
-    insertVariants: async(variantArrayObj,productId)=>{
+    insertVariants: async(res,variantArrayObj,productId)=>{
         const connection = await connectionPromise;
         try {
             for (let i = 0; i < variantArrayObj.length; i++) {
@@ -11,6 +11,7 @@ module.exports = {
             }
         } catch (error) {
             console.error(error);
+            errorMsg.query(res);
         }finally {
             console.log('connection release');
         }
