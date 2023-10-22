@@ -4,6 +4,7 @@ module.exports = {
         let response = null;
         const totalData = [];
         for (let i = 0; i < result.length - 1; i++) {
+            //要多判斷image是否為空 TODO: add error message
             const sizesArray = result[i].sizes.split(',');
             const imagesArray = result[i].images.split(',');
             let res = {
