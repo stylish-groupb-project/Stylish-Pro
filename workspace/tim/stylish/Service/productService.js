@@ -1,6 +1,8 @@
 const productRepo = require('../Repository/productRepo');
-
-
+const colorRepo = require('../Repository/colorRepo');
+const sizeRepo = require('../Repository/sizeRepo');
+const imageRepo = require('../Repository/imageRepo');
+const variantRepo = require('../Repository/variantRepo');
 module.exports = {
     getProductDetail: async(res,sql_condition_obj,productRedisKey)=>{
         const result = await productRepo.getProductByCondition(res,sql_condition_obj,productRedisKey);
@@ -15,8 +17,16 @@ module.exports = {
         const result = await productRepo.getProductByCondition(res,sql_condition_obj);
         return result;
     },
-    insertNewProduct: async(res,productDataObj,mainImageUrl)=>{
+    insertNewProduct: async(res,productDataObj,mainImageUrl,otherImageUrls)=>{
         const result = await productRepo.insertNewProduct(res,productDataObj,mainImageUrl);
+        const newProductId = result.insertId;
+        const insertConcurrency = [
+            colorRepo.insertColors(res, productDataObj.colors, newProductId),
+            sizeRepo.insertSizes(res, productDataObj.sizes, newProductId),
+            variantRepo.insertVariants(res,variantArrayObj, newProductId),
+            imageRepo.insertImages(res,otherImageUrls,newProductId)
+        ];
+        await Promise.all(insertConcurrency);
         return result;
     }
 
