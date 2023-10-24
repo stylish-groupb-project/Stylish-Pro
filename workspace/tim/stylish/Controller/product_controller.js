@@ -1,7 +1,7 @@
 const getProductDetailHandler = require('../Application/Features/Product/Queries/GetProductDetail/getProductDetailHandler');
 const searchProductHandler = require('../Application/Features/Product/Queries/SearchProduct/searchProductHandler');
 const getFileredProductHandler = require('../Application/Features/Product/Queries/GetFilteredProduct/getFilteredProductHandler');
-const createProductHandler = require('../Application/Features/Product/Commands/CreateProducts/createProductHandler');
+const createProductHandler = require('../Application/Features/Product/Commands/CreateProduct/createProductHandler');
 module.exports = {
     addProduct: async (req, res) => {
         try {
