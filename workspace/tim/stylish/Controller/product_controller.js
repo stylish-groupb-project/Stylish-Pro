@@ -7,8 +7,8 @@ module.exports = {
         try {
             const { data} = req.body;
             const uploadedPictures = req.files;
-            const result=await createProductHandler.handle(res,data,uploadedPictures);
-            res.status(200).json(result);
+            const response=await createProductHandler.handle(res,data,uploadedPictures);
+            res.status(200).json(response);
         } catch (error) {
             console.log(error)
         }
