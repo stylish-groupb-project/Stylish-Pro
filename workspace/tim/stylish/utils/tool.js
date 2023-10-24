@@ -17,6 +17,7 @@ module.exports = {
         //         cb(null, `${Date.now()}${path.extname(file.originalname)}`);
         //     }
         // });
+        //TODO: 驗證副檔名、限制檔案大小
         const upload = multer({ 
             storage: multer.memoryStorage(),
         });
