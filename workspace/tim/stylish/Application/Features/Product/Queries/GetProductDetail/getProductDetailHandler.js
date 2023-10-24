@@ -20,6 +20,7 @@ module.exports = {
         let result = null;
         let cacheObj = redis.getCacheByKey(productRedisKey);
         if(cacheObj === null){
+            //
             // 實作Read/Write Through緩存策略 取得同時更新快取
             result = await productService.getProductDetail(res,sql_condition_obj,productRedisKey);
         }else{
