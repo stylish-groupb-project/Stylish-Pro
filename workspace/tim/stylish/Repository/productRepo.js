@@ -13,7 +13,7 @@ module.exports = {
      * @returns {Array || error}
      */
     getProductByCondition: async (res, sql_condition_obj, productRedisKey) => {
-        const connection = connectionPromise;
+        const connection = await connectionPromise;
         try {
             await connection.beginTransaction();
 
