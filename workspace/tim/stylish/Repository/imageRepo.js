@@ -1,9 +1,8 @@
-const connectionPromise = require('../utils/db').connectionPromise;
+// const connectionPromise = require('../utils/db').connectionPromise;
 const tool = require('../utils/tool');
 const errorMsg = require('../utils/error');
 module.exports = {
-    insertImages: async(res,otherImageUrls,productId)=>{
-        const connection = await connectionPromise;
+    insertImages: async(res,otherImageUrls,productId,connection)=>{
         try {
             for (let i = 0; i < otherImageUrls.length; i++) {
                 const addImageQuery = 'INSERT INTO images(url,product_id) VALUES(?,?)';
@@ -12,8 +11,6 @@ module.exports = {
         } catch (error) {
             console.error(error);
             errorMsg.query(res)
-        }finally {
-            console.log('connection release');
         }
     }
 

@@ -13,7 +13,7 @@ module.exports = {
      * @returns {Array || error}
      */
     getProductByCondition: async (res, sql_condition_obj, productRedisKey) => {
-        const connection = await connectionPromise;
+        const connection = connectionPromise;
         try {
             await connection.beginTransaction();
 
@@ -32,23 +32,16 @@ module.exports = {
             console.log('connection release');
         }
     },
-    insertNewProduct: async (res, productDataObj, mainImageUrl) => {
-        const connection = await connectionPromise;
+    insertNewProduct: async (res, productDataObj, mainImageUrl, connection) => {
         try {
-            await connection.beginTransaction();
-
             const { category, title, description, price, texture, wash, place, note, story } = productDataObj;
             const insertProductQuery = 'INSERT INTO product(category,title,description,price,texture, wash, place, note, story ,main_image) VALUES(?,?,?,?,?,?,?,?,?,?)';
             const [result] = await connection.execute(insertProductQuery, [category, title, description, price, texture, wash, place, note, story, mainImageUrl]);
 
-            await connection.commit();
             return result;
         } catch (error) {
-            await connection.rollback();
             console.error(error);
             errorMsg.query(res)
-        } finally {
-            console.log('connection release');
         }
     }
 

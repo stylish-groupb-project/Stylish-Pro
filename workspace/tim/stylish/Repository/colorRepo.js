@@ -1,9 +1,8 @@
-const connectionPromise = require('../utils/db').connectionPromise;
+// const connectionPromise = require('../utils/db').connectionPromise;
 const tool = require('../utils/tool');
 const errorMsg = require('../utils/error');
 module.exports = {
-    insertColors: async(res,colorArrayObj,productId)=>{
-        const connection = await connectionPromise;
+    insertColors: async(res,colorArrayObj,productId, connection)=>{
         try {
             for (let i = 0; i < colorArrayObj.length; i++) {
                 const addColorQuery = 'INSERT INTO color(name,code,product_id) VALUES(?,?,?)';
@@ -12,8 +11,6 @@ module.exports = {
         } catch (error) {
             console.error(error);
             errorMsg.query(res)
-        }finally {
-            console.log('connection release');
         }
         
     }
