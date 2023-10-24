@@ -1,5 +1,6 @@
 const multer = require('multer'); // 引入 multer 套件，用於處理上傳檔案
 const path = require('path');
+const jwt = require('jsonwebtoken');
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 require('dotenv').config();
 const {
@@ -18,7 +19,7 @@ module.exports = {
         //     }
         // });
         //TODO: 驗證副檔名、限制檔案大小
-        const upload = multer({ 
+        const upload = multer({
             storage: multer.memoryStorage(),
         });
         return upload;
@@ -40,6 +41,7 @@ module.exports = {
         });
         await s3Client.send(command);
         return `https://${BUCKET_NAME}.s3.${S3_BUCKET_REGION}.amazonaws.com/${key}`;
-    }
+    },
+    
 
 }

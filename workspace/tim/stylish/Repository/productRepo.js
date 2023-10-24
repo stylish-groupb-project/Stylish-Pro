@@ -15,17 +15,14 @@ module.exports = {
     getProductByCondition: async (res, sql_condition_obj, productRedisKey) => {
         const connection = await connectionPromise;
         try {
-            // await connection.beginTransaction();
 
             const selectQuery = await sql_view.getProducts(sql_condition_obj);
             console.log(selectQuery);
             const [result] = await connection.execute(selectQuery);
             await redis.updateCache(productRedisKey, result);
 
-            // await connection.commit();
             return result;
         } catch (error) {
-            // await connection.rollback();
             console.error(error);
             errorMsg.query(res)
         } finally {

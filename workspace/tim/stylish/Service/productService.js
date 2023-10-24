@@ -21,6 +21,7 @@ module.exports = {
     insertNewProduct: async (res, productDataObj, mainImageUrl, otherImageUrls) => {
         const connection = await connectionPromise.getConnection();
         try {
+            //transaction 
             await connection.beginTransaction();
 
             const result = await productRepo.insertNewProduct(res, productDataObj, mainImageUrl, connection);
@@ -34,6 +35,7 @@ module.exports = {
             await Promise.all(insertConcurrency);
 
             await connection.commit();
+
             return result;
         } catch (error) {
             await connection.rollback();
@@ -42,7 +44,6 @@ module.exports = {
         } finally {
             console.log('connection release');
             connection.release();
-            
         }
     }
 

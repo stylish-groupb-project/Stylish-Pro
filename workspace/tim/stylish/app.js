@@ -2,12 +2,14 @@ const express = require('express');
 const app = express();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
-const cors = require('cors');
+// const cors = require('cors');
 const product_router = require('./Router/product_router');
-app.use(cors());
+const user_router = require('./Router/user_router');
+// app.use(cors());
 app.use(express.json());
 
 app.use('/api/1.0/products',product_router);
+app.use('/api/1.0/users',user_router);
 
 // app.use('/static',express.static(__dirname+'/static'));
 app.use(
