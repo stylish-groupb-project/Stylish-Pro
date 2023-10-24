@@ -23,7 +23,7 @@ module.exports = {
         const insertConcurrency = [
             colorRepo.insertColors(res, productDataObj.colors, newProductId),
             sizeRepo.insertSizes(res, productDataObj.sizes, newProductId),
-            variantRepo.insertVariants(res,variantArrayObj, newProductId),
+            variantRepo.insertVariants(res,productDataObj.variants, newProductId),
             imageRepo.insertImages(res,otherImageUrls,newProductId)
         ];
         await Promise.all(insertConcurrency);
