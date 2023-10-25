@@ -25,6 +25,11 @@ module.exports = {
         });
         return upload;
     },
+    /**
+     * upload the file from client to the S3
+     * @param {Object} file - The file from client
+     * @returns {string}
+     */
     uploadToS3: async (file) => {
         const key = Date.now().toString() + '-' + file.originalname;
         const s3Client = new S3Client({
@@ -53,6 +58,12 @@ module.exports = {
         const hash = await bcrypt.hash(password, salt);
         return hash;
     },
+    /**
+     * check the input password
+     * @param {string} input - The input password from client
+     * @param {Object} real - The hashed password in db
+     * @returns {boolean}
+     */
     confirmPassword: async (input, real) => {
         return bcrypt.compare(input, real);
     }

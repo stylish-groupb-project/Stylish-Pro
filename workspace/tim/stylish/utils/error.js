@@ -13,5 +13,11 @@ module.exports = {
     },
     emailExist: (res) => {
         res.status(403).json({ error: 'Email already exists' });
-    }
+    },
+    noUser: (res) => {
+        res.status(403).json({ error: 'Client error - User Not Found' })
+    },
+    wrongPassword: (res) => {
+        res.status(403).json({ error: 'Sign In Failed - wrong password' });
+    },
 }

@@ -26,7 +26,7 @@ module.exports = {
         };
         console.log(userInfoObj);
         const insertResult = await userService.signUp(res,userInfoObj);
-        const accessTokenInfoObj = await auth.generateAccessToken(insertResult.insertId)
+        const accessTokenInfoObj = await auth.generateAccessToken(insertResult.insertId);
         response = await userSignUpRes.customize(insertResult,userInfoObj,accessTokenInfoObj);
         return response;
     }
