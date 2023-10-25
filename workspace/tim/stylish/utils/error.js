@@ -13,5 +13,5 @@ module.exports = {
     },
     emailExist: (res) => {
         res.status(403).json({ error: 'Email already exists' });
-    },
+    }
 }

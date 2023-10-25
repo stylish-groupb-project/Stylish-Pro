@@ -9,7 +9,7 @@ module.exports = {
         //init
         let provider = "native";
         let response = null;
-        
+
         //check
         if (!name || !email || !password) return errorMsg.inputEmpty(res);
         if (!await tool.checkEmail(email)) {
@@ -24,6 +24,7 @@ module.exports = {
             provider: provider,
             picture: null
         };
+        console.log(userInfoObj);
         const insertResult = await userService.signUp(res,userInfoObj);
         const accessTokenInfoObj = await auth.generateAccessToken(insertResult.insertId)
         response = await userSignUpRes.customize(insertResult,userInfoObj,accessTokenInfoObj);
