@@ -5,7 +5,7 @@ module.exports = {
     selectUserByEmail: async(res,email)=>{
         const connection = connectionPromise;
         try {
-            const [result] = await connection.execute('SELECT * FROM users WHERE email = ?', [email]);
+            const [result] = await connection.execute('SELECT * FROM userInfo WHERE email = ?', [email]);
             return result;
         } catch (error) {
             console.error(error);
@@ -16,7 +16,7 @@ module.exports = {
         const connection = connectionPromise;
         try {
             const {name , email, hashedPassword , provider , picture} = userInfoObj;
-            const signupQuery = 'INSERT INTO users(name, email, password, provider , picture) VALUES(?,?,?,?,?)';
+            const signupQuery = 'INSERT INTO userInfo(name, email, password, provider , picture) VALUES(?,?,?,?,?)';
             const [result] = await connection.execute(signupQuery, [name, email, hashedPassword, provider , picture]); 
             return result;     
         } catch (error) {
