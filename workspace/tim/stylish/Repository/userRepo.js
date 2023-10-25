@@ -5,6 +5,7 @@ module.exports = {
     selectUserByEmail: async(res,email)=>{
         const connection = connectionPromise;
         try {
+            console.log(email);
             const [result] = await connection.execute('SELECT * FROM users WHERE email = ?', [email]);
             return result;
         } catch (error) {
