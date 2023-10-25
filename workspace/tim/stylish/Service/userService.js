@@ -16,5 +16,12 @@ module.exports = {
             return errorMsg.noUser(res);
         }
         return result;
+    },
+    getProfile: async(res,userId)=>{
+        const result = await userRepo.selectUserById(res,userId);
+        if (result.length === 0) {
+            return errorMsg.noUser(res);
+        }
+        return result;
     }
 }
