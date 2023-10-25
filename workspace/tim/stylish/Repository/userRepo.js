@@ -12,6 +12,16 @@ module.exports = {
             errorMsg.query(res);
         }
     },
+    selectUserById: async(res,userId)=>{
+        const connection = connectionPromise;
+        try {
+            const [result] = await connection.execute('SELECT * FROM userInfo WHERE id = ?', [userId]);
+            return result;
+        } catch (error) {
+            console.error(error);
+            errorMsg.query(res);
+        }
+    },
     insertNewUser: async(res,userInfoObj)=>{
         const connection = connectionPromise;
         try {

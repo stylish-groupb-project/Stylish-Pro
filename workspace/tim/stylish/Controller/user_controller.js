@@ -1,6 +1,7 @@
 
 const userSignUpHandler = require('../Application/Features/UserInfo/Commands/UserSignUp/userSignUpHandler');
 const userSignInHandler = require('../Application/Features/UserInfo/Commands/UserSignIn/userSignInHandler');
+const getUserProfileHandler = require('../Application/Features/UserInfo/Queries/GetUserProfile/getUserProfileHandler');
 
 module.exports = {
     signUp: async(req,res)=>{
@@ -20,6 +21,16 @@ module.exports = {
         } catch (error) {
             console.log(error)
         }
+    },
+    getProfile: async(req,res)=>{
+        try {
+            const loginUserId = req.decodedToken.id;
+            const response=await getUserProfileHandler.handle(res, loginUserId);
+            res.status(200).json(response);
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
 }
