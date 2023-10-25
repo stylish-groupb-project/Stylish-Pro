@@ -9,7 +9,7 @@ const user_router = require('./Router/user_router');
 app.use(express.json());
 
 app.use('/api/1.0/products',product_router);
-app.use('/api/1.0/users',user_router);
+app.use('/api/1.0/user',user_router);
 
 // app.use('/static',express.static(__dirname+'/static'));
 app.use(

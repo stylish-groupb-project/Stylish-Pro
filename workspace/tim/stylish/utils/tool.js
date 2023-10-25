@@ -1,5 +1,6 @@
 const multer = require('multer'); // 引入 multer 套件，用於處理上傳檔案
 const path = require('path');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 require('dotenv').config();
@@ -42,6 +43,20 @@ module.exports = {
         await s3Client.send(command);
         return `https://${BUCKET_NAME}.s3.${S3_BUCKET_REGION}.amazonaws.com/${key}`;
     },
-    
+    checkEmail: async (email) => {
+        const emailRegex = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+        return emailRegex.test(email);
+    },
+    generateHashPassword: async (password) => {
+        const saltRounds = 10;
+        const salt = await bcrypt.genSalt(saltRounds);
+        const hash = await bcrypt.hash(password, salt);
+        return hash;
+    },
+    confirmPassword: async (input, real) => {
+        return bcrypt.compare(input, real);
+    }
+
+
 
 }

@@ -7,7 +7,11 @@ module.exports = {
         const payload = { id: userId };
         //console.log(payload);
         const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });
-        return token;
+        const tokenInfo = {
+            token: token,
+            expire: `${60*60*60}`
+        };
+        return tokenInfo;
     },
     // Middleware for verifying JWT token
     verifyToken: async (req, res, next) => {

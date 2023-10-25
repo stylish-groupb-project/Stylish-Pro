@@ -6,7 +6,7 @@ const userController = require('../Controller/user_controller');
 
 
 //post
-router.post('/signup',auth.verifyToken,userController.signUp);
+router.post('/signup',userController.signUp);
 
 
 module.exports = router;

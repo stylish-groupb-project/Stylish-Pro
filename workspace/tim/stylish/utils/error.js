@@ -10,5 +10,8 @@ module.exports = {
     },
     wrongToken: (res) => {
         res.status(403).json({ error: 'Client error - Invalid token' });
-    }
+    },
+    emailExist: (res) => {
+        res.status(403).json({ error: 'Email already exists' });
+    },
 }
