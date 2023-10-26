@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
+const path = require('path');
 // const cors = require('cors');
 const product_router = require('./Router/product_router');
 const user_router = require('./Router/user_router');
@@ -21,8 +22,12 @@ app.use(
 app.get('/api/1.0/test', (req, res) => {
     res.send('Hello');
 });
-app.get('/test', (req, res) => {
-    res.send('Helloo');
+
+app.get('/.well-known/pki-validation/753A3038A7992A7112828484D232D6CA.txt', (req, res) => {
+    console.log("well-know!");
+    const file= path.join(__dirname,'static','.well-known','pki-validation','753A3038A7992A7112828484D232D6CA.txt');
+    console.log(file);
+    res.sendFile(file);
 });
 
 app.listen(3000, () => {
