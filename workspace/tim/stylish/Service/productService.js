@@ -23,7 +23,6 @@ module.exports = {
         try {
             //transaction 
             await connection.beginTransaction();
-
             const result = await productRepo.insertNewProduct(res, productDataObj, mainImageUrl, connection);
             const newProductId = result.insertId;
             const insertConcurrency = [
