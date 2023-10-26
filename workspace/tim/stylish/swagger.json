@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "http://13.55.47.107/api/1.0",
+            "url": "https://13.55.47.107/api/1.0",
             "description": "Local server"
         }
     ],
