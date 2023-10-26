@@ -49,12 +49,12 @@
                                     "other_images": {
                                         "type": "array",
                                         "items": {
-                                          "type": "string",
-                                          "format": "binary"
+                                            "type": "string",
+                                            "format": "binary"
                                         },
                                         "example": [
-                                          "base64-encoded-image-1",
-                                          "base64-encoded-image-2"
+                                            "base64-encoded-image-1",
+                                            "base64-encoded-image-2"
                                         ]
                                     },
                                     "data": {
@@ -98,7 +98,6 @@
         "/products/accessories": {
             "$ref": "#/paths/productList"
         },
-
         "productList": {
             "get": {
                 "summary": "Get all products",
@@ -142,23 +141,23 @@
             "get": {
                 "summary": "Search products",
                 "parameters": [
-                  {
-                    "name": "keyword",
-                    "in": "query",
-                    "description": "Search keyword",
-                    "required": true,
-                    "schema": {
-                      "type": "string"
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "Search keyword",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "paging",
+                        "in": "query",
+                        "description": "Paging for request next page.",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                  },
-                  {
-                    "name": "paging",
-                    "in": "query",
-                    "description": "Paging for request next page.",
-                    "schema": {
-                      "type": "string"
-                    }
-                  }
                 ],
                 "responses": {
                     "200": {
@@ -184,21 +183,21 @@
                         }
                     }
                 }
-              }
+            }
         },
-        "/products/details":{
+        "/products/details": {
             "get": {
                 "summary": "Get product details",
                 "parameters": [
-                  {
-                    "name": "id",
-                    "in": "query",
-                    "description": "Product ID",
-                    "required": true,
-                    "schema": {
-                      "type": "number"
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
                     }
-                  }
                 ],
                 "responses": {
                     "200": {
@@ -224,8 +223,126 @@
                         }
                     }
                 }
+            }
+        },
+        "/user/signup": {
+            "post": {
+                "summary": "User Sign Up",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ]
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": {
+                                        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6joiYXJ0aHVIjoxNjEzNTY3MzA0fQ.6EPCOfBGynidAfpVqlvbHGWHCJ5LZLtKvPaQ",
+                                        "access_expired": 3600,
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/signin": {
+            "post": {
+              "summary": "User Sign In",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "provider": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "password": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["provider", "email", "password"]
+                    }
+                  }
+                },
+                "required": true
+              },
+      "responses": {
+                "200": {
+                  "description": "Success",
+                  "content": {
+                    "application/json": {
+                      "example": {
+                        "data": {
+                          "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6joiYXJ0aHVIjoxNjEzNTY3MzA0fQ.6EPCOfBGynidAfpVqlvbHGWHCJ5LZLtKvPaQ",
+                          "access_expired": 3600,
+                          "user": {
+                            "$ref": "#/components/schemas/User"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
-        }
+            }
+          },
+          "/user/profile": {
+            "get": {
+              "summary": "User Profile",
+              "security": [
+                {
+                  "BearerAuth": []
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Success",
+                  "content": {
+                    "application/json": {
+                      "example": {
+                        "data": {
+                          "$ref": "#/components/schemas/User"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
     },
     "components": {
         "schemas": {
@@ -426,6 +543,32 @@
                         },
                         "description": "Array of image URLs"
                     }
+                }
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "provider": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "picture": {
+                    "type": "string"
+                  }
+                }
+            },
+            "securitySchemes": {
+                "BearerAuth": {
+                  "type": "http",
+                  "scheme": "bearer"
                 }
             }
         }
