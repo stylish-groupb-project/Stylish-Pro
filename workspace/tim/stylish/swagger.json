@@ -259,11 +259,18 @@
                         "description": "Success",
                         "content": {
                             "application/json": {
-                                "example": {
-                                    "data": {
-                                        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6joiYXJ0aHVIjoxNjEzNTY3MzA0fQ.6EPCOfBGynidAfpVqlvbHGWHCJ5LZLtKvPaQ",
-                                        "access_expired": 3600,
-                                        "user": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6joiYXJ0aHVIjoxNjEzNTY3MzA0fQ.6EPCOfBGynidAfpVqlvbHGWHCJ5LZLtKvPaQ"
+                                        },
+                                        "access_expired": {
+                                            "type": "integer",
+                                            "example": 3600
+                                        },
+                                        "data": {
                                             "$ref": "#/components/schemas/User"
                                         }
                                     }
@@ -276,73 +283,87 @@
         },
         "/user/signin": {
             "post": {
-              "summary": "User Sign In",
-              "requestBody": {
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "object",
-                      "properties": {
-                        "provider": {
-                          "type": "string"
-                        },
-                        "email": {
-                          "type": "string"
-                        },
-                        "password": {
-                          "type": "string"
+                "summary": "User Sign In",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "provider": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "provider",
+                                    "email",
+                                    "password"
+                                ]
+                            }
                         }
-                      },
-                      "required": ["provider", "email", "password"]
-                    }
-                  }
+                    },
+                    "required": true
                 },
-                "required": true
-              },
-      "responses": {
-                "200": {
-                  "description": "Success",
-                  "content": {
-                    "application/json": {
-                      "example": {
-                        "data": {
-                          "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6joiYXJ0aHVIjoxNjEzNTY3MzA0fQ.6EPCOfBGynidAfpVqlvbHGWHCJ5LZLtKvPaQ",
-                          "access_expired": 3600,
-                          "user": {
-                            "$ref": "#/components/schemas/User"
-                          }
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6joiYXJ0aHVIjoxNjEzNTY3MzA0fQ.6EPCOfBGynidAfpVqlvbHGWHCJ5LZLtKvPaQ"
+                                        },
+                                        "access_expired": {
+                                            "type": "integer",
+                                            "example": 3600
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    }
+                                }
+                            }
                         }
-                      }
                     }
-                  }
                 }
-              }
             }
-          },
-          "/user/profile": {
+        },
+        "/user/profile": {
             "get": {
-              "summary": "User Profile",
-              "security": [
-                {
-                  "BearerAuth": []
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "Success",
-                  "content": {
-                    "application/json": {
-                      "example": {
-                        "data": {
-                          "$ref": "#/components/schemas/User"
-                        }
-                      }
+                "summary": "User Profile",
+                "security": [
+                    {
+                        "BearerAuth": []
                     }
-                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/UserProfile"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-              }
             }
-          }
+        }
     },
     "components": {
         "schemas": {
@@ -548,28 +569,45 @@
             "User": {
                 "type": "object",
                 "properties": {
-                  "id": {
-                    "type": "integer"
-                  },
-                  "provider": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "picture": {
-                    "type": "string"
-                  }
+                    "id": {
+                        "type": "integer"
+                    },
+                    "provider": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "picture": {
+                        "type": "string"
+                    }
                 }
             },
-            "securitySchemes": {
-                "BearerAuth": {
-                  "type": "http",
-                  "scheme": "bearer"
+            "UserProfile": {
+                "type": "object",
+                "properties": {
+                    "provider": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "picture": {
+                        "type": "string"
+                    }
                 }
+            }
+        },
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
             }
         }
     }
