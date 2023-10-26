@@ -9,7 +9,7 @@ module.exports = {
         //init
         let response = null;
 
-        if(provider === "native"){
+        // if(provider === "native"){
             //check
             if (!email || !password) return errorMsg.inputEmpty(res);
 
@@ -20,6 +20,6 @@ module.exports = {
             const accessTokenInfoObj = await auth.generateAccessToken(getUserdata[0].id);
             response = await userSignInRes.customize(getUserdata , accessTokenInfoObj)
             return response;
-        }
+        // }
     }
 }
