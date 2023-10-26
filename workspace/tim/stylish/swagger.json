@@ -602,12 +602,12 @@
                         "type": "string"
                     }
                 }
-            },
-            "securitySchemes": {
-                "BearerAuth": {
-                    "type": "http",
-                    "scheme": "bearer"
-                }
+            }
+        },
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
             }
         }
     }
