@@ -242,6 +242,7 @@
                 };
                 const tokenElement = document.getElementById('Token');
                 const token = tokenElement.textContent || tokenElement.innerText;
+                console.log(token);
                 fetch('https://13.55.47.107/api/1.0/order/checkout', {
                     method: 'POST',
                     headers: {
