@@ -9,13 +9,14 @@ module.exports = {
         const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });
         const tokenInfo = {
             token: token,
-            expire: `${60*60*60}`
+            expire: `${60*60*24}`
         };
         return tokenInfo;
     },
     // Middleware for verifying JWT token
     verifyToken: async (req, res, next) => {
         const token = req.headers.authorization;
+        console.log(token);
         try {
             if (!token) {
                 return errorMsg.noToken(res);
