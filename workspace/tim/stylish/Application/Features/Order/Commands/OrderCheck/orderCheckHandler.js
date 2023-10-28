@@ -53,17 +53,16 @@ module.exports = {
         const post_req = https.request(post_options, function (response) {
             response.setEncoding('utf8');
             response.on('data', function (body) {
-                // tapPayResponse = JSON.parse(body);
+                tapPayResponse = JSON.parse(body);
                 
-                return res.json({
-                    result: JSON.parse(body)
-                })
+                // return res.json({
+                //     result: JSON.parse(body)
+                // })
             });
         });
         post_req.write(JSON.stringify(post_data));
         post_req.end();
         console.log(tapPayResponse);
-        // console.log(tapPayResponse);
 
         const result = await orderService.insertNewOrder(res,order,loginUserId);
         finalResponse = await orderCheckRes.customize(result);
