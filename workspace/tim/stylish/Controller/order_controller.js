@@ -7,7 +7,7 @@ module.exports = {
             const {prime , order} = req.body;
             const data = {
                 prime: prime,
-                order: JSON.parse(order)
+                order: order
             };
             console.log(prime);
             console.log(order);
