@@ -23,6 +23,7 @@ app.use(
 );
 
 app.get('/admin/checkout.html', (req, res) => {
+    console.log(path.join(__dirname, 'View', 'html','checkout.html'));
     res.sendFile(path.join(__dirname, 'View', 'html','checkout.html'));
 });
 
