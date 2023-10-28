@@ -20,4 +20,14 @@ module.exports = {
     wrongPassword: (res) => {
         res.status(403).json({ error: 'Sign In Failed - wrong password' });
     },
+    notContainAnyProductInOrder: (res) => {
+        res.status(403).json({ error: 'Order detail - order req must have a product' });
+    },
+    variantProblem: (res) => {
+        res.status(403).json({ error: 'variant problem - the variant of this product goes wrong' });
+    },
+    stockProblem: (res) => {
+        res.status(403).json({ error: 'stock problem - the stock of this product goes wrong' });
+    }
+
 }

@@ -40,6 +40,19 @@ module.exports = {
             console.error(error);
             errorMsg.query(res)
         }
+    },
+    simpleSearchById: async(res, productId)=>{
+        const connection = await connectionPromise;
+        try {
+            const selectQuery = 'SELECT * FROM product WHERE id = ?'
+            const [result] = await connection.execute(selectQuery,[productId]);
+            return result;
+        } catch (error) {
+            console.error(error);
+            errorMsg.query(res)
+        } finally {
+            console.log('connection release');
+        }
     }
 
 

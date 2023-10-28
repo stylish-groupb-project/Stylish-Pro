@@ -10,6 +10,11 @@ module.exports = {
         if (result.length == 0) return res.status(403).json("product doesn't exist");
         return result;
     },
+    simpleSearchById: async (res, productId) => {
+        const result = await productRepo.simpleSearchById(res, productId);
+        if (result.length == 0) return res.status(403).json("product doesn't exist");
+        return result;
+    },
     searchByTitle: async (res, sql_condition_obj) => {
         const result = await productRepo.getProductByCondition(res, sql_condition_obj);
         return result;

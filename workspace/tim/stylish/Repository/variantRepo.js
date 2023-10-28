@@ -13,6 +13,27 @@ module.exports = {
             errorMsg.query(res);
         }
         
+    },
+    findByColorAndSizeAndPid: async(res,dataObj,connection)=>{
+        try {
+            const {color ,size ,product_id} = dataObj;
+            const findQuery = 'SELECT  * FROM variant WHERE product_id = ? AND colorCode = ? AND size = ?';
+            const [result] = await connection.execute(findQuery, [product_id, color , size]);
+            return result;
+        } catch (error) {
+            console.error(error);
+            errorMsg.query(res);
+        }
+        
+    },
+    updateVariantStock: async(res,qty,variant_id,connection)=>{
+        try {
+            const updateQuery = 'UPDATE variant SET stock = stock - ? WHERE id = ?';
+            await connection.execute(updateQuery, [qty,variant_id]);
+        } catch (error) {
+            console.error(error);
+            errorMsg.query(res);
+        }
     }
 
 }
