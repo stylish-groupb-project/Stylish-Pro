@@ -25,11 +25,11 @@ module.exports = {
         //不確定要不Json.parse
         const { prime, order } = data;
         if(!prime || !order) return errorMsg.inputEmpty(res);
-        const orderObj = JSON.parse(order);
-        if(orderObj.list.length === 0) return errorMsg.notContainAnyProductInOrder(res);
-        for(let i=0;i<orderObj.list.length;i++){
+        // const orderObj = JSON.parse(order);
+        if(order.list.length === 0) return errorMsg.notContainAnyProductInOrder(res);
+        for(let i=0;i<order.list.length;i++){
             //確保訂單中都有提供正確的 product id
-            await productService.simpleSearchById(orderObj.list[i].id);
+            await productService.simpleSearchById(order.list[i].id);
         }
 
         //operation
@@ -63,7 +63,7 @@ module.exports = {
         post_req.end();
         console.log(tapPayResponse);
 
-        const result = await orderService.insertNewOrder(res,orderObj,loginUserId);
+        const result = await orderService.insertNewOrder(res,order,loginUserId);
         finalResponse = await orderCheckRes.customize(result);
         return finalResponse;
     }
