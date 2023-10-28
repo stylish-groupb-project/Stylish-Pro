@@ -1,4 +1,5 @@
-const orderCheckHandler = require('../Application/Features/Order/Commands/OderCheck/orderCheckHandler');
+// const orderCheckHandler = require('../Application/Features/Order/Commands/OderCheck/orderCheckHandler');
+const orderCheckHandler = require('../Application/Features/Order/Commands/OrderCheck/orderCheckHandler');
 module.exports = {
     checkout: async(req,res)=>{
         try {
