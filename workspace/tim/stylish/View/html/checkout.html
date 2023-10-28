@@ -240,12 +240,13 @@
                         }
                     ]
                 };
-                const token = document.getElementById('Token');
+                const tokenElement = document.getElementById('Token');
+                const token = tokenElement.textContent || tokenElement.innerText;
                 fetch('https://13.55.47.107/api/1.0/order/checkout', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + JSON.stringify(token),
+                        'Authorization': 'Bearer ' + token,
                     },
                     body: JSON.stringify({
                         prime: prime,
