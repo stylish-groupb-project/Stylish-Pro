@@ -22,17 +22,14 @@ module.exports = {
         };
         //check
         if(!data) return errorMsg.inputEmpty(res);
-        //不確定要不Json.parse
+        //不確定要不Json.parse ANS: no
         const { prime, order } = data;
         if(!prime || !order) return errorMsg.inputEmpty(res);
-        // const orderObj = JSON.parse(order);
         if(order.list.length === 0) return errorMsg.notContainAnyProductInOrder(res);
         console.log(order.list.length);
         for(let i=0;i<order.list.length;i++){
             //確保訂單中都有提供正確的 product id
-            console.log(order.list[i]);
-            console.log(order.list[i].id);
-            await productService.simpleSearchById(order.list[i].id);
+            await productService.simpleSearchById(res,order.list[i].id);
         }
 
         //operation
