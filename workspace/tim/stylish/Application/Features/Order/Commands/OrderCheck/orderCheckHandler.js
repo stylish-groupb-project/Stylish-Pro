@@ -65,6 +65,7 @@ module.exports = {
         // console.log(tapPayResponse);
 
         const result = await orderService.insertNewOrder(res,order,loginUserId);
+        console.log(result.insertId);
         finalResponse = await orderCheckRes.customize(result);
         return finalResponse;
     }
