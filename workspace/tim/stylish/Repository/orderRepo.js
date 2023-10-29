@@ -17,7 +17,7 @@ module.exports = {
         try {
             const connection = await connectionPromise;
             const updateOrderQuery = 'UPDATE orders SET isPaid = ? WHERE id = ?';
-            await connection.execute(updateOrderQuery, [ status ? 1:0, orderId, 0]);
+            await connection.execute(updateOrderQuery, [ status ? 1:0, orderId]);
         } catch (error) {
             console.error(error);
             errorMsg.query(res)
