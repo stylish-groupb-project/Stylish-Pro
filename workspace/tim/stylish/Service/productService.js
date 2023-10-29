@@ -11,6 +11,7 @@ module.exports = {
         return result;
     },
     simpleSearchById: async (res, productId) => {
+        console.log('simpleSearchById: '+ productId);
         const result = await productRepo.simpleSearchById(res, productId);
         if (result.length == 0) return res.status(403).json("product doesn't exist");
         return result;
