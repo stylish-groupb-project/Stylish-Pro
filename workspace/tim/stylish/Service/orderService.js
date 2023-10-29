@@ -22,6 +22,7 @@ module.exports = {
             console.log(orderObj);
             const result = await orderRepo.insertNewOrder(res,orderObj,connection);
             const newOrderId = result.insertId;
+            console.log(newOrderId);
             const concurrencyQuery =[
                 recipientRepo.insertNewRecipient(res,recipient , newOrderId ,connection),
                 cartItemRepo.updateCartItems(res, userId, newOrderId ,connection)
@@ -44,8 +45,8 @@ module.exports = {
             return result;
 
         }catch (error) {
+            console.log(error);
             await connection.rollback();
-            console.error(error);
             errorMsg.query(res);
         } finally {
             console.log('connection release');
