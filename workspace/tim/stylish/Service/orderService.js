@@ -34,11 +34,12 @@ module.exports = {
                     size: list[i].size,
                     product_id: list[i].id
                 };
+                console.log(variantObj);
                 const findVariant = await variantRepo.findByColorAndSizeAndPid(res,variantObj,connection);
                 if(findVariant.length === 0) return errorMsg.variantProblem(res);
                 //可能剛好同時兩個人下單那個貨物而貨物只剩1
                 console.log("here: "+findVariant[0]);
-                if(findVariant[0].stock - list[i].qty <= 0) return errorMsg.stockProblem(res);
+                if(findVariant[0].stock - list[i].qty < 0) return errorMsg.stockProblem(res);
                 await variantRepo.updateVariantStock(res,list[i].qty,findVariant[0].id,connection);
             }
             await connection.commit();
