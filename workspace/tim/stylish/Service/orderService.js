@@ -53,5 +53,9 @@ module.exports = {
             console.log('connection release');
             connection.release();
         }
+    },
+    updateOrderIsPaid: async(res,status,orderId)=>{
+        await orderRepo.updateOrderPaidStatus(res,status,orderId);
     }
+
 }

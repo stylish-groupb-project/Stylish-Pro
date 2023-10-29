@@ -35,6 +35,9 @@ module.exports = {
         }
 
         //operation
+
+        const result = await orderService.insertNewOrder(res,order,loginUserId);
+
         const post_data = {
             "prime": prime,
             "partner_key": 'partner_PHgswvYEk4QY6oy3n8X3CwiQCVQmv91ZcFoD5VrkGFXo8N7BFiLUxzeG',
@@ -51,14 +54,12 @@ module.exports = {
             },
             "remember": true
         };
-        const re = await tool.tappayRequest(post_options,post_data);
-        console.log("re:"+re);
-
-        const result = await orderService.insertNewOrder(res,order,loginUserId);
-        console.log(result.insertId);
+        tappayStatus = await tool.tappayRequest(post_options,post_data);
+        console.log(tappayStatus);
+        if(tappayStatus === true){
+            await orderService.updateOrderIsPaid(res,true,result.isertId);
+        }
         finalResponse = await orderCheckRes.customize(result);
-
-        
         
         return finalResponse;
     }
