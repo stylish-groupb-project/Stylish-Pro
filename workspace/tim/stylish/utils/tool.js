@@ -68,27 +68,40 @@ module.exports = {
     confirmPassword: async (input, real) => {
         return bcrypt.compare(input, real);
     },
-    tappayRequest: async(post_options,post_data)=>{
-        let tappayStatus = false;
-        const post_req = https.request(post_options, function (response) {
-            response.setEncoding('utf8');
-            response.on('data', function (body) {
-                let tapPayResponse = JSON.parse(body);
-                console.log(tapPayResponse.msg);
-                console.log(tapPayResponse.status);
-                if(tapPayResponse.msg == 'Success'){
-                    tappayStatus = true;
-                    console.log("tool:"+tappayStatus);
-                    return tappayStatus;
-                }
-                // console.log(tapPayResponse);
-                // return res.json({
-                //     result: JSON.parse(body)
-                // })
+    tappayRequest: async (post_options, post_data) => {
+        return new Promise((resolve, reject) => {
+            let tappayStatus = false;
+            const post_req = https.request(post_options, function (response) {
+                let tapPayResponse = '';
+
+                response.setEncoding('utf8');
+                response.on('data', function (body) {
+                    tapPayResponse += body;
+                });
+
+                response.on('end', function () {
+                    try {
+                        const parsedResponse = JSON.parse(tapPayResponse);
+                        console.log(parsedResponse.msg);
+                        console.log(parsedResponse.status);
+                        if (parsedResponse.msg === 'Success') {
+                            tappayStatus = true;
+                        }
+                        resolve(tappayStatus);
+                    } catch (error) {
+                        reject(error);
+                    }
+                });
             });
+
+            post_req.on('error', function (error) {
+                reject(error);
+            });
+
+            // 寫入 request body 或進行其他設置
+            post_req.write(JSON.stringify(post_data));
+            post_req.end();
         });
-        post_req.write(JSON.stringify(post_data));
-        post_req.end();
     }
 
 
