@@ -78,6 +78,7 @@ module.exports = {
                 console.log(tapPayResponse.status);
                 if(tapPayResponse.msg == 'Success'){
                     tappayStatus = true;
+                    console.log("tool:"+tappayStatus);
                 }
                 // console.log(tapPayResponse);
                 // return res.json({

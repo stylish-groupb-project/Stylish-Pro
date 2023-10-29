@@ -52,28 +52,14 @@ module.exports = {
             "remember": true
         };
         tappayStatus = await tool.tappayRequest(post_options,post_data);
-        // const post_req = https.request(post_options, function (response) {
-        //     response.setEncoding('utf8');
-        //     response.on('data', function (body) {
-        //         tapPayResponse = JSON.parse(body);
-        //         console.log(tapPayResponse.msg);
-        //         console.log(tapPayResponse.status);
-        //         if(tapPayResponse.msg == 'Success'){
-        //             tappayStatus = true;
-        //         }
-        //         // console.log(tapPayResponse);
-        //         // return res.json({
-        //         //     result: JSON.parse(body)
-        //         // })
-        //     });
-        // });
-        // post_req.write(JSON.stringify(post_data));
-        // post_req.end();
         console.log(tappayStatus);
 
         const result = await orderService.insertNewOrder(res,order,loginUserId);
         console.log(result.insertId);
         finalResponse = await orderCheckRes.customize(result);
+
+        
+        
         return finalResponse;
     }
 }
