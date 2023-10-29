@@ -79,6 +79,7 @@ module.exports = {
                 if(tapPayResponse.msg == 'Success'){
                     tappayStatus = true;
                     console.log("tool:"+tappayStatus);
+                    return tappayStatus;
                 }
                 // console.log(tapPayResponse);
                 // return res.json({
@@ -88,7 +89,6 @@ module.exports = {
         });
         post_req.write(JSON.stringify(post_data));
         post_req.end();
-        return tappayStatus;
     }
 
 
