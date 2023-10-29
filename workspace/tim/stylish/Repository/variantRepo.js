@@ -17,7 +17,7 @@ module.exports = {
     findByColorAndSizeAndPid: async(res,dataObj,connection)=>{
         try {
             const {color ,size ,product_id} = dataObj;
-            const findQuery = 'SELECT  * FROM variant WHERE product_id = ? AND colorCode = ? AND size = ?';
+            const findQuery = 'SELECT  * FROM variant WHERE product_id = ? AND color_code = ? AND size = ?';
             const [result] = await connection.execute(findQuery, [product_id, color , size]);
             return result;
         } catch (error) {
