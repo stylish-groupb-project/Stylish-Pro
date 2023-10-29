@@ -4,8 +4,7 @@ module.exports = {
         try {
             const { name, phone, email , address , time } = recipientDataObj;
             const insertRecipientQuery = 'INSERT INTO recipients(name, phone, email , address,  prefer_time, order_id) VALUES(?,?,?,?,?,?)';
-            const [result] = await connection.execute(insertRecipientQuery, [name, phone, email , address , time, order_id]);
-            return result;
+            await connection.execute(insertRecipientQuery, [name, phone, email , address , time, order_id]);
         } catch (error) {
             console.error(error);
             errorMsg.query(res)

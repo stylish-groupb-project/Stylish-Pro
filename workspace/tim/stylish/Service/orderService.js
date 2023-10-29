@@ -17,8 +17,9 @@ module.exports = {
                 subtotal: subtotal,
                 freight: freight,
                 total: total,
-                userId: userId
+                user_id: userId
             };
+            console.log(orderObj);
             const result = await orderRepo.insertNewOrder(res,orderObj,connection);
             const newOrderId = result.insertId;
             const concurrencyQuery =[
@@ -35,8 +36,9 @@ module.exports = {
                 const findVariant = await variantRepo.findByColorAndSizeAndPid(res,variantObj,connection);
                 if(findVariant.length === 0) return errorMsg.variantProblem(res);
                 //可能剛好同時兩個人下單那個貨物而貨物只剩1
-                if(findVariant.stock - list[i].qty <= 0) return errorMsg.stockProblem(res);
-                await variantRepo.updateVariantStock(res,list[i].qty,list[i].id,connection);
+                console.log("here: "+findVariant[0]);
+                if(findVariant[0].stock - list[i].qty <= 0) return errorMsg.stockProblem(res);
+                await variantRepo.updateVariantStock(res,list[i].qty,findVariant[0].id,connection);
             }
             await connection.commit();
             return result;
