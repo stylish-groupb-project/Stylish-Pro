@@ -55,6 +55,8 @@ module.exports = {
             response.setEncoding('utf8');
             response.on('data', function (body) {
                 tapPayResponse = JSON.parse(body);
+                console.log(tapPayResponse.msg);
+                console.log(tapPayResponse.status);
                 if(tapPayResponse.msg == 'Success'){
                     tappayStatus = true;
                 }
