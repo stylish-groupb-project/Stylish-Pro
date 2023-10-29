@@ -9,6 +9,7 @@ module.exports = {
         //init
         let tapPayResponse = null;
         let finalResponse = null;
+        let tappayStatus = false;
         // const partner_key = process.env.PARTNER_KEY;
         const post_options = {
             host: 'sandbox.tappaysdk.com',
@@ -54,6 +55,9 @@ module.exports = {
             response.setEncoding('utf8');
             response.on('data', function (body) {
                 tapPayResponse = JSON.parse(body);
+                if(tapPayResponse.msg == 'Success'){
+                    tappayStatus = true;
+                }
                 // console.log(tapPayResponse);
                 // return res.json({
                 //     result: JSON.parse(body)
@@ -62,7 +66,7 @@ module.exports = {
         });
         post_req.write(JSON.stringify(post_data));
         post_req.end();
-        console.log(tapPayResponse);
+        console.log(tappayStatus);
 
         const result = await orderService.insertNewOrder(res,order,loginUserId);
         console.log(result.insertId);
