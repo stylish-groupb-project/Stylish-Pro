@@ -54,7 +54,7 @@ module.exports = {
             response.setEncoding('utf8');
             response.on('data', function (body) {
                 tapPayResponse = JSON.parse(body);
-                console.log(tapPayResponse);
+                // console.log(tapPayResponse);
                 // return res.json({
                 //     result: JSON.parse(body)
                 // })
@@ -62,7 +62,7 @@ module.exports = {
         });
         post_req.write(JSON.stringify(post_data));
         post_req.end();
-        // console.log(tapPayResponse);
+        console.log(tapPayResponse);
 
         const result = await orderService.insertNewOrder(res,order,loginUserId);
         console.log(result.insertId);
