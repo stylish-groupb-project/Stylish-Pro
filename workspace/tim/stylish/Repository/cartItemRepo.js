@@ -21,6 +21,7 @@ module.exports = {
     },
     updateCartItems: async (res,userId,orderId,connection)=>{
         try {
+            console.log("updateCart:"+orderId);
             const updateItemsQuery = 'UPDATE cart_items SET order_id = ? WHERE user_id = ? AND order_id = ?';
             await connection.execute(updateItemsQuery, [orderId,userId,null]);
         } catch (error) {
