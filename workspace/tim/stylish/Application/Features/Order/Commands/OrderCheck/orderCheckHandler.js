@@ -57,7 +57,7 @@ module.exports = {
         tappayStatus = await tool.tappayRequest(post_options,post_data);
         console.log(tappayStatus);
         if(tappayStatus === true){
-            await orderService.updateOrderIsPaid(res,true,result.isertId);
+            await orderService.updateOrderIsPaid(res,true,result.insertId);
         }
         finalResponse = await orderCheckRes.customize(result);
         
