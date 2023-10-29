@@ -51,8 +51,8 @@ module.exports = {
             },
             "remember": true
         };
-        tappayStatus = await tool.tappayRequest(post_options,post_data);
-        console.log(tappayStatus);
+        const re = await tool.tappayRequest(post_options,post_data);
+        console.log("re:"+re);
 
         const result = await orderService.insertNewOrder(res,order,loginUserId);
         console.log(result.insertId);
