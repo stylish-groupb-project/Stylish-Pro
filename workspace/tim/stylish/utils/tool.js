@@ -2,6 +2,7 @@ const multer = require('multer'); // 引入 multer 套件，用於處理上傳�
 const path = require('path');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const https = require('https');
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 require('dotenv').config();
 const {
@@ -66,6 +67,27 @@ module.exports = {
      */
     confirmPassword: async (input, real) => {
         return bcrypt.compare(input, real);
+    },
+    tappayRequest: async(post_options,post_data)=>{
+        let tappayStatus = false;
+        const post_req = https.request(post_options, function (response) {
+            response.setEncoding('utf8');
+            response.on('data', function (body) {
+                let tapPayResponse = JSON.parse(body);
+                console.log(tapPayResponse.msg);
+                console.log(tapPayResponse.status);
+                if(tapPayResponse.msg == 'Success'){
+                    tappayStatus = true;
+                }
+                // console.log(tapPayResponse);
+                // return res.json({
+                //     result: JSON.parse(body)
+                // })
+            });
+        });
+        post_req.write(JSON.stringify(post_data));
+        post_req.end();
+        return tappayStatus;
     }
 
 

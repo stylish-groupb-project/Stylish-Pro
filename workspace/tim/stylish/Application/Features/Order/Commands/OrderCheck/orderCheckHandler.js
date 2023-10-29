@@ -2,12 +2,13 @@ const https = require('https');
 const productService = require('../../../../../Service/productService');
 const orderCheckRes = require('./orderCheckRes');
 const errorMsg = require('../../../../../utils/error');
+const tool = require('../../../../../utils/tool');
 const orderService = require('../../../../../Service/orderService');
 // require('dotenv').config();
 module.exports = {
     handle: async (res, loginUserId, data) => {
         //init
-        let tapPayResponse = null;
+        // let tapPayResponse = null;
         let finalResponse = null;
         let tappayStatus = false;
         // const partner_key = process.env.PARTNER_KEY;
@@ -50,24 +51,24 @@ module.exports = {
             },
             "remember": true
         };
-
-        const post_req = https.request(post_options, function (response) {
-            response.setEncoding('utf8');
-            response.on('data', function (body) {
-                tapPayResponse = JSON.parse(body);
-                console.log(tapPayResponse.msg);
-                console.log(tapPayResponse.status);
-                if(tapPayResponse.msg == 'Success'){
-                    tappayStatus = true;
-                }
-                // console.log(tapPayResponse);
-                // return res.json({
-                //     result: JSON.parse(body)
-                // })
-            });
-        });
-        post_req.write(JSON.stringify(post_data));
-        post_req.end();
+        tappayStatus = await tool.tappayRequest(post_options,post_data);
+        // const post_req = https.request(post_options, function (response) {
+        //     response.setEncoding('utf8');
+        //     response.on('data', function (body) {
+        //         tapPayResponse = JSON.parse(body);
+        //         console.log(tapPayResponse.msg);
+        //         console.log(tapPayResponse.status);
+        //         if(tapPayResponse.msg == 'Success'){
+        //             tappayStatus = true;
+        //         }
+        //         // console.log(tapPayResponse);
+        //         // return res.json({
+        //         //     result: JSON.parse(body)
+        //         // })
+        //     });
+        // });
+        // post_req.write(JSON.stringify(post_data));
+        // post_req.end();
         console.log(tappayStatus);
 
         const result = await orderService.insertNewOrder(res,order,loginUserId);
