@@ -18,9 +18,10 @@ module.exports = {
 
             const selectQuery = await sql_view.getProducts(sql_condition_obj);
             console.log(selectQuery);
-            const [result] = await connection.execute(selectQuery);
-            await redis.updateCache(productRedisKey, result);
-
+            if (productRedisKey != '') {
+                const [result] = await connection.execute(selectQuery);
+                await redis.updateCache(productRedisKey, result);
+            }
             return result;
         } catch (error) {
             console.error(error);
@@ -41,11 +42,11 @@ module.exports = {
             errorMsg.query(res)
         }
     },
-    simpleSearchById: async(res, productId)=>{
+    simpleSearchById: async (res, productId) => {
         const connection = await connectionPromise;
         try {
             const selectQuery = 'SELECT * FROM product WHERE id = ?'
-            const [result] = await connection.execute(selectQuery,[productId]);
+            const [result] = await connection.execute(selectQuery, [productId]);
             return result;
         } catch (error) {
             console.error(error);

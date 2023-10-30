@@ -17,11 +17,11 @@ module.exports = {
         return result;
     },
     searchByTitle: async (res, sql_condition_obj) => {
-        const result = await productRepo.getProductByCondition(res, sql_condition_obj);
+        const result = await productRepo.getProductByCondition(res, sql_condition_obj,"");
         return result;
     },
     getFilteredProductList: async (res, sql_condition_obj) => {
-        const result = await productRepo.getProductByCondition(res, sql_condition_obj);
+        const result = await productRepo.getProductByCondition(res, sql_condition_obj, "");
         return result;
     },
     insertNewProduct: async (res, productDataObj, mainImageUrl, otherImageUrls) => {
