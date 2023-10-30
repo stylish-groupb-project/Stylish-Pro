@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+
+  stylish:
+      build: 
+        context: .
+        dockerfile: Dockerfile
+      container_name: stylish_container
+      networks:
+        - stylish_network
+
+  redis:
+    image: redis
+    container_name: redis_container
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - stylish_network
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/nginx/conf.d/nginx.conf:/etc/nginx/conf.d/default.conf  #本機對應容器
+      - /etc/ssl/certs/mergedCert.crt:/etc/ssl/mergedCert.crt
+      - /etc/ssl/certs/private.key:/etc/ssl/private.key
+    networks:
+      - stylish_network
+    depends_on:
+      - stylish
+
+
+networks:
+  stylish_network:   
