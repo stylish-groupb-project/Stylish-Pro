@@ -18,8 +18,8 @@ module.exports = {
 
             const selectQuery = await sql_view.getProducts(sql_condition_obj);
             console.log(selectQuery);
+            const [result] = await connection.execute(selectQuery);
             if (productRedisKey != '') {
-                const [result] = await connection.execute(selectQuery);
                 await redis.updateCache(productRedisKey, result);
             }
             return result;
