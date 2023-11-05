@@ -54,7 +54,7 @@ module.exports = {
                 console.error(error);
             }
 
-        }
+        };
     }
     // authorize: async (req, res, next)=>{
     //     const loginUserId = req.decodedToken.id;
