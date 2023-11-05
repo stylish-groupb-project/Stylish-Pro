@@ -31,7 +31,7 @@ module.exports = {
             return errorMsg.wrongToken(res);
         }
     },
-    authorize: async (requiredRole) => {
+    authorize: (requiredRole) => {
         return async(req, res, next) => {
             try {
                 const loginUserId = req.decodedToken.id;
