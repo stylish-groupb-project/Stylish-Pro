@@ -1,8 +1,8 @@
 // Service layer (負責關於資料庫相關的邏輯處理)
 const userRepo = require('../Repository/userRepo');
 const roleRepo = require('../Repository/roleRepo');
-const errorMsg = require('../utils/error');
-const connectionPromise = require('../utils/db').connectionPromise;
+const errorMsg = require('../../utils/error');
+const connectionPromise = require('../../utils/db').connectionPromise;
 module.exports = {
     signUp: async (res, userIfoObj) => {
         const connection = await connectionPromise.getConnection();

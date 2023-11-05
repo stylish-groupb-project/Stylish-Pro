@@ -4,9 +4,9 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const path = require('path');
 const cors = require('cors');
-const product_router = require('./Router/product_router');
-const user_router = require('./Router/user_router');
-const order_router = require('./Router/order_router');
+const product_router = require('./Backend/Router/product_router');
+const user_router = require('./Backend/Router/user_router');
+const order_router = require('./Backend/Router/order_router');
 app.use(cors());
 app.use(express.json());
 
@@ -23,8 +23,8 @@ app.use(
 );
 
 app.get('/admin/checkout.html', (req, res) => {
-    console.log(path.join(__dirname, 'View', 'html','checkout.html'));
-    res.sendFile(path.join(__dirname, 'View', 'html','checkout.html'));
+    console.log(path.join(__dirname, 'Backend','View', 'html','checkout.html'));
+    res.sendFile(path.join(__dirname, 'Backend','View', 'html','checkout.html'));
 });
 
 app.get('/api/1.0/test', (req, res) => {
