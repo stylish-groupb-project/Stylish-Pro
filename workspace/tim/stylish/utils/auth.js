@@ -31,6 +31,11 @@ module.exports = {
             return errorMsg.wrongToken(res);
         }
     },
+    /** 當標示authorize為async會提示Route.get() requires a callback function but got a [object Promise]
+     * 認為可能原因：
+     * 因為標示為async的函示被呼叫時必回傳一個Promise所以儘管內容是回傳一個中間件函式，express也認為這是一個Promise物件
+     * 所以去掉async後不再被視為Promise就能正確執行內部程式
+    */
     authorize: (requiredRole) => {
         return async(req, res, next) => {
             try {
