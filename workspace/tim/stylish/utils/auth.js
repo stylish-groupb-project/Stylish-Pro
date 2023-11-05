@@ -32,27 +32,30 @@ module.exports = {
         }
     },
     authorize: async (requiredRole) => {
-        return async (req, res, next) => {
-            try {
-                const loginUserId = req.decodedToken.id;
-                const roles = await roleService.checkRole(res, loginUserId);
-                if (roles.length === 0) return errorMsg.roleProblem(res);
-                let flag = false;
-                console.log(roles[0].name);
-                roles.forEach((role) => {
-                    if (role.name == requiredRole) {
-                        flag = true;
+        return (req, res, next) => {
+            Promise.resolve()
+                .then(async () => {
+                    const loginUserId = req.decodedToken.id;
+                    const roles = await roleService.checkRole(res, loginUserId);
+                    if (roles.length === 0) return errorMsg.roleProblem(res);
+                    const flag = roles.some((role) => role.name == requiredRole);
+                    // let flag = false;
+                    // console.log(roles[0].name);
+                    // roles.forEach((role) => {
+                    //     if (role.name == requiredRole) {
+                    //         flag = true;
+                    //     }
+                    // });
+                    if (flag) {
+                        next();
+                    } else {
+                        errorMsg.permissionDenied(res);
                     }
+                })
+                .catch((error) => {
+                    console.error(error);
+                    next(error); // 將錯誤傳遞到 Express 的錯誤處理中間件
                 });
-                if (flag) {
-                    next();
-                } else {
-                    errorMsg.permissionDenied(res);
-                }
-            } catch (error) {
-                console.error(error);
-            }
-
         }
     }
     // authorize: async (req, res, next)=>{
