@@ -28,6 +28,12 @@ module.exports = {
     },
     stockProblem: (res) => {
         res.status(403).json({ error: 'stock problem - the stock of this product goes wrong' });
+    },
+    roleProblem: (res) => {
+        res.status(403).json({ error: 'role problem - the role of this product goes wrong(may not exist)' });
+    },
+    permissionDenied: (res) => {
+        res.status(403).json({ error: 'role problem - permission denied' });
     }
 
 }

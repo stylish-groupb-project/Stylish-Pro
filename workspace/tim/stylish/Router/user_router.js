@@ -5,7 +5,7 @@ const router = express.Router();
 const userController = require('../Controller/user_controller');
 
 //get 
-router.get('/profile',auth.verifyToken ,userController.getProfile);
+router.get('/profile',auth.verifyToken ,auth.authorize("admin"),userController.getProfile);
 
 //post
 router.post('/signup',userController.signUp);

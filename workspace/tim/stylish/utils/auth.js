@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const errorMsg = require('./error');
+const roleService = require('../Service/roleService');
 require('dotenv').config();
 module.exports = {
     generateAccessToken: async (userId) => {
@@ -9,7 +10,7 @@ module.exports = {
         const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });
         const tokenInfo = {
             token: token,
-            expire: `${60*60*24}`
+            expire: `${60 * 60 * 24}`
         };
         return tokenInfo;
     },
@@ -29,7 +30,35 @@ module.exports = {
             console.error(error);
             return errorMsg.wrongToken(res);
         }
+    },
+    authorize: async (requiredRole) => {
+        return async (req, res, next) => {
+            const loginUserId = req.decodedToken.id;
+            const roles = await roleService.checkRole(res, loginUserId);
+            if (roles.length === 0) return errorMsg.roleProblem(res);
+            let flag = false;
+            console.log(roles[0].name);
+            roles.forEach((role) => {
+                if(role.name == requiredRole){
+                    flag = true;
+                }
+            });
+            if(flag){
+                next();
+            }else{
+                errorMsg.permissionDenied(res);
+            }
+        }
     }
+    // authorize: async (req, res, next)=>{
+    //     const loginUserId = req.decodedToken.id;
+    //     const roles = await roleService.checkRole(res,loginUserId);
+    //     if(roles.length === 0) return errorMsg.roleProblem(res);
+    //     roles.map((role)=>{
+
+    //     })
+
+    // }
 
 
 }

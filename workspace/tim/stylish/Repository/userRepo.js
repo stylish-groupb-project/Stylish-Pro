@@ -22,8 +22,7 @@ module.exports = {
             errorMsg.query(res);
         }
     },
-    insertNewUser: async(res,userInfoObj)=>{
-        const connection = connectionPromise;
+    insertNewUser: async(res,userInfoObj, connection)=>{
         try {
             const {name , email, hashedPassword , provider , picture} = userInfoObj;
             const signupQuery = 'INSERT INTO userInfo(name, email, password, provider , picture) VALUES(?,?,?,?,?)';
