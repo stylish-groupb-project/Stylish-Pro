@@ -32,10 +32,10 @@ module.exports = {
         }
     },
     authorize: async (requiredRole) => {
-        return (req, res, next) => {
+        return async(req, res, next) => {
             try {
                 const loginUserId = req.decodedToken.id;
-                const roles = roleService.checkRole(res, loginUserId);
+                const roles = await roleService.checkRole(res, loginUserId);
                 if (roles.length === 0) return errorMsg.roleProblem(res);
                 const flag = roles.some((role) => role.name == requiredRole);
                 // let flag = false;
