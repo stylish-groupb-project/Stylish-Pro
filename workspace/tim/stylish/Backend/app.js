@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
+const swaggerDocument = require('../swagger.json');
 const path = require('path');
 const cors = require('cors');
-const product_router = require('./Backend/Router/product_router');
-const user_router = require('./Backend/Router/user_router');
-const order_router = require('./Backend/Router/order_router');
+const product_router = require('./Router/product_router');
+const user_router = require('./Router/user_router');
+const order_router = require('./Router/order_router');
 app.use(cors());
 app.use(express.json());
 
