@@ -1,0 +1,393 @@
+.header {
+    background-color: #ffffff;
+    border-bottom-style: solid;
+    border-bottom-width: 2.5rem;
+    ;
+    border-color: #313538;
+    /* height: 13vh; */
+    position: relative;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+}
+
+.header .logo {
+    width: 20%;
+    padding: 1rem 5rem 1rem 2rem;
+    object-fit: contain;
+}
+
+.header .categories {
+    width: 25%;
+    font-family: "Noto Sans TC-Regular", Helvetica;
+    color: #3f3a3a;
+    font-size: 1.25rem;
+    padding: 1.8rem 2rem 2rem 2rem;
+    display: flex;
+    /* align-items: center; */
+}
+
+.categories .single {
+    margin: 7% 1% 1% 1%;
+    width: 33%;
+    letter-spacing: 10%;
+    transition: color 0.3s;
+    text-align: center;
+}
+
+.single:hover {
+    color: #8b572a;
+}
+
+.categories .split {
+    /* padding: 8% 5%  0.1% 5%; */
+    margin-top: 7%;
+    object-fit: contain;
+    width: 1%;
+}
+
+.header .search {
+    margin-left: auto;
+    position: relative;
+    /* display: flex; */
+    width: 20%;
+    border-radius: 20px;
+}
+
+.search .overlap-group {
+    position: relative;
+    /* padding: 10% 10% 10% 10%; */
+    /* margin-bottom: 2.5rem;  */
+    /* padding: 10%; */
+    width: 100%;
+    display: flex;
+}
+
+.overlap-group .search-input {
+    color: #8b572a;
+    border: 1px solid;
+    border-color: #979797;
+    border-radius: 20px;
+    font-family: "Noto Sans TC-Regular", Helvetica;
+    font-size: 1.25rem;
+    white-space: nowrap;
+    padding: 0.5rem 0;
+
+}
+
+.overlap-group input {
+    width: 15rem;
+    margin-right: 1rem;
+    text-indent: 1rem;
+}
+
+input[type=text]:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.search .search-input::placeholder {
+    color: #8b572a;
+    font-family: "Noto Sans TC-Regular", Helvetica;
+    font-size: 20px;
+}
+
+.overlap-group .searchImg {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    /* margin-right: auto; */
+    width: 15%;
+}
+
+.cartBox {
+    padding: 1rem 0.1rem 1rem 0.1rem;
+    position: relative;
+    /* display: inline-block; */
+}
+
+.cartBox .cart {
+    object-fit: contain;
+    /* padding: 1rem 0.1rem 1rem 0.1rem; */
+}
+/* .cartBox .cart-hover { */
+    /* position: absolute; */
+    /* transition: transform 0.3s; */
+    /* top: 0;
+    left: 0;
+    display: none;
+} */
+/* .cartBox:hover .cart-hover {
+    display: block; 
+} */
+
+.cartBox .circle {
+    position: absolute;
+    /* transform: translateY(80%); */
+    top: 45%;
+    right: 0.1rem;
+}
+/* 用 */
+.cartBox .cartNumber {
+    position: absolute;
+    color: #ffffff;
+    font-family: "Noto Sans TC-Regular", Helvetica;
+    font-size: 1.25rem;
+    top: 45%;
+    /* transform: translateY(-120%); */
+    right: 0.45rem;
+}
+
+/* .header .profile {
+    object-fit: contain;
+    padding: 1rem 1rem 1rem 1rem;
+    transition: transform 0.3s;
+} 
+.profile:hover {
+    /* 鼠標懸停時，圖像放大一點 */
+    /* transform: scale(1.1); 
+    background-image: url('./member-hover.png'); 
+} */
+
+.cart-container {
+    position: relative;
+    display: inline-block;
+}
+.cart,
+.cart-hover {
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+
+.cart-hover {
+    position: absolute;
+    /* transition: transform 0.3s; */
+    top: 0;
+    left: 0;
+    display: none;
+}
+.cart-container:hover .cart-hover {
+    display: block; 
+}
+
+/* 讓容器大小基於圖片大小 */
+.profile-container {
+    position: relative;
+    display: inline-block;
+}
+
+.profile,
+.profile-hover {
+    object-fit: contain;
+    padding: 1rem 1rem 1rem 1rem;
+    transition: transform 0.3s;
+}
+
+.profile-hover {
+    position: absolute;
+    /* transition: transform 0.3s; */
+    top: 0;
+    left: 0;
+    display: none;
+}
+/* 在懸停時顯示深色圖像 */
+.profile-container:hover .profile-hover {
+    display: block; 
+}
+
+
+
+
+
+/* .header .profile,
+.header .cart,
+.header .search,
+.header .image,
+.header .categories,
+.header .accessory,
+.header .men,
+.header .women,
+.header .img{
+    position: absolute;
+    top: 30%; 
+} */
+
+/* 44px */
+/* .header .profile ,
+.header .cart ,
+.header .search,
+.header .image {
+    height: 3%;
+    width: 3%;
+} */
+
+
+/* .header .profile {
+    object-fit: cover;
+    left: 95%
+}
+
+.header .cart {
+    left: 90%
+} */
+/* w:216px */
+/* .header .search {
+    left: 77.5%;
+    width: 11.25%;
+}
+
+.header .overlap-group {
+    border: 1px solid;
+    border-color: #979797;
+    border-radius: 20px;
+    height: 46px;
+    left: -1px;
+    position: relative;
+    top: -1px;
+} */
+
+/* .header .text {
+    color: #8b572a;
+    font-family: "Noto Sans TC-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    height: 24px;
+    left: 20px;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: absolute;
+    text-align: center;
+    top: 10px;
+    white-space: nowrap;
+    width: 40px;
+} */
+
+/* .header .image {
+    left: 8.3%;
+    object-fit: cover;
+} */
+/* height: 28px; */
+/* .header .categories {
+    left: 19.5%; 
+    top: 31.4%; 
+    width: 24%; 
+}
+
+.header .overlap {
+    height: 28px;
+    left: 301px;
+    position: absolute;
+    top: 0;
+    width: 150px;
+} */
+
+
+/* .header .text-wrapper {
+    color: #3f3a3a;
+    font-family: "Noto Sans TC-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    height: 28px;
+    left: 0;
+    letter-spacing: 30px;
+    line-height: 28px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    white-space: nowrap;
+    width: 150px;
+} */
+
+/* .header .accessory,
+.header .men,
+.header .women {
+    color: #3f3a3a;
+    font-family: "Noto Sans TC-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    height: 28px;
+    letter-spacing: 30px;
+    line-height: 28px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    white-space: nowrap;
+    width: 150px;
+}
+
+.header .accessory {
+    left: 0;
+}
+.header .men {
+    left: 151px;
+}
+.header .women {
+    left: 0;
+} */
+
+
+/* .header .div {
+    color: #3f3a3a;
+    font-family: "Noto Sans TC-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    height: 28px;
+    left: 151px;
+    letter-spacing: 30px;
+    line-height: 28px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    white-space: nowrap;
+    width: 150px;
+} */
+/* .header .split {
+    height: 20px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 5px;
+    width: 1px;
+}
+
+.header .img {
+    height: 20px;
+    left: 150px;
+    object-fit: cover;
+    width: 1px;
+} */
+
+/* .header .text-wrapper-2 {
+    color: #8b572a;
+    font-family: "Noto Sans TC-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    height: 28px;
+    left: 0;
+    letter-spacing: 30px;
+    line-height: 28px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    white-space: nowrap;
+    width: 150px;
+} */
+
+
+/* .header .search-input {
+    color: #8b572a;
+    font-family: "Noto Sans TC-Regular", Helvetica;
+    font-size: 20px;
+    white-space: nowrap;
+    width: calc(100% - 44px); 
+}
+
+.header .search-input::placeholder {
+    color: #8b572a;
+    font-family: "Noto Sans TC-Regular", Helvetica;
+    font-size: 20px;
+}
+ */
+.main {
+    height: 500px;
+}

@@ -12,6 +12,14 @@ services:
       networks:
         - stylish_network
 
+  stylish_frontend:
+      build: 
+        context: ./frontend
+        dockerfile: Dockerfile
+      container_name: stylish_frontend_container
+      networks:
+        - stylish_network
+
   redis:
     image: redis
     container_name: redis_container
