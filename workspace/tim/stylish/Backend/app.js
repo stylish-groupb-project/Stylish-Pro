@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('../swagger.json');
+const swaggerDocument = require('./swagger.json');
 const path = require('path');
 const cors = require('cors');
 const product_router = require('./Router/product_router');
@@ -17,12 +17,12 @@ app.use('/api/1.0/order',order_router);
 // app.use('/static',express.static(__dirname+'/static'));
 // test
 app.use(
-    '/docs',
+    '/api/docs',
     swaggerUi.serve,
     swaggerUi.setup(swaggerDocument)
 );
 
-app.get('/admin/checkout.html', (req, res) => {
+app.get('/api/admin/checkout.html', (req, res) => {
     console.log(path.join(__dirname, 'Backend','View', 'html','checkout.html'));
     res.sendFile(path.join(__dirname, 'Backend','View', 'html','checkout.html'));
 });
