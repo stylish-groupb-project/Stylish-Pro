@@ -1,0 +1,20 @@
+.main {
+    /* height: 1000px; */
+    display: block;
+    /* padding-top: 140px; */
+    padding-bottom: 50px;
+}
+
+/* same space */
+/* 
+justify-content:space-between-->左右邊
+
+*/
+.product-grid {
+    /* border: 2px blue solid; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 5% 15%;
+    gap: 1.25rem; /* 或者使用margin在product-card样式中定义 */
+}
