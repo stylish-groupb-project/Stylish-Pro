@@ -25,44 +25,65 @@ const Main = () => {
             imgUrl: "./img/slideImg5.png"
         }
     ];
+    const colors = [
+        {
+            id: 1,
+            color_code: "#F0F8FF"
+        },
+        {
+            id: 2,
+            color_code: "#FAEBD7"
+        },
+        {
+            id: 3,
+            color_code: "#5F9EA0"
+        }
+    ];
     const products = [
         {
             id: 1,
             title: "test",
             price: 10,
-            imgUrl: "./img/dress.png"
+            imgUrl: "./img/dress.png",
+            colors: colors
         },
         {
             id: 2,
             title: "test",
             price: 10,
-            imgUrl: "./img/dress.png"
+            imgUrl: "./img/dress.png",
+            colors: colors
         },
         {
             id: 3,
             title: "test",
             price: 10,
-            imgUrl: "./img/dress.png"
+            imgUrl: "./img/dress.png",
+            colors: colors
         },
         {
             id: 4,
             title: "test",
             price: 10,
-            imgUrl: "./img/dress.png"
+            imgUrl: "./img/dress.png",
+            colors: colors
         },
         {
             id: 5,
             title: "test",
             price: 10,
-            imgUrl: "./img/dress.png"
+            imgUrl: "./img/dress.png",
+            colors: colors
         },
         {
             id: 6,
             title: "test",
             price: 10,
-            imgUrl: "./img/dress.png"
+            imgUrl: "./img/dress.png",
+            colors: colors
         }
-    ]
+    ];
+    
     return (
         <div className="main">
             <Slider slides={imgArray}></Slider>
