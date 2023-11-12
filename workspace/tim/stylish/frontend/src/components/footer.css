@@ -7,6 +7,9 @@
     justify-content: center;
     text-align: center;
     font-family: "Noto Sans TC-Regular", Helvetica;
+    /* margin-bottom: 60px; */
+    width: 100%;
+    position: relative;
     /* 確保文字也是居中的 */
     /* width: 100vw; */
 }
@@ -18,12 +21,59 @@
     /* 這將水平居中內容 */
     align-items: center;
     font-size: 1rem;
+    /* flex-wrap: wrap; */
 }
 
 .links {
-    width: 40%;
-    text-align: center;
+    
+    /* width: 40%; */
+    /* text-align: center; */
     padding: 0 2rem 0 2rem;
+}
+
+
+
+.text-wrapper {
+    /* padding: 0 1rem; */
+    margin: 0 0 0 1.5rem;
+    text-wrap: nowrap;
+    width: 100%;
+    border-right: 1px solid rgb(154, 152, 149);
+}
+
+/* .links a:last-child .text-wrapper {
+    border-right: none;
+} */
+
+
+
+.icons {
+    width: 20%;
+    padding: 0 0 0 2rem;
+}
+
+.social-media-image {
+    padding: 0 0.8rem 0 0.8rem;
+}
+
+.copy-right {
+    font-size: 0.8em;
+    color: #828282;
+    position: absolute;
+    right: 10%;
+
+}
+
+.footerContainer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+}
+.linkContainer {
+    width: 100%;
+    padding: 0 0;
+    display: flex;
 }
 
 a {
@@ -36,30 +86,63 @@ a:visited {
 }
 
 
-.text-wrapper {
-    /* padding: 0 1rem; */
-    margin: 0 1.5rem;
-    width: 100%;
-    border-right: 1px solid rgb(154, 152, 149);
-}
-.links a:last-child .text-wrapper {
-    border-right: none;
-}
+@media (max-width: 1280px) {
+    .footer {
+        height: auto;
+      /* padding: 20px 0;
+      flex-wrap: wrap; */
+        padding-bottom: 4rem;
+        /* margin-bottom: 60px; */
+        /* bottom: 3rem; */
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+    .footerContainer {
+        /* height: 30%; */
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
+    /* flex-start-->靠左對齊 */
+    .links {
+        flex-direction: flex;
+        
+        align-items: flex-start;
+        width: 100%;
+        padding: 0 0 0 10%;
+        /* flex-direction: column;
+        align-items: center; */
+    }
+    .linkContainer {
+        width: 50%;
+        /* display: block; */
+        flex-direction: column;
+        text-wrap: nowrap;
+        align-items: flex-start;
+        padding: 0% 5%;
 
+    }
 
-.icons {
-    width: 20%;
-    padding: 0 0 0 2rem;
-}
-.social-media-image {
-    padding: 0 0.8rem 0 0.8rem;
-}
+    .text-wrapper {
+        width: 100%;
+        margin:  1rem 1rem 0 1rem;
+        text-align: left;
+        border-right: none;
+        /* padding:  10px 10px 10px 0; */
+    }
 
-
-
-
-.copy-right{
-    font-size: 0.8em;
-    color: #828282;
+    .icons {
+        width: 100%;
+        padding: 0 20% 0 0;
+    }
+    .copy-right {
+        width: 100%;
+        text-align: center;
+        padding: 0 0;
+        position: relative;
+        right: 0;
+    }
 }

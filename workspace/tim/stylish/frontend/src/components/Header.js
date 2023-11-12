@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import "./style.css";
+import "./header.css";
 const Header = ({
     profile,
     cart,
@@ -15,6 +15,10 @@ const Header = ({
         <div className="header">
             <div className="header_left">
                 <img className="logo" alt="Logo" src={logo} />
+                <div className="rwdHeaderContainer">
+                    <img className="rwdLogo" alt="Logo" src={logo} />
+                    <img className="rwdSearchImg" src={search} />
+                </div>
                 <div className="categories">
                     <div className="single">女裝</div>
                     {/* <img className="split" alt="Split" src={split} height={20} /> */}
@@ -30,18 +34,34 @@ const Header = ({
                         <img className="searchImg" alt="searchImg" src={search} />
                     </div>
                 </div>
-                <div className="cartBox">
-                    <div className="cart-container">
-                        <img className="cart" alt="Cart" src={cart} />
-                        <img className="cart-hover" alt="Cart" src={cartHover} />
+                <div className="header_bottom">
+                    <div className="cartBox">
+                        <div className="cartLabelContainer">
+                            <div className="cart-container">
+                                <picture>
+                                    <source media="(max-width: 1279px)" srcset="./img/cart-mobile.png" />
+                                    <img className="cart" alt="Cart" src={cart} />
+                                    <img className="cart-hover" alt="Cart" src={cartHover} />
+                                </picture>
+
+                            </div>
+                            <img className="circle" alt="Circle" src={circle} />
+                            <div className="cartNumber">1</div>
+                            <div className="cartLabel">購物車</div>
+                        </div>
                     </div>
-                    <img className="circle" alt="Circle" src={circle} />
-                    <div className="cartNumber">1</div>
+
+                    <div class="profile-container">
+                        <picture>
+                            <source media="(max-width: 1279px)" srcset="./img/member-mobile.png" />
+                            <img className="profile" alt="Profile" src={profile} />
+                            <img className="profile-hover" alt="Profile" src={profileHover} />
+                        </picture>
+                        <div className="memberLabel">會員</div>
+
+                    </div>
                 </div>
-                <div class="profile-container">
-                    <img className="profile" alt="Profile" src={profile} />
-                    <img className="profile-hover" alt="Profile" src={profileHover} />
-                </div>
+
             </div>
 
 

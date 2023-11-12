@@ -2,6 +2,7 @@
     /* height: 1000px; */
     display: block;
     /* padding-top: 140px; */
+    /* width: 100%; */
     padding-bottom: 50px;
 }
 
@@ -15,6 +16,12 @@ justify-content:space-between-->左右邊
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    padding: 5% 15%;
-    gap: 1.25rem; /* 或者使用margin在product-card样式中定义 */
+    /* align-items: center; */
+    margin: 5% 15%;
+    gap: 1rem; /* 或者使用margin在product-card样式中定义 */
+}
+@media (max-width: 1280px) {
+    .product-grid {
+        margin: 5% 5%;
+    }
 }
