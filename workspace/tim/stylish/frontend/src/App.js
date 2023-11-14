@@ -2,10 +2,11 @@
 import Header from './components/Header';
 import { Footer } from './components/Footer';
 import Main from './components/Main';
-
+import { QueryClient, QueryClientProvider } from "react-query";
+const queryClient = new QueryClient();
 function App() {
   return (
-    <div>
+    <QueryClientProvider client={queryClient}>
       <Header
         profile="./img/member.png"
         cart="./img/cart.png"
@@ -23,7 +24,7 @@ function App() {
         twitter="./img/twitter.png"
         split="./img/split.svg"
       />
-    </div>
+    </QueryClientProvider>
 
   );
 }

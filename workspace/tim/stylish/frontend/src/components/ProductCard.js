@@ -3,11 +3,12 @@ import { ColorBlock, ColorContainer } from "../styled-components/ProductColor";
 import './productCard.css'
 const ProductCard = ({ product }) => {
     return (
+
         <div className="product-card">
-            <img src={product.imgUrl} alt={product.title} />
+            <img src={product.main_image} alt={product.title} />
             <ColorContainer>
-                {product.colors.map((color) => (
-                    <ColorBlock key={color.id} colorCode={color.color_code} />
+                {product.colors.map((color, index) => (
+                    <ColorBlock key={index} colorCode={color.code} />
                 ))}
             </ColorContainer>
             <div className="product-info">

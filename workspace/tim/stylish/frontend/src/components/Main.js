@@ -2,7 +2,27 @@ import React from "react";
 import "./main.css";
 import Slider from "./Slider";
 import ProductCard from "./ProductCard";
+import { useQuery } from 'react-query';
 const Main = () => {
+    const todoKeys = {
+        filter: ['products'],
+        all: ()=>[...todoKeys.filter,'all'],
+        men: ()=>[...todoKeys.filter,'men'],
+        women: ()=>[...todoKeys.filter,'women'],
+        accessories: ()=>[...todoKeys.filter,'accessories']
+    };
+    const getAllProdcutData = async () => {
+        const response = await fetch('https://13.55.47.107/api/1.0/products/all');
+        if (!response.ok) {
+            throw new Error('getProduct api response was not ok');
+        }
+        return response.json();
+    };
+    const { data: products, isLoading, error } = useQuery(todoKeys.all(), getAllProdcutData);
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error occurred: {error.message}</div>;
+    // console.log(products)
+    // console.log(products.data[0].colors[0].code)
     const imgArray = [
         {
             id: 1,
@@ -25,70 +45,13 @@ const Main = () => {
             imgUrl: "./img/slideImg5.png"
         }
     ];
-    const colors = [
-        {
-            id: 1,
-            color_code: "#F0F8FF"
-        },
-        {
-            id: 2,
-            color_code: "#FAEBD7"
-        },
-        {
-            id: 3,
-            color_code: "#5F9EA0"
-        }
-    ];
-    const products = [
-        {
-            id: 1,
-            title: "test",
-            price: 10,
-            imgUrl: "./img/dress.png",
-            colors: colors
-        },
-        {
-            id: 2,
-            title: "test",
-            price: 10,
-            imgUrl: "./img/dress.png",
-            colors: colors
-        },
-        {
-            id: 3,
-            title: "test",
-            price: 10,
-            imgUrl: "./img/dress.png",
-            colors: colors
-        },
-        {
-            id: 4,
-            title: "test",
-            price: 10,
-            imgUrl: "./img/dress.png",
-            colors: colors
-        },
-        {
-            id: 5,
-            title: "test",
-            price: 10,
-            imgUrl: "./img/dress.png",
-            colors: colors
-        },
-        {
-            id: 6,
-            title: "test",
-            price: 10,
-            imgUrl: "./img/dress.png",
-            colors: colors
-        }
-    ];
+    
     
     return (
         <div className="main">
             <Slider slides={imgArray}></Slider>
             <div className="product-grid">
-                {products.map((product) => (
+                {products.data.map((product) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
             </div>

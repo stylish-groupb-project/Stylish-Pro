@@ -4,7 +4,6 @@ import "./header.css";
 const Header = ({
     profile,
     cart,
-    split,
     search,
     logo,
     circle,
@@ -21,9 +20,7 @@ const Header = ({
                 </div>
                 <div className="categories">
                     <div className="single">女裝</div>
-                    {/* <img className="split" alt="Split" src={split} height={20} /> */}
                     <div className="single">男裝</div>
-                    {/* <img className="split" alt="Split" src={split} height={20} /> */}
                     <div className="single">配件</div>
                 </div>
             </div>
