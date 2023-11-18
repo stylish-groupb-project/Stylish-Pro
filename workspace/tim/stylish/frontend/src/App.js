@@ -21,7 +21,7 @@ function App() {
               path="/accessories"
               element={<HomePageLayout endpoint="accessories" />}
             />
-            <Route path="/search" element={<HomePageLayout/>} />
+            <Route path="/search" element={<HomePageLayout endpoint="search"/>} />
           </Routes>
         </BrowserRouter>
       </div>

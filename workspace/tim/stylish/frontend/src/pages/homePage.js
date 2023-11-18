@@ -35,7 +35,7 @@ const HomePageLayout = ({ endpoint }) => {
     ];
     const [searchTerm, setSearchTerm] = useState("");
     const [ref, inView] = useInView();
-
+    // if (endpoint != "search") {
     const { data, error, isLoading, refetch, fetchNextPage, hasNextPage } =
         useInfiniteQuery({
             queryKey: ["productList", endpoint],
@@ -53,20 +53,48 @@ const HomePageLayout = ({ endpoint }) => {
         console.log("inView", inView);
         console.log("hasNextPage", hasNextPage);
         if (inView && hasNextPage) {
-            console.log("dataaaa", data.pages);
             fetchNextPage();
         }
     }, [inView, hasNextPage]);
+
+
+    // const {
+    //     data: searchData,
+    //     error: searchError,
+    //     isLoading: searchLoading,
+    //     refetch: searchReftch,
+    // } = useQuery({
+    //     queryKey: ["productSearch", searchTerm],
+    //     queryFn: () => GetProductSearch(searchTerm),
+    //     enabled: !!searchTerm,
+    // });
+    if(endpoint=="search"){
+
+    }
     const {
         data: searchData,
         error: searchError,
         isLoading: searchLoading,
-        refetch: searchReftch,
-    } = useQuery({
+        fetchNextPage: fetchNextSearchPage,
+        hasNextPage: hasSearchNextPage
+    } = useInfiniteQuery({
         queryKey: ["productSearch", searchTerm],
-        queryFn: () => GetProductSearch(searchTerm),
-        enabled: !!searchTerm,
+        queryFn: ({ pageParam = 0 }) => GetProductSearch(searchTerm, pageParam),
+        initialPageParam: 0,
+        getNextPageParam: (lastPage, allPages) =>
+            lastPage?.next_paging || undefined,
+        enabled: !!endpoint,
+        onLoadMore: (lastPage, allPages) => {
+            console.log("onloading", lastPage);
+        },
+        staleTime: Infinity,
     });
+
+    useEffect(() => {
+        if (inView && hasSearchNextPage) {
+            fetchNextSearchPage();
+        }
+    }, [inView, hasSearchNextPage]);
 
     //當輸入時一個字重新渲染一次?
     const handleSearchChange = async (e) => {
@@ -78,17 +106,17 @@ const HomePageLayout = ({ endpoint }) => {
     // if (error) {
     //     return <div>Error: {error.message}</div>;
     // }
+    console.log("test", searchData);
     return (
         <div>
             <Header
-                refetch={refetch}
+                refetch={fetchNextSearchPage}
                 onSearchChange={handleSearchChange}
-                searchReftch={searchReftch}
             />
             <div className="main">
                 <Slider slides={imgArray}></Slider>
                 <div className="product-grid">
-                    {(searchData ? searchData.data : data?.pages)?.map(
+                    {(endpoint=="search" ? searchData?.pages : data?.pages)?.map(
                         (page, pageIndex) => (
                             <div key={pageIndex} className='productCard'>
                                 {console.log(page)}

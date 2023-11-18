@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import "./header.css";
 import { useNavigate } from 'react-router-dom';
 import { CategoryBtn } from "../../styled-components/CategoryBtn";
-const Header = ({ refetch, onSearchChange, searchReftch }) => {
+const Header = ({ refetch, onSearchChange}) => {
     const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate();
 
@@ -12,6 +12,7 @@ const Header = ({ refetch, onSearchChange, searchReftch }) => {
     const handleEnterPress = (e) => {
         if (e.key === "Enter") {
             onSearchChange(searchTerm);
+            navigate(`/search`);
         }
     };
     return (
