@@ -17,6 +17,8 @@ services:
         context: ./frontend
         dockerfile: Dockerfile
       container_name: stylish_frontend_container
+      env_file:
+        - .env
       networks:
         - stylish_network
 
