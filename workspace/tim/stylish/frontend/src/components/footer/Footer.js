@@ -1,12 +1,7 @@
-import PropTypes from "prop-types";
 import React from "react";
 import "./footer.css";
 
-export const Footer = ({
-    facebook,
-    line,
-    twitter
-}) => {
+export const Footer = () => {
     return (
         <div className="footer">
             <div className="footerContainer">
@@ -42,13 +37,13 @@ export const Footer = ({
 
                 <div className="icons">
                     <a href="#" target="_blank">
-                        <img className="social-media-image" alt="Line" src={line} />
+                        <img className="social-media-image" alt="Line" src={"img/line.png"} />
                     </a>
                     <a href="#" target="_blank">
-                        <img className="social-media-image" alt="Twitter" src={twitter} />
+                        <img className="social-media-image" alt="Twitter" src={"img/twitter.png"} />
                     </a>
                     <a href="#" target="_blank">
-                        <img className="social-media-image" alt="Facebook" src={facebook} />
+                        <img className="social-media-image" alt="Facebook" src={"img/facebook.png"} />
                     </a>
                 </div>
             </div>

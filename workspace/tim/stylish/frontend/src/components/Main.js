@@ -1,28 +1,30 @@
-import React from "react";
+import React, { useState } from 'react';
 import "./main.css";
-import Slider from "./Slider";
-import ProductCard from "./ProductCard";
-import { useQuery } from 'react-query';
+import Slider from "./slider/Slider";
+import ProductCard from "./productCard/ProductCard";
+import axios from 'axios';
+import { useQuery } from "react-query";
 const Main = () => {
-    const todoKeys = {
-        filter: ['products'],
-        all: ()=>[...todoKeys.filter,'all'],
-        men: ()=>[...todoKeys.filter,'men'],
-        women: ()=>[...todoKeys.filter,'women'],
-        accessories: ()=>[...todoKeys.filter,'accessories']
-    };
-    const getAllProdcutData = async () => {
-        const response = await fetch('https://13.55.47.107/api/1.0/products/all');
-        if (!response.ok) {
-            throw new Error('getProduct api response was not ok');
+    // console.log(products);
+    const [productList, setProductList] = useState([]);
+    const fetchProducts = async () => {
+        try {
+            const response = await axios.get(`https://13.55.47.107/api/1.0/products/all`);
+            setProductList(response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching products:', error);
         }
-        return response.json();
     };
-    const { data: products, isLoading, error } = useQuery(todoKeys.all(), getAllProdcutData);
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error occurred: {error.message}</div>;
-    // console.log(products)
-    // console.log(products.data[0].colors[0].code)
+    const { data: products, isLoading, error } = useQuery("test", fetchProducts);
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+    console.log(products.data);
+    // console.log(productList)
     const imgArray = [
         {
             id: 1,
@@ -45,12 +47,13 @@ const Main = () => {
             imgUrl: "./img/slideImg5.png"
         }
     ];
-    
-    
+
+
     return (
         <div className="main">
             <Slider slides={imgArray}></Slider>
             <div className="product-grid">
+                {/* {products.data.map((product) => ( */}
                 {products.data.map((product) => (
                     <ProductCard key={product.id} product={product} />
                 ))}

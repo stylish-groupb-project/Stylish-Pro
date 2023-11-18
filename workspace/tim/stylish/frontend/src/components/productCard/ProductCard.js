@@ -1,9 +1,8 @@
 import React from "react";
-import { ColorBlock, ColorContainer } from "../styled-components/ProductColor";
+import { ColorBlock, ColorContainer } from "../../styled-components/ProductColor";
 import './productCard.css'
 const ProductCard = ({ product }) => {
     return (
-
         <div className="product-card">
             <img src={product.main_image} alt={product.title} />
             <ColorContainer>

@@ -28,7 +28,7 @@
     width: 25%;
     font-family: "Noto Sans TC-Regular", Helvetica;
     color: #3f3a3a;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     padding: 1.8rem 2rem 2rem 2rem;
     display: flex;
     /* align-items: center; */
@@ -52,6 +52,9 @@
     text-align: center;
     white-space: nowrap;
     border-right: 1px solid rgb(154, 152, 149);
+    font-family: "Noto Sans TC-Regular", Helvetica;
+    color: #3f3a3a;
+    font-size: 1.25rem;
 }
 
 .categories .single:last-child {
@@ -314,6 +317,7 @@ input[type=text]:focus {
     .categories .single {
         border-right: 1px solid rgb(154, 152, 149);
         margin: 0;
+        color: #ffffff;
         padding: 0;
         letter-spacing: normal;
     }

@@ -20,6 +20,11 @@ justify-content:space-between-->左右邊
     margin: 5% 15%;
     gap: 1rem; /* 或者使用margin在product-card样式中定义 */
 }
+.productCard {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
 @media (max-width: 1280px) {
     .product-grid {
         margin: 5% 5%;
