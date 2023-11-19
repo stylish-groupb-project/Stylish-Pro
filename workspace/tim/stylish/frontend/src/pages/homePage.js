@@ -68,9 +68,6 @@ const HomePageLayout = ({ endpoint }) => {
     //     queryFn: () => GetProductSearch(searchTerm),
     //     enabled: !!searchTerm,
     // });
-    if(endpoint=="search"){
-
-    }
     const {
         data: searchData,
         error: searchError,
