@@ -1,11 +1,26 @@
-import React,{useState} from "react";
+import React,{useState , useContext} from "react";
 import "./header.css";
 import { useNavigate } from 'react-router-dom';
 import { CategoryBtn } from "../../styled-components/CategoryBtn";
+import logo from '../../assets/images/logo.png';
+import searchImg from '../../assets/images/search.png'
+import cartMobileImg from '../../assets/images/cart-mobile.png';
+import cartImg from '../../assets/images/cart.png';
+import cartHoverImg from '../../assets/images/cart-hover.png'
+import circleImg from '../../assets/images/circle.svg';
+import memberMobileImg from '../../assets/images/member-mobile.png';
+import memberImg from '../../assets/images/member.png';
+import memberHoverImg from '../../assets/images/member-hover.png'
+
+import { CartCountContext } from "../../contexts/CartCountManager";
+
+
 const Header = ({ refetch, onSearchChange}) => {
+    const { count } = useContext(CartCountContext);
+    
     const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate();
-
+    console.log(count)
     const handleCategory = (category) => {
         navigate(`/${category}`);
     };
@@ -18,14 +33,17 @@ const Header = ({ refetch, onSearchChange}) => {
     return (
         <div className="header">
             <div className="header_left">
-                <img className="logo" alt="Logo" src={"img/logo.png"} />
+                {/* <img className="logo" alt="Logo" src={"img/logo.png"} /> */}
+                <img className="logo" alt="Logo" src={logo} />
                 <div className="rwdHeaderContainer">
-                    <img className="rwdLogo" alt="Logo" src={"img/logo.png"} />
-                    <img className="rwdSearchImg" src={"img/search.png"} />
+                    <img className="rwdLogo" alt="Logo" src={logo} />
+                    <img className="rwdSearchImg" src={searchImg} />
                 </div>
                 <div className="categories">
                     <CategoryBtn onClick={() => handleCategory("women")} ><span className="single">女裝</span></CategoryBtn>
+                    <span className="category-spliter">|</span>
                     <CategoryBtn onClick={() => handleCategory("men")} ><span className="single">男裝</span></CategoryBtn>
+                    <span className="category-spliter">|</span>
                     <CategoryBtn onClick={() => handleCategory("accessories")} ><span className="single">配件</span></CategoryBtn>
                 </div>
             </div>
@@ -40,7 +58,7 @@ const Header = ({ refetch, onSearchChange}) => {
                             onChange={(e) => setSearchTerm(e.target.value)}
                             onKeyDown={handleEnterPress}
                         />
-                        <img className="searchImg" alt="searchImg" src={"img/search.png"} />
+                        <img className="searchImg" alt="searchImg" src={searchImg} />
                     </div>
                 </div>
                 <div className="header_bottom">
@@ -48,23 +66,23 @@ const Header = ({ refetch, onSearchChange}) => {
                         <div className="cartLabelContainer">
                             <div className="cart-container">
                                 <picture>
-                                    <source media="(max-width: 1279px)" srcset="./img/cart-mobile.png" />
-                                    <img className="cart" alt="Cart" src={"img/cart.png"} />
-                                    <img className="cart-hover" alt="Cart" src={"img/cart-hover.png"} />
+                                    <source media="(max-width: 1279px)" srcSet={cartMobileImg} />
+                                    <img className="cart" alt="Cart" src={cartImg} />
+                                    <img className="cart-hover" alt="Cart" src={cartHoverImg} />
                                 </picture>
 
                             </div>
-                            <img className="circle" alt="Circle" src={"img/circle.svg"} />
-                            <div className="cartNumber">1</div>
+                            <img className="circle" alt="Circle" src={circleImg} />
+                            <div className="cartNumber">{count}</div>
                             <div className="cartLabel">購物車</div>
                         </div>
                     </div>
 
-                    <div class="profile-container">
+                    <div className="profile-container">
                         <picture>
-                            <source media="(max-width: 1279px)" srcset="./img/member-mobile.png" />
-                            <img className="profile" alt="Profile" src={"img/member.png"} />
-                            <img className="profile-hover" alt="Profile" src={"img/member-hover.png"} />
+                            <source media="(max-width: 1279px)" srcSet={memberMobileImg} />
+                            <img className="profile" alt="Profile" src={memberImg} />
+                            <img className="profile-hover" alt="Profile" src={memberHoverImg} />
                         </picture>
                         <div className="memberLabel">會員</div>
 

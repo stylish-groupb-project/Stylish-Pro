@@ -3,18 +3,21 @@ import { ColorBlock, ColorContainer } from "../../styled-components/ProductColor
 import './productCard.css'
 const ProductCard = ({ product }) => {
     return (
-        <div className="product-card">
-            <img src={product.main_image} alt={product.title} />
-            <ColorContainer>
-                {product.colors.map((color, index) => (
-                    <ColorBlock key={index} colorCode={color.code} />
-                ))}
-            </ColorContainer>
-            <div className="product-info">
-                <h3 className="product-title">{product.title}</h3>
-                <p className="product-price">TWD.{product.price}</p>
+        <a href={`/products/${product.id}`} data-testid="product-card">
+            <div className="product-card">
+                <img src={product.main_image} alt={product.title} />
+                <ColorContainer>
+                    {product.colors.map((color, index) => (
+                        <ColorBlock key={index} colorCode={color.code} />
+                    ))}
+                </ColorContainer>
+                <div className="product-info">
+                    <h3 className="product-title">{product.title}</h3>
+                    <p className="product-price">TWD.{product.price}</p>
+                </div>
             </div>
-        </div>
+        </a>
+
     );
 };
 

@@ -14,11 +14,6 @@ root.render(
       <App />
   </React.StrictMode>
 );
-// profile = "./img/member.png"
-//       cart = "./img/cart.png"
-//       split = "./img/split.svg"
-//       search = "./img/search.png"
-//       logo = "./img/logo.png"
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

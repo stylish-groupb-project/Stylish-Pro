@@ -35,7 +35,6 @@ const HomePageLayout = ({ endpoint }) => {
     ];
     const [searchTerm, setSearchTerm] = useState("");
     const [ref, inView] = useInView();
-    // if (endpoint != "search") {
     const { data, error, isLoading, refetch, fetchNextPage, hasNextPage } =
         useInfiniteQuery({
             queryKey: ["productList", endpoint],

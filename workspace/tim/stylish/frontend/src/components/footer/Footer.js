@@ -1,5 +1,9 @@
 import React from "react";
 import "./footer.css";
+import lineImg from '../../assets/images/line.png';
+import twitterImg from '../../assets/images/twitter.png'
+import fbImg from '../../assets/images/facebook.png'
+
 
 export const Footer = () => {
     return (
@@ -37,13 +41,13 @@ export const Footer = () => {
 
                 <div className="icons">
                     <a href="#" target="_blank">
-                        <img className="social-media-image" alt="Line" src={"img/line.png"} />
+                        <img className="social-media-image" alt="Line" src={lineImg} />
                     </a>
                     <a href="#" target="_blank">
-                        <img className="social-media-image" alt="Twitter" src={"img/twitter.png"} />
+                        <img className="social-media-image" alt="Twitter" src={twitterImg} />
                     </a>
                     <a href="#" target="_blank">
-                        <img className="social-media-image" alt="Facebook" src={"img/facebook.png"} />
+                        <img className="social-media-image" alt="Facebook" src={fbImg} />
                     </a>
                 </div>
             </div>
