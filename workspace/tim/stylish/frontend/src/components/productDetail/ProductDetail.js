@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+//TODO
 import GetProductDetail from "../../hooks/fetchProductDetail";
 import { CartCountContext } from "../../contexts/CartCountManager";
 import styled from 'styled-components';

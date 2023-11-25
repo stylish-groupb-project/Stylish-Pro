@@ -15,7 +15,7 @@ import memberHoverImg from '../../assets/images/member-hover.png'
 import { CartCountContext } from "../../contexts/CartCountManager";
 
 
-const Header = ({ refetch, onSearchChange}) => {
+const Header = ({ refetch, onSearchChange , place}) => {
     const { count } = useContext(CartCountContext);
     
     const [searchTerm, setSearchTerm] = useState("");

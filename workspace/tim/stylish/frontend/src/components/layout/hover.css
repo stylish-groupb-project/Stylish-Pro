@@ -1,0 +1,47 @@
+.profile-container {
+    position: relative;
+    display: inline-block;
+    
+}
+.profile,
+.profile-hover {
+    object-fit: contain;
+    /* padding: 1rem 1rem 1rem 1rem; */
+    transition: transform 0.3s;
+}
+
+.profile-hover {
+    position: absolute;
+    /* transition: transform 0.3s; */
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+/* 在懸停時顯示深色圖像 */
+.profile-container:hover .profile-hover {
+    display: block;
+}
+
+.cart-container {
+    position: relative;
+    display: inline-block;
+}
+
+.cart,
+.cart-hover {
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+
+.cart-hover {
+    position: absolute;
+    /* transition: transform 0.3s; */
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.cart-container:hover .cart-hover {
+    display: block;
+}

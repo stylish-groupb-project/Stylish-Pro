@@ -212,6 +212,7 @@ input[type=text]:focus {
 .profile-container {
     position: relative;
     display: inline-block;
+    
 }
 
 .profile,
@@ -363,6 +364,7 @@ input[type=text]:focus {
         justify-content: space-around;
         padding: 0;
         height: 8%;
+       
         /* border-top: 2px solid #313538; */
     }
 
