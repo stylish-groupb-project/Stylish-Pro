@@ -318,6 +318,7 @@ input[type=text]:focus {
         background: #313538;
         color: #ffffff;
         width: 95%;
+        
         padding: 3%;
     }
 

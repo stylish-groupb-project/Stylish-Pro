@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from "react";
-import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 //TODO
-import GetProductDetail from "../../hooks/fetchProductDetail";
+import {GetProductDetail} from "../../hooks/api";
 import { CartCountContext } from "../../contexts/CartCountManager";
 import styled from 'styled-components';
 import "./productDetail.css";
@@ -74,8 +74,8 @@ const ProductDetail = () => {
     const { id } = useParams();
     console.log("testId:"+id);
     const { data, isLoading, isError,error,isSuccess } = useQuery({
-        queryKey: ["productDetails", 113],
-        queryFn: () => GetProductDetail(113)
+        queryKey: ["productDetails", id],
+        queryFn: () => GetProductDetail(id)
     });
 //     const { data, isLoading, isError, error } = useQuery(["productDetails", 110], () =>
 //   GetProductDetail(110)

@@ -45,3 +45,25 @@
 .cart-container:hover .cart-hover {
     display: block;
 }
+
+.remove-img-container {
+    position: relative;
+    display: inline-block;
+    
+}
+.remove-img,
+.remove-img-hover {
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+
+.remove-img-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.remove-img-container:hover .remove-img-hover {
+    display: block;
+}

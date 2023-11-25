@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom
 import Cookies from "js-cookie";
 import HomePageLayout from "./pages/homePage";
 import ProductDetailPageLayout from "./pages/productDetailPage";
+import CheckoutPage from "./pages/checkoutPage";
+import ThankyouPage from "./pages/ThankyouPage";
 import { CartCountProvider } from "./contexts/CartCountManager";
 // const queryClient = new QueryClient();
 const queryClient = new QueryClient({
@@ -45,14 +47,15 @@ function App() {
 
               <Route path="/products/:id" element={<ProductDetailPageLayout endpoint="search" />} />
 
-              {/* <Route path="/checkout" element={<CheckoutPage />} /> */}
+              <Route path="/checkout" element={<CheckoutPage />} />
 
               {/* <Route element={<LoginRoute />}>
                 <Route path="/login" element={<LoginPage />} />
-              </Route>
-              <Route element={<PrivateRoute />}>
-                <Route path="/user" element={<ProfilePage />} />
-                <Route path="/thankyou" element={<ThankyouPage />} />
+              </Route> */}
+              <Route path="/thankyou" element={<ThankyouPage />} />
+              {/* <Route element={<PrivateRoute />}> */}
+                {/* <Route path="/user" element={<ProfilePage />} /> */}
+                {/* <Route path="/thankyou" element={<ThankyouPage />} />
               </Route> */}
             </Routes>
           </BrowserRouter>
