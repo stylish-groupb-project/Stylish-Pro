@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import useTappay from "../../hooks/useTappay";
 import { CartCountContext } from "../../contexts/CartCountManager";
 import styled from 'styled-components';
-// const elasticIp = process.env.REACT_APP_ELASTIC_IP;
+const elasticIp = process.env.REACT_APP_ELASTIC_IP;
 /* global TPDirect */
 
 
@@ -165,7 +165,7 @@ const PayInput = styled.div`
     border: 1px solid;
     border-radius: 0.375rem;
     outline: none;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
     height: 1rem;
     width: 100%;
     margin-top: 1rem;
@@ -335,17 +335,7 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
 
             const cartItems = JSON.parse(localStorage.getItem("cart") || "[]");
             console.log("test:"+cartItems);
-            //   const list = cartItems.map((item) => ({
-            //     id: item.id,
-            //     name: item.name,
-            //     price: item.price,
-            //     color: {
-            //       code: item.colorCode,
-            //       name: item.colorName,
-            //     },
-            //     size: item.size,
-            //     qty: item.quantity,
-            //   }));
+            
             const list = transformCartItems(cartItems);
 
             const requestBody = {
@@ -370,25 +360,27 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
 
             console.log(requestBody);
             //TODO: login 
-            // const response = await axios.post(`https://${elasticIp}/api/1.0/order/checkout`, requestBody, {
-            //     headers: {
-            //         Authorization: `Bearer ${Cookies.get("token")}`,
-            //     },
-            // });
-            // console.log(response.data.data);
-            // navigate(`/thankyou?order_id=${response.data.data.number}&time=${response.data.data.time}`);
-            navigate(`/thankyou?order_id=${1}&time=${values.time}`);
+            const response = await axios.post(`https://${elasticIp}/api/1.0/order/checkout`, requestBody, {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get("token")}`,
+                },
+            });
+            console.log(response.data.data);
+            //response.data.data.time
+            navigate(`/thankyou?order_id=${response.data.data.number}&time=${values.time}`);
+            // navigate(`/thankyou?order_id=${1}&time=${values.time}`);
+
         } catch (error) {
             console.error(error);
             alert('訂單提交失敗');
         }
         setLoading(false);
     }
-    // const disabled = !Cookies.get("token") || totalAmount === 0;
-    const disabled = totalAmount === 0;
+    const disabled = !Cookies.get("token") || totalAmount === 0;
+    // const disabled = totalAmount === 0;
     return (
         <FormContainer onSubmit={handleSubmit(onSubmit)}>
-            {disabled && <span className="mb-3 text-red-500">請先登入並選擇商品</span>}
+            {disabled && <ErrorText>請先登入並選擇商品</ErrorText>}
             <div>
                 <SectionTitle>訂購資料</SectionTitle>
                 <Section>
@@ -522,8 +514,6 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
                     確認付款
                 </MobileSubmitButton>
             </div>
-
-
         </FormContainer>
     )
 

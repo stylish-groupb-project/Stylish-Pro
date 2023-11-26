@@ -39,6 +39,7 @@ const ThankyouPage = () => {
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get("order_id");
   const time = searchParams.get("time");
+  console.log(time);
   const formattedDate = formatDate(time);
 
   return (
@@ -47,7 +48,7 @@ const ThankyouPage = () => {
       <ContentContainer>
         <Text>交易已完成</Text>
         <Text>訂單編號: {orderId}</Text>
-        <Text>交易時間: {formattedDate}</Text>
+        <Text>交易時間: {time}</Text>
         <HomePageLink href="/">回到首頁</HomePageLink>
       </ContentContainer>
       <Footer />

@@ -7,7 +7,10 @@ import HomePageLayout from "./pages/homePage";
 import ProductDetailPageLayout from "./pages/productDetailPage";
 import CheckoutPage from "./pages/checkoutPage";
 import ThankyouPage from "./pages/ThankyouPage";
+import LoginPage from "./pages/LoginPage";
+
 import { CartCountProvider } from "./contexts/CartCountManager";
+
 // const queryClient = new QueryClient();
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 1000 * 60 * 5 } },
@@ -49,14 +52,14 @@ function App() {
 
               <Route path="/checkout" element={<CheckoutPage />} />
 
-              {/* <Route element={<LoginRoute />}>
+              <Route element={<LoginRoute />}>
                 <Route path="/login" element={<LoginPage />} />
-              </Route> */}
-              <Route path="/thankyou" element={<ThankyouPage />} />
-              {/* <Route element={<PrivateRoute />}> */}
+              </Route>
+              {/* <Route path="/thankyou" element={<ThankyouPage />} /> */}
+              <Route element={<PrivateRoute />}>
                 {/* <Route path="/user" element={<ProfilePage />} /> */}
-                {/* <Route path="/thankyou" element={<ThankyouPage />} />
-              </Route> */}
+                <Route path="/thankyou" element={<ThankyouPage />} />
+              </Route>
             </Routes>
           </BrowserRouter>
         </CartCountProvider>
