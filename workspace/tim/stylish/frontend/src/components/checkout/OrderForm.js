@@ -311,7 +311,6 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
 
 
     const onSubmit = async (values) => {
-        console.log(values);
         setLoading(true);
         const tappayStatus = TPDirect.card.getTappayFieldsStatus();
         console.log("status:"+tappayStatus);
@@ -322,6 +321,7 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
         }
 
         try {
+            console.log(values);
             const prime = await new Promise((resolve) => {
                 TPDirect.card.getPrime((result) => {
                     if (result.status !== 0) {
@@ -383,7 +383,7 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
             alert('訂單提交失敗');
         }
         setLoading(false);
-    };
+    }
     // const disabled = !Cookies.get("token") || totalAmount === 0;
     const disabled = totalAmount === 0;
     return (

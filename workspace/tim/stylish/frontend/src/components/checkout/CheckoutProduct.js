@@ -72,7 +72,7 @@ const CheckoutItems = ({ setCartUpdate }) => {
     };
     handleStorageChange();
   }, [count]);
-  console.log(cartData[0]);
+//   console.log(cartData[0]);
   const cartItems = cartData.map((cartItem) => (
     <CartItem
       key={cartItem.id + cartItem.color + cartItem.size}
