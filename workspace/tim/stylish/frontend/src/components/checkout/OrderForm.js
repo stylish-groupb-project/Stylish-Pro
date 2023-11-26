@@ -54,6 +54,11 @@ const LabelSection = styled.label`
   justify-content: center;
   margin-bottom: 8px;
   align-items: center;
+
+  @media (max-width: 1280px){
+    flex-direction: column;
+    align-items: flex-start;
+  }
   
 `;
 
@@ -63,14 +68,17 @@ const Input = styled.input`
     border: 1px solid #3F3A3A;
     border-radius: 0.375rem;
     outline: none;
-    padding: 0.5rem 0.5rem;
+    padding: 0.5rem 0;
     height: 1rem;
+    margin-top: 0.4rem;
     width: 100%;
 
     color: ${(props) => (props.isError ? 'red' : 'black')}
-    // isError
+    
     @media (min-width: 1024px) {
         width: 36rem;
+        padding: 0.5rem 0.5rem;
+        margin-top: 0;
     }
 
 `;
@@ -87,6 +95,28 @@ const RadioButtonLabel = styled.label`
 `;
 
 const SubmitButton = styled.button`
+    display: block;
+    padding: 0.5rem 1rem;
+    background-color: black;
+    color: white;
+    margin-top: 10px;
+    margin-left: auto;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    @media (max-width: 1280px){
+        display: none;
+    }
+
+  
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+`;
+const MobileSubmitButton = styled.button`
   padding: 0.5rem 1rem;
   background-color: black;
   color: white;
@@ -100,6 +130,9 @@ const SubmitButton = styled.button`
     opacity: 0.5;
     cursor: not-allowed;
   }
+  @media (min-width: 1280px){
+        display: none;
+    }
 `;
 
 const MaxWidthContainer = styled.div`
@@ -115,10 +148,16 @@ const WarningMessage = styled.span`
 `;
 const PaySection = styled.div`
   display: flex;
-  flex-direction: row
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 1.5rem
+  margin-top: 1.5rem;
+
+  @media (max-width: 1280px){
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 const PayInput = styled.div`
     font-size: 1rem;
@@ -129,9 +168,11 @@ const PayInput = styled.div`
     padding: 0.5rem;
     height: 1rem;
     width: 100%;
+    margin-top: 1rem;
 
     @media (min-width: 1024px) {
-    width: 36rem;
+        width: 36rem;
+        margin-top: 0;
     }
 `;
 
@@ -171,8 +212,13 @@ const TotalRow = styled(SummaryRow)`
 
 const EachOrderLabel = styled.span`
     text-wrap: nowrap;
-    // padding-right: 2rem;
-    width: 20%
+    width: 20%;
+
+    @media (max-width: 1280px){
+        
+        margin-bottom: 1rem;
+
+    }
 `;
 
 const DeliverySection = styled.div`
@@ -180,6 +226,20 @@ const DeliverySection = styled.div`
     flex-direction: row;
     align-items: center;
 
+    @media (max-width: 1280px){
+        flex-direction: column;
+        align-items: flex-start;
+    }
+`;
+const MobileDeliverySection = styled.div`
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    @media (max-width: 1280px){
+        margin-top: 1rem;
+    }
 
 `;
 
@@ -384,18 +444,21 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
                         <FormRow>
                             <DeliverySection>
                                 <EachOrderLabel>配送時間</EachOrderLabel>
-                                <RadioButtonLabel>
-                                    <input type="radio" value="08:00-12:00" {...register("time")} disabled={disabled} />
-                                    <span>08:00-12:00</span>
-                                </RadioButtonLabel>
-                                <RadioButtonLabel>
-                                    <input type="radio" value="14:00-18:00" {...register("time")} disabled={disabled} />
-                                    <span>14:00-18:00</span>
-                                </RadioButtonLabel>
-                                <RadioButtonLabel>
-                                    <input type="radio" value="不指定" {...register("time")} disabled={disabled} />
-                                    <span>不指定</span>
-                                </RadioButtonLabel>
+                                <MobileDeliverySection>
+                                    <RadioButtonLabel>
+                                        <input type="radio" value="08:00-12:00" {...register("time")} disabled={disabled} />
+                                        <span>08:00-12:00</span>
+                                    </RadioButtonLabel>
+                                    <RadioButtonLabel>
+                                        <input type="radio" value="14:00-18:00" {...register("time")} disabled={disabled} />
+                                        <span>14:00-18:00</span>
+                                    </RadioButtonLabel>
+                                    <RadioButtonLabel>
+                                        <input type="radio" value="不指定" {...register("time")} disabled={disabled} />
+                                        <span>不指定</span>
+                                    </RadioButtonLabel>
+                                </MobileDeliverySection>
+
                             </DeliverySection>
 
                         </FormRow>
@@ -448,6 +511,12 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
                         確認付款
                     </SubmitButton>
                 </PaymentSummary>
+                <MobileSubmitButton
+                    type="submit"
+                    disabled={disabled && loading}
+                >
+                    確認付款
+                </MobileSubmitButton>
             </div>
 
 

@@ -17,10 +17,13 @@ const CartItemContainer = styled.div`
 
 const ItemDisplay = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin-top: 1.25rem;
+
   @media (min-width: 1024px) {
     margin-top: 0;
+    flex-direction: row;
   }
 `;
 
@@ -30,7 +33,7 @@ const ImageContainer = styled.div`
 
 const ProductInfo = styled.div`
   margin-left: 1rem;
-  min-width: 370px;
+  width: 100% 
 `;
 
 const ProductDetails = styled.p`
@@ -75,11 +78,42 @@ const ItemDetailBlock = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    width: 50%;
+    width: 100%;
     align-items: center;
 
+    @media (max-width: 1280px){
+        flex-direction: column;
+        padding-top: 1rem;
+    }
+`;
+const MobileCartItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
 
-`
+`;
+const MobileCartDetail = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    justify-content: space-around;
+    width: 100%;
+
+    @media (min-width: 1280px){
+        display: none;
+    }
+`;
+const MobileCartSection = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    justify-content: space-around;
+    width: 100%;
+`;
+
 
 const CartItem = ({ cartItem, setCartUpdate }) => {
     const [quantity, setQuantity] = useState(cartItem.quantity);
@@ -141,21 +175,37 @@ const CartItem = ({ cartItem, setCartUpdate }) => {
     return (
         <CartItemContainer>
             <ItemDisplay>
-                <ImageContainer>
-                    <CartItemImage src={cartItem.image} alt={cartItem.name} />
-                </ImageContainer>
-                <ProductInfo>
-                    <ProductDetails>{cartItem.name}</ProductDetails>
-                    <ProductDetails>{cartItem.id}</ProductDetails>
-                    <ProductDetails>顏色 | {cartItem.color}</ProductDetails>
-                    <ProductDetails>尺寸 | {cartItem.size}</ProductDetails>
-                </ProductInfo>
+                <MobileCartItem>
+                    <ImageContainer>
+                        <CartItemImage src={cartItem.image} alt={cartItem.name} />
+                    </ImageContainer>
+                    <ProductInfo>
+                        <ProductDetails>{cartItem.name}</ProductDetails>
+                        <ProductDetails>{cartItem.id}</ProductDetails>
+                        <ProductDetails>顏色 | {cartItem.color}</ProductDetails>
+                        <ProductDetails>尺寸 | {cartItem.size}</ProductDetails>
+                    </ProductInfo>
+                    <div className='rwd-remove-img-container'>
+                        <RemoveButton onClick={deleteProductHandler}>
+                            <img src={CartRemove} className='rwd-remove-img' alt="Remove" />
+                            <img src={CartRemoveHovered} className='rwd-remove-img-hover' alt="Remove Hovered" />
+                        </RemoveButton>
+                    </div>
+                </MobileCartItem>
+
                 <ItemDetailBlock>
-                    <QuantitySelect value={quantity} onChange={QuantityChangeHandler}>
-                        {options}
-                    </QuantitySelect>
-                    <PriceDisplay>TWD.{cartItem.price}</PriceDisplay>
-                    <PriceDisplay>TWD.{cartItem.price * quantity}</PriceDisplay>
+                    <MobileCartDetail>
+                        <span>數量</span>
+                        <span>單價</span>
+                        <span>小計</span>
+                    </MobileCartDetail>
+                    <MobileCartSection>
+                        <QuantitySelect value={quantity} onChange={QuantityChangeHandler}>
+                            {options}
+                        </QuantitySelect>
+                        <PriceDisplay>TWD.{cartItem.price}</PriceDisplay>
+                        <PriceDisplay>TWD.{cartItem.price * quantity}</PriceDisplay>
+                    </MobileCartSection>
                 </ItemDetailBlock>
                 <div className='remove-img-container'>
                     <RemoveButton onClick={deleteProductHandler}>

@@ -6,15 +6,23 @@ import { CartCountContext } from "../../contexts/CartCountManager";
 const CartHeader = styled.div`
   display: flex;
   margin-bottom: 1rem;
+
+  @media (max-width: 1280px) {
+    margin-bottom: 0;
+  }
 `;
 
 const CartTitle = styled.span`
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: 1rem;
-  color: #3F3A3A;
-//   margin-right: 490px;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #3F3A3A;
     width: 46%;
+
+    @media (max-width: 1280px){
+        padding-left: 1rem;
+        width: 100%;
+    }
   
 `;
 
@@ -33,10 +41,18 @@ const CartInfo = styled.div`
 
 const CartItemContainer = styled.div`
   border: 1px solid #979797;
-  padding-top: 2.5rem; /* pt-10 */
+  padding-top: 2.5rem;
   padding-bottom: 0.625rem; /* pb-[10px] */
-  padding-left: 1.875rem; /* px-[30px] */
+  padding-left: 1.875rem;
   padding-right: 1.875rem;
+
+  @media (max-width: 1280px){
+    border: none;
+    padding-top: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
 `;
 
 const OrderWindow = styled.div`
