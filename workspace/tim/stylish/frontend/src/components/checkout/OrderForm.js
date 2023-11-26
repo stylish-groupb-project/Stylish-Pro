@@ -311,6 +311,7 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
 
 
     const onSubmit = async (values) => {
+        console.log(values);
         setLoading(true);
         const tappayStatus = TPDirect.card.getTappayFieldsStatus();
         console.log(tappayStatus);
@@ -331,6 +332,7 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
             });
 
             const cartItems = JSON.parse(localStorage.getItem("cart") || "[]");
+            console.log("test:"+cartItems);
             //   const list = cartItems.map((item) => ({
             //     id: item.id,
             //     name: item.name,
