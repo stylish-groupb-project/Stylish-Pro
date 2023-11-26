@@ -314,7 +314,7 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
         console.log(values);
         setLoading(true);
         const tappayStatus = TPDirect.card.getTappayFieldsStatus();
-        console.log(tappayStatus);
+        console.log("status:"+tappayStatus);
 
         if (tappayStatus.canGetPrime === false) {
             alert("can not get prime");
@@ -327,9 +327,11 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
                     if (result.status !== 0) {
                         alert('取得 Prime 失敗');
                     }
+                    console.log("result.card.prime:"+result.card.prime);
                     resolve(result.card.prime);
                 });
             });
+            console.log("prime:"+prime);
 
             const cartItems = JSON.parse(localStorage.getItem("cart") || "[]");
             console.log("test:"+cartItems);
