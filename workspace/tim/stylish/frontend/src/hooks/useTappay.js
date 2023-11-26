@@ -5,9 +5,9 @@ import $ from 'jquery';
 
 // const { VITE_TAPPAY_APPID, VITE_TAPPAY_APPKEY, VITE_TAPPAY_SERVER_TYPE } = import.meta.env;
 const appId = process.env.REACT_APP_VITE_TAPPAY_APPID;
+
 const VITE_TAPPAY_APPKEY = process.env.REACT_APP_VITE_TAPPAY_APPKEY;
 const VITE_TAPPAY_SERVER_TYPE = process.env.REACT_APP_VITE_TAPPAY_SERVER_TYPE;
-
 const useTappay = () => {
     console.log(`tappay: ${appId} ,${VITE_TAPPAY_APPKEY}, ${VITE_TAPPAY_SERVER_TYPE}`);
     useEffect(() => {
