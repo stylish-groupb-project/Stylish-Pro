@@ -1,5 +1,6 @@
 const errorMsg = require('../utils/error');
 const monitorRepo = require('../Repository/monitorRepo');
+const connectionPromise = require('../utils/db').connectionPromise;
 module.exports = {
     insertOrderList: async (res, dataObjArray) => {
         const connection = await connectionPromise.getConnection();
