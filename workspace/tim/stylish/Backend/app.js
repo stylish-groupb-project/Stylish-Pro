@@ -23,16 +23,17 @@ app.use(
     swaggerUi.serve,
     swaggerUi.setup(swaggerDocument)
 );
+app.use("/admin", express.static("admin"));
 
 app.get('/api/admin/checkout.html', (req, res) => {
     console.log(path.join(__dirname, 'Backend','View', 'html','checkout.html'));
     res.sendFile(path.join(__dirname, 'Backend','View', 'html','checkout.html'));
 });
 
-app.get('/admin/dashboard.html', (req, res) => {
-    console.log(path.join(__dirname,'View', 'html','dashboard.html'));
-    res.sendFile(path.join(__dirname,'View', 'html','dashboard.html'));
-});
+// app.get('/admin/dashboard.html', (req, res) => {
+//     console.log(path.join(__dirname,'View', 'html','dashboard.html'));
+//     res.sendFile(path.join(__dirname,'View', 'html','dashboard.html'));
+// });
   
 
 app.get('/api/1.0/test', (req, res) => {
