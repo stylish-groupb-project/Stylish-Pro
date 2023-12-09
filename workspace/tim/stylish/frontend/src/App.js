@@ -4,10 +4,10 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import Cookies from "js-cookie";
 import HomePageLayout from "./pages/homePage";
-import ProductDetailPageLayout from "./pages/productDetailPage";
-import CheckoutPage from "./pages/checkoutPage";
-import ThankyouPage from "./pages/ThankyouPage";
-import LoginPage from "./pages/LoginPage";
+// import ProductDetailPageLayout from "./pages/productDetailPage";
+// import CheckoutPage from "./pages/checkoutPage";
+// import ThankyouPage from "./pages/ThankyouPage";
+// import LoginPage from "./pages/LoginPage";
 import MonitorPage from "./pages/monitorPage";
 
 import { CartCountProvider } from "./contexts/CartCountManager";
@@ -48,7 +48,7 @@ function App() {
                 path="/accessories"
                 element={<HomePageLayout endpoint="accessories" />}
               />
-              <Route path="/search" element={<HomePageLayout endpoint="search" />} />
+              {/* <Route path="/search" element={<HomePageLayout endpoint="search" />} />
 
               <Route path="/products/:id" element={<ProductDetailPageLayout endpoint="search" />} />
 
@@ -57,11 +57,9 @@ function App() {
               <Route element={<LoginRoute />}>
                 <Route path="/login" element={<LoginPage />} />
               </Route>
-              {/* <Route path="/thankyou" element={<ThankyouPage />} /> */}
               <Route element={<PrivateRoute />}>
-                {/* <Route path="/user" element={<ProfilePage />} /> */}
                 <Route path="/thankyou" element={<ThankyouPage />} />
-              </Route>
+              </Route> */}
             </Routes>
           </BrowserRouter>
         </CartCountProvider>
