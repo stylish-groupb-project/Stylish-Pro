@@ -28,7 +28,7 @@ module.exports = {
         return result;
     },
     monitorBySize: async (res) => {
-        const result = await monitorRepo.monitorBySize(res);
+        const result = await monitorRepo.monitorByTopSize(res);
         return result;
     },
     monitorRevenue: async (res) => {

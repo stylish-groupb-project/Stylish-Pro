@@ -77,7 +77,7 @@ module.exports = {
             console.log('connection release');
         }
     },
-    monitorByTopSize: async (res) => {
+    monitorRevenue: async (res) => {
         const connection = await connectionPromise;
         try {
             const selectQuery = `
