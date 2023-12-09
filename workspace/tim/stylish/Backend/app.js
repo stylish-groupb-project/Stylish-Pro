@@ -29,6 +29,11 @@ app.get('/api/admin/checkout.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'Backend','View', 'html','checkout.html'));
 });
 
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Backend','View', 'html','dashboard.html'));
+});
+  
+
 app.get('/api/1.0/test', (req, res) => {
     res.send('Hello');
 });
