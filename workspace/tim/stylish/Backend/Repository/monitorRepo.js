@@ -1,10 +1,11 @@
 const errorMsg = require('../utils/error');
 const connectionPromise = require('../utils/db').connectionPromise;
 module.exports = {
-    insertOrderList: async (res, dataObjArray, connection) => {
+    insertOrderList: async (res, dataArray, connection) => {
         try {
+            console.log(dataArray);
             const query = 'INSERT INTO order_product (price, color_code, color_name, size, qty ,product_id) VALUES ?';
-            const [result] = await connection.execute(query, [dataObjArray]);
+            const [result] = await connection.execute(query, [dataArray]);
             return result;
         } catch (error) {
             console.error(error);
