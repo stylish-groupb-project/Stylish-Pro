@@ -2,7 +2,7 @@
 console.log("window.location.origin" + window.location.origin)
 
 
-async function getTotal() {
+async function getTotal(data) {
     // todo1: sum of total order
     const total = document.getElementById('number');
     total.innerText = 'Total Revenue: ' + data.totalRevenue;
@@ -28,7 +28,7 @@ async function getTotal() {
 //   });
 
 // color, percentage, colorCode
-async function getColorShare() {
+async function getColorShare(data) {
     // todo2: color share
     const colors = data.color_code;
     const quantities = data.total_count;
@@ -61,7 +61,7 @@ async function getColorShare() {
 
 
 
-getHistogram = async () => {
+getHistogram = async (data) => {
     // todo3: histogram
     // Extracting data for the histogram
     // const { data: totalPriceArray } = await axios.get(window.location.origin + '/api/1.0/order/price')
@@ -102,7 +102,7 @@ getHistogram = async () => {
 }
 
 
-getStackedBar = async () => {
+getStackedBar = async (data) => {
     // todo4: stacked bar chart
     // const { data } = await axios.get(window.location.origin + '/api/1.0/order/top5')
     // console.log(data)
@@ -172,10 +172,10 @@ getStackedBar = async () => {
 async function dashboard(){
     const { data } = await axios.get(window.location.origin + '/api/1.0/monitor')
     console.log("data: ", data);
-    await getTotal()
-    await getColorShare()
-    await getHistogram()
-    await getStackedBar()
+    await getTotal(data);
+    await getColorShare(data);
+    await getHistogram(data);
+    await getStackedBar(data);
 }
 
 
