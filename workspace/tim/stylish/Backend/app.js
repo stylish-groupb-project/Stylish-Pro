@@ -30,6 +30,7 @@ app.get('/api/admin/checkout.html', (req, res) => {
 });
 
 app.get('/admin/dashboard.html', (req, res) => {
+    console.log(path.join(__dirname, 'Backend','View', 'html','dashboard.html'));
     res.sendFile(path.join(__dirname, 'Backend','View', 'html','dashboard.html'));
 });
   
