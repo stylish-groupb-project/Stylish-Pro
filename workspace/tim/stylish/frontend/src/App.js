@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 // import CheckoutPage from "./pages/checkoutPage";
 // import ThankyouPage from "./pages/ThankyouPage";
 // import LoginPage from "./pages/LoginPage";
-import MonitorPage from "./pages/monitorPage";
+// import MonitorPage from "./pages/monitorPage";
 
 import { CartCountProvider } from "./contexts/CartCountManager";
 
@@ -35,8 +35,8 @@ function App() {
         <CartCountProvider>
           <BrowserRouter>
             <Routes>
-              <Route path="/admin/dashboard.html" element={<MonitorPage />} />
-              {/* <Route path="/" element={<HomePageLayout endpoint="all" />} />
+              {/* <Route path="/admin/dashboard.html" element={<MonitorPage />} /> */}
+              <Route path="/" element={<HomePageLayout endpoint="all" />} />
 
               <Route
                 path="/women"
@@ -47,8 +47,8 @@ function App() {
               <Route
                 path="/accessories"
                 element={<HomePageLayout endpoint="accessories" />}
-              /> */}
-              {/* <Route path="/search" element={<HomePageLayout endpoint="search" />} />
+              />
+              <Route path="/search" element={<HomePageLayout endpoint="search" />} />
 
               <Route path="/products/:id" element={<ProductDetailPageLayout endpoint="search" />} />
 
@@ -59,7 +59,7 @@ function App() {
               </Route>
               <Route element={<PrivateRoute />}>
                 <Route path="/thankyou" element={<ThankyouPage />} />
-              </Route> */}
+              </Route>
             </Routes>
           </BrowserRouter>
         </CartCountProvider>
