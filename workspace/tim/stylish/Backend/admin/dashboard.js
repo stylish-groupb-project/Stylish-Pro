@@ -1,6 +1,6 @@
 // https://44.217.27.217/api/1.0
 console.log("window.location.origin" + window.location.origin)
-const { data } = await axios.get(window.location.origin + '/api/1.0/monitor')
+const { data } = axios.get(window.location.origin + '/api/1.0/monitor')
 console.log("data: ", data)
 async function getTotal() {
     // todo1: sum of total order
