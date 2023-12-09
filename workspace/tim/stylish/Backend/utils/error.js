@@ -34,6 +34,9 @@ module.exports = {
     },
     permissionDenied: (res) => {
         res.status(403).json({ error: 'role problem - permission denied' });
-    }
+    },
+    monitorProblem: (res) => {
+        res.status(403).json({ error: 'Monitor problem' });
+    },
 
 }

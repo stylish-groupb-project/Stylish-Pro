@@ -8,6 +8,7 @@ import ProductDetailPageLayout from "./pages/productDetailPage";
 import CheckoutPage from "./pages/checkoutPage";
 import ThankyouPage from "./pages/ThankyouPage";
 import LoginPage from "./pages/LoginPage";
+import MonitorPage from "./pages/monitorPage";
 
 import { CartCountProvider } from "./contexts/CartCountManager";
 
@@ -34,6 +35,7 @@ function App() {
         <CartCountProvider>
           <BrowserRouter>
             <Routes>
+              <Route path="/admin/dashboard.html" element={<MonitorPage />} />
               <Route path="/" element={<HomePageLayout endpoint="all" />} />
 
               <Route

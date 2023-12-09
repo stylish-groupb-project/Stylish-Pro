@@ -26,3 +26,13 @@ export async function GetProductDetail (id)  {
         console.log(error);
     }
 };
+export async function GetOrderList ()  {
+    try {
+        const response = await axios.get(
+            `https://${elasticIp}/api/1.0/monitor`);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};

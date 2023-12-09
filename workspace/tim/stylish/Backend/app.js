@@ -7,12 +7,14 @@ const cors = require('cors');
 const product_router = require('./Router/product_router');
 const user_router = require('./Router/user_router');
 const order_router = require('./Router/order_router');
+const monitor_router = require('./Router/monitor_router');
 app.use(cors());
 app.use(express.json());
 
 app.use('/api/1.0/products',product_router);
 app.use('/api/1.0/user',user_router);
 app.use('/api/1.0/order',order_router);
+app.use('/api/1.0/monitor',monitor_router);
 
 // app.use('/static',express.static(__dirname+'/static'));
 // test
