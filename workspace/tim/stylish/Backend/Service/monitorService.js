@@ -5,6 +5,7 @@ module.exports = {
     insertOrderList: async (res, dataArray) => {
         const connection = await connectionPromise.getConnection();
         try {
+            await connection.beginTransaction();
             await monitorRepo.insertOrderList(res, dataArray, connection);
 
         } catch (error) {
