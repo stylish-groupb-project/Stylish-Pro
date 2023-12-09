@@ -178,5 +178,5 @@ async function dashboard(){
     await getStackedBar(data);
 }
 
-
+dashboard();
 
