@@ -3,11 +3,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import Cookies from "js-cookie";
-// import HomePageLayout from "./pages/homePage";
-// import ProductDetailPageLayout from "./pages/productDetailPage";
-// import CheckoutPage from "./pages/checkoutPage";
-// import ThankyouPage from "./pages/ThankyouPage";
-// import LoginPage from "./pages/LoginPage";
+import HomePageLayout from "./pages/homePage";
+import ProductDetailPageLayout from "./pages/productDetailPage";
+import CheckoutPage from "./pages/checkoutPage";
+import ThankyouPage from "./pages/ThankyouPage";
+import LoginPage from "./pages/LoginPage";
 // import MonitorPage from "./pages/monitorPage";
 
 import { CartCountProvider } from "./contexts/CartCountManager";
