@@ -19,8 +19,6 @@ services:
       container_name: stylish_frontend_container
       env_file:
         - .env
-      environment:
-        - NODE_OPTIONS=--max-old-space-size=4096
       networks:
         - stylish_network
 
