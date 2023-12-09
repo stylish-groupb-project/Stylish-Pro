@@ -29,7 +29,7 @@ app.get('/api/admin/checkout.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'Backend','View', 'html','checkout.html'));
 });
 
-app.get('/admin', (req, res) => {
+app.get('/admin/dashboard.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'Backend','View', 'html','dashboard.html'));
 });
   
