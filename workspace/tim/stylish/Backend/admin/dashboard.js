@@ -103,70 +103,38 @@ getHistogram = async (data) => {
 
 
 getStackedBar = async (data) => {
-    // todo4: stacked bar chart
-    // const { data } = await axios.get(window.location.origin + '/api/1.0/order/top5')
-    // console.log(data)
-    // Group data by size
-    // const groupedByProduct = data.reduce((acc, val) => {
-    //     acc[val.product_id] = acc[val.product_id] || [];
-    //     acc[val.product_id].push({ size: val.size, quantity_sold: parseInt(val.quantity_sold, 10) });
-    //     return acc;
-    // }, {});
+   
+    let productTraces = {};
 
-    // // Calculate total quantity sold for each product
-    // const totalQuantityByProduct = Object.keys(groupedByProduct).reduce((acc, productId) => {
-    //     acc[productId] = groupedByProduct[productId].reduce((sum, item) => sum + item.quantity_sold, 0);
-    //     return acc;
-    // }, {});
+  data.top.forEach(({ product_id, size, total_qty }) => {
+    // If there is no trace for the product, create a new one
+    if (!productTraces[product_id]) {
+      productTraces[product_id] = {
+        x: ['S', 'M', 'L'], // All possible sizes
+        y: [0, 0, 0], // Initialize with zeros
+        name: `Product ${product_id}`,
+        type: 'bar'
+      };
+    }
+    // Update the appropriate size index with the quantity
+    const sizeIndex = productTraces[product_id].x.indexOf(size);
+    productTraces[product_id].y[sizeIndex] = parseInt(total_qty, 10);
+  });
 
-    // // Sort product_ids by total quantity sold
-    // const sortedProductIds = Object.keys(totalQuantityByProduct).sort((a, b) => totalQuantityByProduct[b] - totalQuantityByProduct[a]);
+  const plotData = Object.values(productTraces);
 
-    // // Create traces for each size
-    // const sizes = ['S', 'M', 'L']; // Assuming these are all the sizes you have
-    // const traces = sizes.map(size => {
-    //     return {
-    //         x: sortedProductIds.map(id => 'product ' + id),
-    //         y: sortedProductIds.map(id => {
-    //             const productData = groupedByProduct[id].find(item => item.size === size);
-    //             return productData ? productData.quantity_sold : 0;
-    //         }),
-    //         name: size,
-    //         type: 'bar'
-    //     };
-    // });
+  var layout = {
+    barmode: 'stack',
+    title: 'Quantity of top sold products in different sizes',
+    yaxis: {
+      title: 'Quantity'
+    },
+    xaxis: {
+      title: 'Product ID'
+    }
+  };
 
-    // console.log(traces)
-    let traces = {};
-
-    data.top.forEach(product => {
-        if (!traces[product.size]) {
-            traces[product.size] = {
-                x: [],
-                y: [],
-                name: `Size ${product.size}`,
-                type: 'bar'
-            };
-        }
-        traces[product.size].x.push(`Product ${product.product_id}`);
-        traces[product.size].y.push(product.total_qty);
-    });
-
-    const plotData = Object.values(traces);
-
-    var layout = {
-        barmode: 'stack',
-        title: {
-            text: 'Quantity of top 5 sold products in different sizes',
-        },
-        yaxis: {
-            title: {
-                text: 'Quantity',
-            }
-        }
-    };
-
-    Plotly.newPlot('myStacked', plotData, layout);
+  Plotly.newPlot('myStacked', plotData, layout);
 }
 
 async function dashboard(){
