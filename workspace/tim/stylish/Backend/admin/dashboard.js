@@ -173,10 +173,10 @@ async function dashboard(){
     const { data } = await axios.get(window.location.origin + '/api/1.0/monitor')
     console.log("data: ", data);
     console.log("datadata: ",data.data);
-    await getTotal(data);
-    await getColorShare(data);
-    await getHistogram(data);
-    await getStackedBar(data);
+    await getTotal(data.data);
+    await getColorShare(data.data);
+    await getHistogram(data.data);
+    await getStackedBar(data.data);
 }
 
 dashboard();
