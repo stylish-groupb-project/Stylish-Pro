@@ -69,7 +69,8 @@ module.exports = {
                     ORDER BY SUM(qty) DESC
                     LIMIT 5
                 ) top_products ON op.product_id = top_products.product_id
-                GROUP BY op.product_id, op.size;
+                GROUP BY op.product_id, op.size
+                ORDER BY SUM(qty) DESC;
             `;
             const [result] = await connection.execute(query);
             return result;
