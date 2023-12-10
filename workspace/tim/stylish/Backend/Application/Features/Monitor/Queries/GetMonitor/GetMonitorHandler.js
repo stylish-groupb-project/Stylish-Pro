@@ -15,10 +15,10 @@ module.exports = {
         if (checkDbforInsertOrNot.length === 0) {
             const responseArray = await tool.fetchOrder();
             const batchSize = 200;
-            for (let i = 0; i < responseArray.length; i += batchSize) {
+            for (let i = 0; i < responseArray.length; i ++) {
                 // console.log(responseArray.slice(i, i + batchSize));
-                const batch = responseArray.slice(i, i + batchSize)
-                await monitorService.insertOrderList(res, batch);
+                // const batch = responseArray.slice(i, i + batchSize)
+                await monitorService.insertOrderList(res, responseArray[i]);
             }
             
         }
