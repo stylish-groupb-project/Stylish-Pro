@@ -14,11 +14,12 @@ module.exports = {
         const checkDbforInsertOrNot = await monitorService.simpleSearch();
         if (checkDbforInsertOrNot.length === 0) {
             const responseArray = await tool.fetchOrder();
-            // const batchSize = 200;
-            // for (let i = 0; i < responseArray.length; i ++) {
-                console.log(responseArray)
-                await monitorService.insertOrderList(res, responseArray);
-            // }
+            const batchSize = 200;
+            for (let i = 0; i < responseArray.length; i += batchSize) {
+                console.log(responseArray.slice(i, i + batchSize));
+                const batch = responseArray.slice(i, i + batchSize)
+                await monitorService.insertOrderList(res, batch);
+            }
             
         }
         totalRevenue = await monitorService.monitorRevenue(res);
