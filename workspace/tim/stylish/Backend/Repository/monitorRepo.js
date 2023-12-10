@@ -4,12 +4,12 @@ module.exports = {
     insertOrderList: async (res, dataArray, connection) => {
         try {
             console.log(dataArray);
-            const query = 'INSERT INTO order_product (price, color_code, color_name, size, qty ,product_id) VALUES (?,?,?,?,?,?)';
+            //(?,?,?,?,?,?)
+            const query = 'INSERT INTO order_product (price, color_code, color_name, size, qty ,product_id) VALUES ?';
             // const test = dataArray.slice(0, 1);
-            // const test = dataArray.map(order => [order.price, order.color_code, order.color_name, order.name , order.qty , order.product_id]);
-            dataArray.map(async(order)=>{
-                await connection.execute(query, [order.price, order.color_code, order.color_name, order.size , order.qty , order.product_id]);
-            })
+            //  dataArray.map(async(order)=>{
+                await connection.execute(query, dataArray.map(order => [order.price, order.color_code, order.color_name, order.size , order.qty , order.product_id]));
+            // })
             // await connectionPromise.execute(query, );
 
         } catch (error) {
