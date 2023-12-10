@@ -104,9 +104,9 @@ getHistogram = async (data) => {
 // 
 getStackedBar = async (data) => {
     let traces = {
-        'S': { x: [], y: [], name: 'S', type: 'bar' },
+        'L': { x: [], y: [], name: 'L', type: 'bar' },
         'M': { x: [], y: [], name: 'M', type: 'bar' },
-        'L': { x: [], y: [], name: 'L', type: 'bar' }
+        'S': { x: [], y: [], name: 'S', type: 'bar' }
     };
 
     // Assuming `data` is an array of objects with {product_id, size, total_qty}

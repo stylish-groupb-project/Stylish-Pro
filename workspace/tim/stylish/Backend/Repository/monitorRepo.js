@@ -59,14 +59,19 @@ module.exports = {
     monitorByTopSize: async (res) => {
         const connection = await connectionPromise;
         try {
-            const selectQuery = `
-                SELECT product_id, size, SUM(qty) as total_qty
-                FROM order_product
-                GROUP BY product_id, size
-                ORDER BY SUM(qty) DESC
-                LIMIT 5;
+            const query = `
+                SELECT op.product_id, op.size, SUM(op.qty) as total_qty
+                FROM order_product op
+                INNER JOIN (
+                    SELECT product_id
+                    FROM order_product
+                    GROUP BY product_id
+                    ORDER BY SUM(qty) DESC
+                    LIMIT 5
+                ) top_products ON op.product_id = top_products.product_id
+                GROUP BY op.product_id, op.size;
             `;
-            const [result] = await connection.execute(selectQuery);
+            const [result] = await connection.execute(query);
             return result;
         } catch (error) {
             console.error(error);
