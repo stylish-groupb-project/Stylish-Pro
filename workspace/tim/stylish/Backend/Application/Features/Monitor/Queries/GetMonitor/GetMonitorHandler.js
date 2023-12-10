@@ -16,12 +16,13 @@ module.exports = {
             const responseArray = await tool.fetchOrder();
             // const batchSize = 200;
             // for (let i = 0; i < responseArray.length; i ++) {
+                console.log(responseArray)
                 await monitorService.insertOrderList(res, responseArray);
             // }
             
         }
         totalRevenue = await monitorService.monitorRevenue(res);
-
+        console.log(totalRevenue);
 
         const colorMonitor = await monitorService.monitorByColor(res);
         console.log(colorMonitor);

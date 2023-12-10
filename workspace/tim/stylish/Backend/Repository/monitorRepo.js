@@ -3,7 +3,7 @@ const connectionPromise = require('../utils/db').connectionPromise;
 module.exports = {
     insertOrderList: async (res, order, connection) => {
         try {
-            console.log(order);
+            // console.log(order);
             //(?,?,?,?,?,?)
             const query = 'INSERT INTO order_product (price, color_code, color_name, size, qty ,product_id) VALUES ?';
             // order.price, order.color_code, order.color_name, order.size , order.qty , order.product_id
