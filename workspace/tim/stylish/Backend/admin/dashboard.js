@@ -5,7 +5,7 @@ console.log("window.location.origin" + window.location.origin)
 async function getTotal(data) {
     // todo1: sum of total order
     const total = document.getElementById('number');
-    total.innerText = 'Total Revenue: ' + data.totalRevenue;
+    total.innerText = 'Total Revenue: ' + data.totalRevenue.totalRevenue;
 }
 
 //   const socket = io('http://44.217.27.217:4000');
