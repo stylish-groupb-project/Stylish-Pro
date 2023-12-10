@@ -101,7 +101,7 @@ getHistogram = async (data) => {
     Plotly.newPlot('myHistogram', histogramData, layout);
 }
 
-
+// 
 getStackedBar = async (data) => {
     let traces = {
         'S': { x: [], y: [], name: 'S', type: 'bar' },
