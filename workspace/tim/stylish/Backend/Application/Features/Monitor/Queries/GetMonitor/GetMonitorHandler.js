@@ -15,9 +15,9 @@ module.exports = {
         if (checkDbforInsertOrNot.length === 0) {
             const responseArray = await tool.fetchOrder();
             // const batchSize = 200;
-            for (let i = 0; i < responseArray.length; i ++) {
-                await monitorService.insertOrderList(res, responseArray[i]);
-            }
+            // for (let i = 0; i < responseArray.length; i ++) {
+                await monitorService.insertOrderList(res, responseArray);
+            // }
             
         }
         totalRevenue = await monitorService.monitorRevenue(res);

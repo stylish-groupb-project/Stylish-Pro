@@ -111,22 +111,22 @@ module.exports = {
         let processedData = [];
         orders.forEach(order => {
             order.list.forEach(item => {
-                // processedData.push([
-                //     item.price,
-                //     item.color.code,
-                //     item.color.name,
-                //     item.size,
-                //     item.qty,
-                //     item.id
-                // ]);
-                processedData.push({
-                    price: item.price,
-                    color_code: item.color.code,
-                    color_name: item.color.name,
-                    size: item.size,
-                    qty: item.qty,
-                    product_id: item.id
-                });
+                processedData.push([
+                    item.price,
+                    item.color.code,
+                    item.color.name,
+                    item.size,
+                    item.qty,
+                    item.id
+                ]);
+                // processedData.push({
+                //     price: item.price,
+                //     color_code: item.color.code,
+                //     color_name: item.color.name,
+                //     size: item.size,
+                //     qty: item.qty,
+                //     product_id: item.id
+                // });
             });
         });
 
