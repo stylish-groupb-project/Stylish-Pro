@@ -110,7 +110,7 @@ getStackedBar = async (data) => {
     };
 
     // Assuming `data` is an array of objects with {product_id, size, total_qty}
-    data.forEach(({ product_id, size, total_qty }) => {
+    data.top.forEach(({ product_id, size, total_qty }) => {
         // Add the product id to the x-axis array if it's not already there
         if (!traces[size].x.includes(`Product ${product_id}`)) {
             traces[size].x.push(`Product ${product_id}`);
