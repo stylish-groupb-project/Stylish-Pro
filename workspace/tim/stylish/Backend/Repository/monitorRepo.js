@@ -7,8 +7,8 @@ module.exports = {
             //(?,?,?,?,?,?)
             const query = 'INSERT INTO order_product (price, color_code, color_name, size, qty ,product_id) VALUES ?';
             // order.price, order.color_code, order.color_name, order.size , order.qty , order.product_id
-            await connection.execute(query, [order]);
-            // await connectionPromise.execute(query, );
+            // await connection.execute(query, [order]);
+            await connectionPromise.execute(query, [order]);
 
         } catch (error) {
             console.error(error);
