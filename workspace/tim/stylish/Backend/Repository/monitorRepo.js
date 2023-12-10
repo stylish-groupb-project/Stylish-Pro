@@ -5,7 +5,8 @@ module.exports = {
         try {
             console.log(dataArray);
             const query = 'INSERT INTO order_product (price, color_code, color_name, size, qty ,product_id) VALUES ?';
-            const [result] = await connection.execute(query, [dataArray]);
+            const test = dataArray.slice(0, 1);
+            const [result] = await connection.execute(query, [test]);
             return result;
         } catch (error) {
             console.error(error);
