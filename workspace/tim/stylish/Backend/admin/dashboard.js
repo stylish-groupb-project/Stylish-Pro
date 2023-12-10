@@ -103,38 +103,33 @@ getHistogram = async (data) => {
 
 
 getStackedBar = async (data) => {
-   
-    let productTraces = {};
+    let traces = {
+        'S': { x: [], y: [], name: 'S', type: 'bar' },
+        'M': { x: [], y: [], name: 'M', type: 'bar' },
+        'L': { x: [], y: [], name: 'L', type: 'bar' }
+    };
 
-  data.top.forEach(({ product_id, size, total_qty }) => {
-    // If there is no trace for the product, create a new one
-    if (!productTraces[product_id]) {
-      productTraces[product_id] = {
-        x: ['S', 'M', 'L'], // All possible sizes
-        y: [0, 0, 0], // Initialize with zeros
-        name: `Product ${product_id}`,
-        type: 'bar'
-      };
-    }
-    // Update the appropriate size index with the quantity
-    const sizeIndex = productTraces[product_id].x.indexOf(size);
-    productTraces[product_id].y[sizeIndex] = parseInt(total_qty, 10);
-  });
+    // Assuming `data` is an array of objects with {product_id, size, total_qty}
+    data.forEach(({ product_id, size, total_qty }) => {
+        // Add the product id to the x-axis array if it's not already there
+        if (!traces[size].x.includes(`Product ${product_id}`)) {
+            traces[size].x.push(`Product ${product_id}`);
+        }
 
-  const plotData = Object.values(productTraces);
+        // Add the total quantity to the y-axis array
+        traces[size].y.push(parseInt(total_qty, 10));
+    });
 
-  var layout = {
-    barmode: 'stack',
-    title: 'Quantity of top sold products in different sizes',
-    yaxis: {
-      title: 'Quantity'
-    },
-    xaxis: {
-      title: 'Product ID'
-    }
-  };
+    const plotData = Object.values(traces);
 
-  Plotly.newPlot('myStacked', plotData, layout);
+    const layout = {
+        title: 'Quantity of Top 5 Sold Products in Different Sizes',
+        barmode: 'stack',
+        xaxis: { title: 'Product ID' },
+        yaxis: { title: 'Quantity' }
+    };
+
+    Plotly.newPlot('myStacked', plotData, layout);
 }
 
 async function dashboard(){
