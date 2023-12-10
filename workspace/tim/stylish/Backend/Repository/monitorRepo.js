@@ -46,16 +46,8 @@ module.exports = {
     monitorByPriceRange: async (res) => {
         const connection = await connectionPromise;
         try {
-            const selectQuery = `
-            SELECT 
-                FLOOR((price - 500) / 20) AS price_range,
-                COUNT(*) AS total_quantity
-            FROM order_product
-            WHERE price >= 500
-            GROUP BY price_range
-            ORDER BY price_range;
-            `;
-            const [result] = await connection.execute(selectQuery);
+            const query = 'SELECT price, qty FROM order_product';
+            const [result] = await connection.execute(query);
             return result;
         } catch (error) {
             console.error(error);

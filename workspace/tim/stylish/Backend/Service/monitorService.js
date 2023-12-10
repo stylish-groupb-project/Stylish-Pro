@@ -27,7 +27,14 @@ module.exports = {
     },
     monitorByPriceRange: async (res) => {
         const result = await monitorRepo.monitorByPriceRange(res);
-        return result;
+        console.log(result);
+        let prices = [];
+        result.forEach(row => {
+        for (let i = 0; i < row.qty; i++) {
+          prices.push(row.price);
+        }
+      });
+        return prices;
     },
     monitorBySize: async (res) => {
         const result = await monitorRepo.monitorByTopSize(res);

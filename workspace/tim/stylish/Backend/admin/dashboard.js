@@ -65,12 +65,12 @@ getHistogram = async (data) => {
     // todo3: histogram
     // Extracting data for the histogram
     // const { data: totalPriceArray } = await axios.get(window.location.origin + '/api/1.0/order/price')
-    const xValues = data.price.map(item => 500 + item.price_range * 20);
+    // const xValues = data.price.map(item => 500 + item.price_range * 20);
 
 
     // Create the histogram data
     var histogramData = [{
-        x: xValues,
+        x: data.price,
         type: 'histogram',
         autobinx: false,
         xbins: {
