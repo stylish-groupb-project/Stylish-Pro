@@ -37,7 +37,7 @@ async function getColorShare(data) {
     // var labels = data.map(item => item.color_name);
     // var values = data.map(item => item.percentage);
     // var colors = data.map(item => item.color_code);
-
+    console.log(colors);
     // Pie chart data
     var pieChartData = [{
         values: quantities,

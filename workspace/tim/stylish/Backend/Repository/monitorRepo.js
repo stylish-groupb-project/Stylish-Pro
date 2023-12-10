@@ -91,7 +91,7 @@ module.exports = {
                 FROM order_product;
             `;
             const [result] = await connection.execute(selectQuery);
-            return result;
+            return result[0];
         } catch (error) {
             console.error(error);
             errorMsg.query(res)
