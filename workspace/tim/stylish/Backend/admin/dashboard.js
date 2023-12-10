@@ -148,7 +148,7 @@ getStackedBar = async (data) => {
                 type: 'bar'
             };
         }
-        traces[product.size].x.push(`Product ${product.id}`);
+        traces[product.size].x.push(`Product ${product.product_id}`);
         traces[product.size].y.push(product.total_qty);
     });
 
