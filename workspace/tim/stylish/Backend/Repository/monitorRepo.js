@@ -8,7 +8,7 @@ module.exports = {
             // const test = dataArray.slice(0, 1);
             // const test = dataArray.map(order => [order.price, order.color_code, order.color_name, order.name , order.qty , order.product_id]);
             dataArray.map(async(order)=>{
-                await connection.execute(query, [order.price, order.color_code, order.color_name, order.name , order.qty , order.product_id]);
+                await connection.execute(query, [order.price, order.color_code, order.color_name, order.size , order.qty , order.product_id]);
             })
             // await connectionPromise.execute(query, );
 
