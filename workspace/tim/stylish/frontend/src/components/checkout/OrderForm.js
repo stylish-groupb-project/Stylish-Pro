@@ -11,7 +11,6 @@ import styled from 'styled-components';
 const elasticIp = process.env.REACT_APP_ELASTIC_IP;
 /* global TPDirect */
 
-
 const FormContainer = styled.form`
     display: flex;
     flex-direction: column;
