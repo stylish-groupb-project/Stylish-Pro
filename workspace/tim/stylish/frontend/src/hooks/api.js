@@ -36,3 +36,16 @@ export async function GetOrderList ()  {
         console.log(error);
     }
 };
+export async function getBotMessage(type) {
+    try {
+        const response =  await axios.get(`https://${elasticIp}/api/1.0/chatBot`, {
+            params: {
+                MsgType: type,
+            },
+        });
+        return response.data.data;
+    } catch (error) {
+        console.log(error);
+    }
+    
+};
