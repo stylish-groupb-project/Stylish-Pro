@@ -1,26 +1,21 @@
-version: '3.8'
+version: "3.8"
 
 services:
-
   stylish:
-      build: 
-        context: ./Backend
-        dockerfile: Dockerfile
-      container_name: stylish_container
-      env_file:
-        - .env
-      networks:
-        - stylish_network
+    image: yingyinglininin/stylish-pro-backend:latest
+    container_name: stylish_container
+    env_file:
+      - .env
+    networks:
+      - stylish_network
 
   stylish_frontend:
-      build: 
-        context: ./frontend
-        dockerfile: Dockerfile
-      container_name: stylish_frontend_container
-      env_file:
-        - .env
-      networks:
-        - stylish_network
+    image: yingyinglininin/stylish-pro-frontend:latest
+    container_name: stylish_frontend_container
+    env_file:
+      - .env
+    networks:
+      - stylish_network
 
   redis:
     image: redis
@@ -39,7 +34,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf  #本機對應容器
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf #本機對應容器
       - ./private/mergedCert.crt:/etc/ssl/mergedCert.crt
       - ./private/private.key:/etc/ssl/private.key
     networks:
@@ -47,6 +42,5 @@ services:
     depends_on:
       - stylish
 
-
 networks:
-  stylish_network:   
+  stylish_network:
