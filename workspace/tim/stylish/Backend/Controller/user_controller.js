@@ -1,6 +1,7 @@
 
 const userSignUpHandler = require('../Application/Features/UserInfo/Commands/UserSignUp/userSignUpHandler');
 const userSignInHandler = require('../Application/Features/UserInfo/Commands/UserSignIn/userSignInHandler');
+const userSignOauth = require('../Application/Features/UserInfo/Commands/UserSignOauth/userSignOauth');
 const getUserProfileHandler = require('../Application/Features/UserInfo/Queries/GetUserProfile/getUserProfileHandler');
 
 module.exports = {
@@ -26,21 +27,20 @@ module.exports = {
         console.log("signInWithGoogle");
         console.log(req.user);
 
-        return res.status(200).json(req.user);
-        // try {
-        //     const user = {
-        //         id: req.user.id,
-        //         name: req.user.displayName,
-        //         email: req.user.emails[0].value,
-        //         photo: req.user.photos[0].value,
-        //         provider: req.user.provider,
-        //     };
-        //     const { provider , email , password } = req.body;
-        //     const response=await userSignInHandler.handle(res, provider , email , password);
-        //     res.status(200).json(response);
-        // } catch (error) {
-        //     console.log(error)
-        // }
+        // return res.status(200).json(req.user);
+        try {
+            const user = {
+                name: req.user.displayName,
+                email: req.user.emails[0].value,
+                picture: req.user.photos[0].value,
+                provider: req.user.provider,
+                hashedPassword: req.user.id
+            };
+            const response=await userSignOauth.handle(res, user);
+            res.status(200).json(response);
+        } catch (error) {
+            console.log(error)
+        }
     },
     signInWithLine: async(req,res)=>{
         console.log("signInWithLine");
