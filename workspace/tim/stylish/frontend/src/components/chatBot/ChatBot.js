@@ -1,16 +1,28 @@
 import styled from 'styled-components';
 import chatbotIcon from './img/chatbot-icon.png';
 import inputBtn from './img/input-btn.png';
-import {Message} from './Message.js';
-import {SocketMessage} from './SocketMessage.js';
-import {Tag} from './Tag.js';
-import {useState, useEffect, useRef} from 'react';
-import {useImmer} from 'use-immer';
-import {io} from 'socket.io-client';
+import { Message } from './Message.js';
+import { SocketMessage } from './SocketMessage.js';
+import { Tag } from './Tag.js';
+import { useState, useEffect, useRef } from 'react';
+import { useImmer } from 'use-immer';
+import { io } from 'socket.io-client';
+// import Cookies from "js-cookie";
 // const socket = io('https://emmalinstudio.com/');
-const socket = io('https://13.55.47.107', { path: '/api/socket.io' });
+// const socket = io('https://13.55.47.107', { path: '/api/socket.io' });
+// const token = Cookies.get('token');
+// const socket = io('https://localhost', { 
+//   path: '/api/socket.io',
+//   extraHeaders: {
+//     Authorization: `Bearer ${token}`,
+//   },
+// });
+// const socket = io('http://localhost', { path: '/api/socket.io'});
+const socketUrl = process.env.REACT_APP_SOCKET_URL;
 const Wrapper = styled.div``;
-
+// socket.on('connect', () => {
+//   console.log("socket.id",socket.id);
+// });
 const ChatbotBtn = styled.img`
   width: 80px;
   position: fixed;
@@ -142,9 +154,10 @@ const InputButton = styled.img`
   cursor: pointer;
 `;
 
-const  Chatbot = () => {
+const Chatbot = () => {
   const [chatBtnShow, setChatBtnShow] = useState(true);
   const [chatRoomShow, setChatRoomShow] = useState(false);
+  const socketRef = useRef(null);
 
   const inputRef = useRef();
   const dummyRef = useRef();
@@ -175,21 +188,35 @@ const  Chatbot = () => {
     campaignImage: [undefined],
     campaignPath: [undefined],
   });
+  // console.log("socket:", socket.id)
 
   const handleSend = message => {
     const data = {
-      from: socket.id,
+      from: socketRef.current.id,
       to: 'admin',
       message,
     };
-    socket.emit('message', data);
+    console.log("socket:", socketRef.current.id)
+    // socket.emit('message', data);
+    socketRef.current.emit('message', data);
     inputRef.current.value = '';
   };
-
   useEffect(() => {
-    socket.on('message', response => {
-      setThreads(draft => draft.concat(response.data));
+    socketRef.current = io(`${socketUrl}`, { path: '/api/socket.io'});
+    console.log(socketRef.current);
+    socketRef.current.on('connect', () => {
+      console.log('Connected to server');
+      // syncData();
     });
+    socketRef.current.on('connect_error', (error) => {
+      console.error('Connection error:', error);
+    });
+    console.log("io after");
+    socketRef.current.on('message', response => {
+      console.log("threads:",response);
+      setThreads(draft => draft.concat(response));
+    });
+
   }, []);
 
   useEffect(() => {
@@ -220,10 +247,11 @@ const  Chatbot = () => {
           <CloseBtn
             onClick={() => {
               setChatRoomShow(false);
+              // TODO: socket關閉連線
               window.setTimeout(() => setChatBtnShow(true), 600);
             }}>
-            <StyledLine style={{transform: 'rotate(-45deg)'}} />
-            <StyledLine style={{transform: 'rotate(45deg)'}} />
+            <StyledLine style={{ transform: 'rotate(-45deg)' }} />
+            <StyledLine style={{ transform: 'rotate(45deg)' }} />
           </CloseBtn>
         </HeaderWrapper>
         <MessageWrapper>
@@ -232,7 +260,7 @@ const  Chatbot = () => {
             <Tag setMessages={setMessages} />
             <SocketMessage
               threads={threads}
-              socketId={socket.id}></SocketMessage>
+              socketId={socketRef.current?.id}></SocketMessage>
             <div ref={dummyRef}></div>
           </MessageBox>
         </MessageWrapper>

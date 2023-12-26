@@ -25,21 +25,43 @@ module.exports = {
         }
 
     },
-    getHotestProductByGender: async (res, gender,hotestProductRedisKey) => {
+    getHotestProductByMen: async (res,hotestMenProductRedisKey) => {
         try {
             const connection = connectionPromise;
             const query = `
                 SELECT p.id, p.title, p.description, p.main_image, p.texture, p.place
                 FROM product AS p
                 JOIN order_product AS op ON p.id = op.product_id
-                WHERE p.category = '${gender}'
+                WHERE p.category = 'men'
                 GROUP BY p.id
                 ORDER BY SUM(op.qty) DESC
                 LIMIT 1;
             `;
             const [result] =  await connection.execute(query);
-            if (hotestProductRedisKey != '') {
-                await redis.updateCache(hotestProductRedisKey, result);
+            if (hotestMenProductRedisKey != '') {
+                await redis.updateCache(hotestMenProductRedisKey, result);
+            }
+            return result;
+        } catch (error) {
+            console.error(error);
+            errorMsg.query(res)
+        }
+    },
+    getHotestProductByWomen: async (res,hotestWomenProductRedisKey) => {
+        try {
+            const connection = connectionPromise;
+            const query = `
+                SELECT p.id, p.title, p.description, p.main_image, p.texture, p.place
+                FROM product AS p
+                JOIN order_product AS op ON p.id = op.product_id
+                WHERE p.category = 'women'
+                GROUP BY p.id
+                ORDER BY SUM(op.qty) DESC
+                LIMIT 1;
+            `;
+            const [result] =  await connection.execute(query);
+            if (hotestWomenProductRedisKey != '') {
+                await redis.updateCache(hotestWomenProductRedisKey, result);
             }
             return result;
         } catch (error) {

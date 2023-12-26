@@ -34,7 +34,7 @@ const ChatbotTag = styled.div`
 
 const tags = [
     { text: '男裝推薦 👗', type: 'men' },
-    { text: '熱門產品推薦 🔥', type: 'hots' },
+    { text: '熱門產品推薦 🔥', type: 'hot' },
     { text: '女裝推薦 👖', type: 'women' },
     { text: '優惠活動詢問 🎁', type: 'divination' },
     { text: '最新流行服飾推薦 ✨', type: 'new' },
@@ -51,7 +51,7 @@ export function Tag({ setMessages }) {
         //     texture: ["棉 100%"],
         //     place: ["中國"]
         // };
-
+        console.log("data",data);
         await setMessages(draft => {
             draft.characters.push('chatbot');
             draft.texts.push([undefined]);

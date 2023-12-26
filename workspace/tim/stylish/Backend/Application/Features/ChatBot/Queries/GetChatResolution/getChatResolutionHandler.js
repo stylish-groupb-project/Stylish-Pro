@@ -19,13 +19,22 @@ module.exports = {
                 result = hotProductRedis;
             }
         }
-        if (MsgType == "women" || MsgType == "men"){
-            const hotProductByGenderRedisKey = `hotProductByGender`;
-            let hotProductByGenderRedis = await redis.getCacheByKey(hotProductByGenderRedisKey);
-            if (hotProductByGenderRedis == null) {
-                result = await chatBotService.getHotestProductByGender(res, MsgType,hotProductByGenderRedisKey);
+        if (MsgType == "women"){
+            const hotProductByWomenRedisKey = `hotProductByWomen`;
+            let hotProductByWomenRedis = await redis.getCacheByKey(hotProductByWomenRedisKey);
+            if (hotProductByWomenRedis == null) {
+                result = await chatBotService.getHotestProductByWomen(res,hotProductByWomenRedisKey);
             } else {
-                result = hotProductByGenderRedis;
+                result = hotProductByWomenRedis;
+            }
+        }
+        if (MsgType == "men"){
+            const hotProductByMenRedisKey = `hotProductByMen`;
+            let hotProductByMenRedis = await redis.getCacheByKey(hotProductByMenRedisKey);
+            if (hotProductByMenRedis == null) {
+                result = await chatBotService.getHotestProductByMen(res,hotProductByMenRedisKey);
+            } else {
+                result = hotProductByMenRedis;
             }
         }
         
