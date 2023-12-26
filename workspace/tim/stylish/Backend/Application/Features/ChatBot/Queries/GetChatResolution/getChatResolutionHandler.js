@@ -19,6 +19,7 @@ module.exports = {
                 result = hotProductRedis;
             }
         }
+
         if (MsgType == "women"){
             const hotProductByWomenRedisKey = `hotProductByWomen`;
             let hotProductByWomenRedis = await redis.getCacheByKey(hotProductByWomenRedisKey);
