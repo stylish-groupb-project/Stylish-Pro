@@ -185,6 +185,12 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
                 會員註冊
               </SignUpLink>
             </SignUpPrompt>
+            <SignUpPrompt>
+              忘記密碼 ?
+              <SignUpLink onClick={showLoginHandler}>
+                忘記密碼
+              </SignUpLink>
+            </SignUpPrompt>
           </StyledForm>
         </FormContainer>
       );

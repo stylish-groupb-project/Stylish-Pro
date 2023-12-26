@@ -31,7 +31,7 @@ passport.use(
       channelID: process.env.LINE_CHANNEL_ID,
       channelSecret: process.env.LINE_CHANNEL_SECRET,
       callbackURL: "http://localhost:3000/auth/line/callback",
-      // scope: ['profile', 'openid', 'email'],
+      scope: ['profile', 'openid', 'email'],
       botPrompt: "normal",
       uiLocales: "zh-TW",
     },
@@ -58,9 +58,7 @@ const handleGoogleCallback = passport.authenticate("google", {
   session: false,
 });
 
-const authenticateLine = passport.authenticate("line", {
-  scope: ["email", "profile", "openid"],
-});
+const authenticateLine = passport.authenticate("line");
 
 const handleLineCallback = passport.authenticate("line", {
   session: false,
