@@ -57,7 +57,6 @@ jobs:
       - name: Set ENV file
         run: |
           echo "${{ secrets.ENV }}" > .env
-          chmod 400 .env
           scp -o StrictHostKeyChecking=no -i key.pem .env ${{ secrets.AWS_INSTANCE }}:~/campus4/workspace/tim/stylish
       - name: Pull Backend Docker image
         run: |
