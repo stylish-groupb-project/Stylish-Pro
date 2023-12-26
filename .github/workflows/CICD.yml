@@ -58,7 +58,7 @@ jobs:
         run: |
           echo "${{ secrets.ENV }}" > .env
           chmod 400 .env
-          scp -o StrictHostKeyChecking=no -i key.pem .env ${{ secrets.AWS_INSTANCE }}:${{ secrets.AWS_DESTINATION_PATH }}
+          scp -o StrictHostKeyChecking=no -i key.pem .env ${{ secrets.AWS_INSTANCE }}:~/campus4/workspace/tim/stylish
       - name: Pull Backend Docker image
         run: |
           ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.AWS_INSTANCE }} 'sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/stylish-pro-backend:latest'
