@@ -8,6 +8,7 @@ import ProductDetailPageLayout from "./pages/productDetailPage";
 import CheckoutPage from "./pages/checkoutPage";
 import ThankyouPage from "./pages/ThankyouPage";
 import LoginPage from "./pages/LoginPage";
+import Backstage from "./pages/Backstage/Backstage";
 // import MonitorPage from "./pages/monitorPage";
 
 import { CartCountProvider } from "./contexts/CartCountManager";
@@ -60,6 +61,7 @@ function App() {
               <Route element={<PrivateRoute />}>
                 <Route path="/thankyou" element={<ThankyouPage />} />
               </Route>
+              <Route path="/backstage" element={<Backstage />} />
             </Routes>
           </BrowserRouter>
         </CartCountProvider>
