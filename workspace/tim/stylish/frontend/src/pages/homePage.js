@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import Products from "../components/product/Products";
+import Chatbot from "../components/chatBot/ChatBot";
 // import Main from './components/Main';
 // import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import React, { useState, useEffect } from 'react';
@@ -151,6 +152,7 @@ const HomePageLayout = ({ endpoint }) => {
                 <Slider slides={imgArray} />
                 <Products endpoint={endpoint} />
             </MainContent>
+            <Chatbot />
             <Footer />
         </>
     )
