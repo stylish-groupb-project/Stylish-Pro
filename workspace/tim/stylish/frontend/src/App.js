@@ -12,7 +12,7 @@ import Backstage from "./pages/Backstage/Backstage";
 // import MonitorPage from "./pages/monitorPage";
 
 import { CartCountProvider } from "./contexts/CartCountManager";
-
+//
 // const queryClient = new QueryClient();
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 1000 * 60 * 5 } },
