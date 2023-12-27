@@ -67,6 +67,9 @@ jobs:
       - name: Copy docker-compose.yaml to remote host
         run: |
           scp -o StrictHostKeyChecking=no -i key.pem ./workspace/tim/stylish/docker-compose.yml ${{ secrets.AWS_INSTANCE }}:${{ secrets.AWS_DESTINATION_PATH }}
+      - name: Remove old containers and images
+        run: |
+          ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.AWS_INSTANCE }} 'sudo docker system prune -f'
       - name: SSH into remote host and stop existing containers
         run: |
           ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.AWS_INSTANCE }} 'cd ${{ secrets.AWS_DESTINATION_PATH }} && sudo docker rm --force $(docker ps --filter status=exited -q) || true '
