@@ -18,7 +18,7 @@ import { io } from 'socket.io-client';
 //   },
 // });
 // const socket = io('http://localhost', { path: '/api/socket.io'});
-const socketUrl = process.env.REACT_APP_SOCKET_URL;
+
 const Wrapper = styled.div``;
 // socket.on('connect', () => {
 //   console.log("socket.id",socket.id);
@@ -155,6 +155,7 @@ const InputButton = styled.img`
 `;
 
 const Chatbot = () => {
+  const socketUrl = process.env.REACT_APP_SOCKET_URL;
   const [chatBtnShow, setChatBtnShow] = useState(true);
   const [chatRoomShow, setChatRoomShow] = useState(false);
   const socketRef = useRef(null);
