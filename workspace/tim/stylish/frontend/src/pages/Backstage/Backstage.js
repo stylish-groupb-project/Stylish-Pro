@@ -123,7 +123,7 @@ function Backstage() {
   };
 
   useEffect(() => {
-    socketRef.current = io(`${socketUrl}`, { path: '/api/socket.io'});
+    socketRef.current = io(`${socketUrl ? socketUrl : 'https://13.55.47.107'}`, { path: '/api/socket.io'});
     console.log(socketRef.current);
     socketRef.current.on('connect', () => {
       console.log('Connected to server');
