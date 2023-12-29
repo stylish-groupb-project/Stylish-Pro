@@ -128,9 +128,10 @@ const CartItem = ({ cartItem, setCartUpdate }) => {
     const QuantityChangeHandler = (e) => {
         setQuantity(Number(e.target.value));
         const cartItemsData = JSON.parse(localStorage.getItem("cart") || "[]");
+        console.log("catItempage:",cartItemsData);
         const itemIndex = cartItemsData.findIndex(
             (item) =>
-                item.id === cartItem.id && item.colorCode === cartItem.colorCode && item.size === cartItem.size,
+                item.id === cartItem.id && item.color.colorCode === cartItem.color.colorCode && item.color.colorName === cartItem.color.colorName && item.size === cartItem.size,
         );
         if (itemIndex !== -1) {
             cartItemsData[itemIndex].quantity = Number(e.target.value);

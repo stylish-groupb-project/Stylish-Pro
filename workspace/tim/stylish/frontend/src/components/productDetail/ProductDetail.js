@@ -187,11 +187,12 @@ const ProductDetail = () => {
                     stock: selectedVariant.stock,
                     price: data.price,
                 };
+                console.log("localStorage :",productCartData)
                 const currentCartItems = JSON.parse(localStorage.getItem("cart") || "[]");
     
                 const checkCurrentItem = currentCartItems.findIndex(
                     (item) =>
-                        item.id === productCartData.id && item.color === productCartData.color && item.size === productCartData.size,
+                        item.id === productCartData.id && item.color.colorName === productCartData.color.colorName && item.color.colorCode === productCartData.color.colorCode && item.size === productCartData.size,
                 );
                 if (checkCurrentItem !== -1) {
                     currentCartItems[checkCurrentItem].quantity += productCartData.quantity;

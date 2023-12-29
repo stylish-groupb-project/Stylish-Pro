@@ -75,7 +75,7 @@ const CheckoutItems = ({ setCartUpdate }) => {
 //   console.log(cartData[0]);
   const cartItems = cartData.map((cartItem) => (
     <CartItem
-      key={cartItem.id + cartItem.color + cartItem.size}
+      key={cartItem.id + cartItem.color.colorCode + cartItem.size}
       cartItem={cartItem}
       setCartUpdate={setCartUpdate}
     />
