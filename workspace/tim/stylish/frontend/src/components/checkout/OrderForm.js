@@ -294,13 +294,14 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
 
     const transformCartItems = (cartItems) => {
         //只有colorname
+        console.log("cartItems",cartItems);
         const transformedList = cartItems.map((item) => ({
             id: item.id,
             name: item.name,
             price: item.price,
             color: {
-                code: item.colorCode,
-                name: item.colorName,
+                code: item.color.colorCode,
+                name: item.color.colorName,
             },
             size: item.size,
             qty: item.quantity,
