@@ -210,7 +210,6 @@ const ProductDetail = () => {
         }
         return (
             <div className="product-detail-window">
-                {/* <div className="product-detail-container"> */}
                     <div className="product-detail">
                         <img src={data.main_image} alt={data.title} class="main-image" />
                         <div className="product-data-container">
@@ -263,11 +262,8 @@ const ProductDetail = () => {
                         <p className="story">{data.story}</p>
                         <div className="sub-images"> {imagesItems}</div>
                     </div>
-                {/* </div> */}
     
             </div>
-    
-    
         );
     
     }

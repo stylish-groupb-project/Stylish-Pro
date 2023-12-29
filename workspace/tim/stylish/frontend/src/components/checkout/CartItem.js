@@ -131,7 +131,7 @@ const CartItem = ({ cartItem, setCartUpdate }) => {
         console.log("catItempage:",cartItemsData);
         const itemIndex = cartItemsData.findIndex(
             (item) =>
-                item.id === cartItem.id && item.color.colorCode === cartItem.color.colorCode && item.color.colorName === cartItem.color.colorName && item.size === cartItem.size,
+                item.id === cartItem.id && item.color.colorCode == cartItem.color.colorCode && item.color.colorName === cartItem.color.colorName && item.size === cartItem.size,
         );
         if (itemIndex !== -1) {
             cartItemsData[itemIndex].quantity = Number(e.target.value);
@@ -183,7 +183,7 @@ const CartItem = ({ cartItem, setCartUpdate }) => {
                     <ProductInfo>
                         <ProductDetails>{cartItem.name}</ProductDetails>
                         <ProductDetails>{cartItem.id}</ProductDetails>
-                        <ProductDetails>顏色 | {cartItem.color}</ProductDetails>
+                        <ProductDetails>顏色 | {cartItem.color.colorName}</ProductDetails>
                         <ProductDetails>尺寸 | {cartItem.size}</ProductDetails>
                     </ProductInfo>
                     <div className='rwd-remove-img-container'>
