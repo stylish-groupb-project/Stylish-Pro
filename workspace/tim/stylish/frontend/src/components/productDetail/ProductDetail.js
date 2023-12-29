@@ -178,7 +178,10 @@ const ProductDetail = () => {
                     id: data.id,
                     name: data.title,
                     image: data.main_image,
-                    color: selectedColorName,
+                    color: {
+                        colorName: selectedColorName,
+                        colorCode: selectedColor
+                    },
                     size: selectedSize,
                     quantity: count,
                     stock: selectedVariant.stock,
