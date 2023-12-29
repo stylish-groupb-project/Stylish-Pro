@@ -294,7 +294,7 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
 
     const transformCartItems = (cartItems) => {
         //只有colorname
-        console.log("cartItems",cartItems);
+        console.log("OrderFormpage:",cartItems);
         const transformedList = cartItems.map((item) => ({
             id: item.id,
             name: item.name,
