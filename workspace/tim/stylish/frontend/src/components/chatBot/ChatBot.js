@@ -217,6 +217,7 @@ const Chatbot = () => {
       console.log("threads:",response);
       setThreads(draft => draft.concat(response));
     });
+    
 
   }, []);
 
