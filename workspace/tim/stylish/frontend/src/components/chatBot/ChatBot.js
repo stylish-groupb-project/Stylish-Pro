@@ -203,7 +203,8 @@ const Chatbot = () => {
     inputRef.current.value = '';
   };
   useEffect(() => {
-    socketRef.current = io(`${socketUrl ? socketUrl : 'https://13.55.47.107'}`, { path: '/api/socket.io'});
+    // socketRef.current = io(`${socketUrl ? socketUrl : 'https://13.55.47.107'}`, { path: '/api/socket.io'});
+    socketRef.current = io(`${socketUrl}`, { path: '/api/socket.io' });
     console.log(socketRef.current);
     socketRef.current.on('connect', () => {
       console.log('Connected to server');
@@ -217,7 +218,25 @@ const Chatbot = () => {
       console.log("threads:",response);
       setThreads(draft => draft.concat(response));
     });
-    
+    socketRef.current.on('busy', response => {
+      console.log("Busy Thread:",response);
+      const data = {
+        from: 'admin',
+        to: socketRef.current.id,
+        response,
+      };
+      setThreads(draft => draft.concat(data));
+    });
+    socketRef.current.on('waiting', response => {
+      console.log("Waiting Thread:",response);
+      const data = {
+        from: 'admin',
+        to: socketRef.current.id,
+        response,
+      };
+      setThreads(draft => draft.concat(data));
+    });
+
 
   }, []);
 

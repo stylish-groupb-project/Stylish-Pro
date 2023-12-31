@@ -5,6 +5,8 @@ const swaggerDocument = require('./swagger.json');
 const path = require('path');
 const cors = require('cors');
 const http = require('http');
+const redis = require('./utils/cache');
+const rabbitMQModule = require('./utils/rabbitMQ');
 const product_router = require('./Router/product_router');
 const user_router = require('./Router/user_router');
 const order_router = require('./Router/order_router');
@@ -58,8 +60,13 @@ const io = require("socket.io")(server, {
         origin: "*",
     },
 });
+let channel;
+rabbitMQModule.connectRabbitMQ().then(ch => {
+    channel = ch;
+});
 const admins = new Map();  // 存储所有 admin 的 sockets
 const users = new Map();
+const MAX_WAITING_USERS = 5;
 // io.use((socket, next) => {
 //     const token = socket.handshake.headers.authorization
 //     console.log("socket test token:", token)
@@ -93,11 +100,23 @@ io.on('connection', (socket) => {
 
     socket.on('message', async (data) => {
         if (data.to === 'admin') {
+            const isUserWaiting = await redis.isSocketIdInList('waitingUsers', data.from);
+            if (!isUserWaiting) {
+                const list = await redis.getAllElementsFromList();
+                const queueSize = list.length;
+                if (queueSize < MAX_WAITING_USERS) {
+                    await redis.addToList('waitingUsers', data.from);
+                    await rabbitMQModule.sendMessageToQueue(channel, data.from);
+                } else {
+                    socket.emit('busy', '目前系统忙碌，請稍後再試');
+                    return;
+                }
+            }
+            await redis.updateCache(`message:${socket.id}`, data);
+            socket.emit('waiting', '排隊成功，請稍等真人為您服務');
             admins.forEach((adminSocket, _) => {
                 adminSocket.emit('message', data);
             });
-            
-            //TODO: admin offline
         }
         if (data.from === 'admin') {
             let userSocket = users.get(data.to);
@@ -107,6 +126,21 @@ io.on('connection', (socket) => {
         }
 
         socket.emit('message', data);
+    });
+    socket.on('consumeRequest', async () => {
+        const socketId = await rabbitMQModule.consumeMessageFromQueue(channel);
+
+        if (socketId) {
+            const messageData = await redis.getCacheByKey(`message:${socketId}`);
+            if (messageData) {
+                socket.emit('message',messageData);
+                // admins.forEach((adminSocket, _) => {
+                //     adminSocket.emit('message',messageData);
+                // });
+            }
+        } else {
+            socket.emit('noMoreCustomers', '目前沒有等待的用戶');
+        }
     });
     // const data = {
     //     from: 'admin',
@@ -169,6 +203,9 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         admins.delete(socket.id);
         users.delete(socket.id);
+        //容錯性
+        redis.removeFromList('waitingUsers', socket.id);
+        redis.deleteCacheByKey(`message:${socket.id}`);
         console.log('Client disconnected:', socket.id);
     });
 });
