@@ -9,6 +9,7 @@ import CheckoutPage from "./pages/checkoutPage";
 import ThankyouPage from "./pages/ThankyouPage";
 import LoginPage from "./pages/LoginPage";
 import Backstage from "./pages/Backstage/Backstage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 // import MonitorPage from "./pages/monitorPage";
 
 import { CartCountProvider } from "./contexts/CartCountManager";
@@ -27,6 +28,11 @@ const PrivateRoute = () => {
   const isLoggedIn = Cookies.get("token");
   return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
 };
+
+const ResetPasswordRoute = () => {
+  const isLoggedIn = Cookies.get("token");
+  return isLoggedIn ? <Navigate to="/" /> : <Outlet />;
+}
 
 function App() {
 
@@ -58,6 +64,7 @@ function App() {
               <Route element={<LoginRoute />}>
                 <Route path="/login" element={<LoginPage />} />
               </Route>
+              <Route path="/reset-password" element={<ResetPasswordPage />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/thankyou" element={<ThankyouPage />} />
               </Route>

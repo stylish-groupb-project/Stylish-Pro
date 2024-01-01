@@ -2,6 +2,8 @@ const userSignUpHandler = require("../Application/Features/UserInfo/Commands/Use
 const userSignInHandler = require("../Application/Features/UserInfo/Commands/UserSignIn/userSignInHandler");
 const userSignOauth = require("../Application/Features/UserInfo/Commands/UserSignOauth/userSignOauth");
 const getUserProfileHandler = require("../Application/Features/UserInfo/Queries/GetUserProfile/getUserProfileHandler");
+const userForgetPasswordHandler = require("../Application/Features/UserInfo/Commands/UserForgetPassword/userForgetPasswordHandler");
+const userResetPasswordHandler = require("../Application/Features/UserInfo/Commands/UserResetPassword/userResetPasswordHandler");
 
 module.exports = {
   signUp: async (req, res) => {
@@ -73,6 +75,26 @@ module.exports = {
     try {
       const loginUserId = req.decodedToken.id;
       const response = await getUserProfileHandler.handle(res, loginUserId);
+      res.status(200).json(response);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  forgotPassword:async (req, res) => {
+    try {
+      console.log(req.body);
+      const { email } = req.body;
+      const response = await userForgetPasswordHandler.handle(res, email);
+      res.status(200).json(response);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  resetPassword:async (req, res) => {
+    try {
+      console.log(req.body);
+      const { newPassword, resetToken } = req.body;
+      const response = await userResetPasswordHandler.handle(res, resetToken, newPassword);
       res.status(200).json(response);
     } catch (error) {
       console.log(error);

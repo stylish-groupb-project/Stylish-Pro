@@ -38,5 +38,17 @@ module.exports = {
     monitorProblem: (res) => {
         res.status(403).json({ error: 'Monitor problem' });
     },
+    failedToSendEmail: (res) => {
+        res.status(500).json({ error: 'Failed to send email' });
+    },
+    notNativeUser: (res) => {
+        res.status(403).json({ error: 'This is not a native user' });
+    },
+    noResetToken: (res) => {
+        res.status(403).json({ error: 'No reset token' });
+    },
+    tokenExpired: (res) => {
+        res.status(403).json({ error: 'Token expired' });
+    },
 
 }

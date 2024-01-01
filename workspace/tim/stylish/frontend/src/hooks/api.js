@@ -4,8 +4,8 @@ const elasticIp = process.env.REACT_APP_ELASTIC_IP;
 
 export async function fetchProducts(endpoint, keyword, pageParam) {
     const url = keyword
-      ? `http://${elasticIp}/api/1.0/products/search`
-      : `http://${elasticIp}/api/1.0/products/${endpoint}`;
+      ? `${elasticIp}/api/1.0/products/search`
+      : `${elasticIp}/api/1.0/products/${endpoint}`;
   
     const params = keyword ? { keyword, paging: pageParam } : { paging: pageParam };
     const response = await axios.get(url, { params });
@@ -15,7 +15,7 @@ export async function fetchProducts(endpoint, keyword, pageParam) {
 export async function GetProductDetail (id)  {
     try {
         const response = await axios.get(
-            `http://${elasticIp}/api/1.0/products/details`, {
+            `${elasticIp}/api/1.0/products/details`, {
             params: {
                 id,
             },
@@ -29,7 +29,7 @@ export async function GetProductDetail (id)  {
 export async function GetOrderList ()  {
     try {
         const response = await axios.get(
-            `http://${elasticIp}/api/1.0/monitor`);
+            `${elasticIp}/api/1.0/monitor`);
         console.log(response.data);
         return response.data;
     } catch (error) {
@@ -38,7 +38,7 @@ export async function GetOrderList ()  {
 };
 export async function getBotMessage(type) {
     try {
-        const response =  await axios.get(`http://${elasticIp}/api/1.0/chatBot`, {
+        const response =  await axios.get(`${elasticIp}/api/1.0/chatBot`, {
             params: {
                 MsgType: type,
             },

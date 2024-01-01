@@ -10,6 +10,8 @@ router.get('/profile',auth.verifyToken ,auth.authorize("user"),userController.ge
 //post
 router.post('/signup',userController.signUp);
 router.post('/signin',userController.signIn);
+router.post('/forgot-password',userController.forgotPassword);
+router.post('/reset-password',userController.resetPassword);
 
 
 module.exports = router;

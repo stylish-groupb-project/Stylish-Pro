@@ -107,7 +107,7 @@ const SignupForm = ({ setShowLogin, showLogin }) => {
     const signupHandler = async(values)=> {
         setLoading(true);
         try {
-            await axios.post(`https://${elasticIp}/api/1.0/user/signup`, {
+            await axios.post(`${elasticIp}/api/1.0/user/signup`, {
                 name: values.name,
                 email: values.email,
                 password: values.password,

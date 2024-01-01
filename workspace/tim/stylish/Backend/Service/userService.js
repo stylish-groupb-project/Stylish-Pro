@@ -86,5 +86,46 @@ module.exports = {
             return errorMsg.noUser(res);
         }
         return result;
-    }
+    },
+    resetPassword: async (res, userId, newPassword) => {
+        const result = await userRepo.resetUserPassword(res, userId, newPassword);
+        if (result.affectedRows === 0) {
+            return errorMsg.noUser(res);
+        }
+        return result;
+    },
+    createUserResetToken: async (res, userId, userInfoObj) => {
+        console.log("createUserResetToken");
+        const result = await userRepo.createUserResetToken(res, userId, userInfoObj);
+        if (result.affectedRows === 0) {
+            return errorMsg.noUser(res);
+        }
+        return result;
+    },
+    updateUserResetToken: async (res, userId, userInfoObj) => {
+        console.log("updateUserResetToken");
+        const result = await userRepo.updateUserResetToken(res, userId, userInfoObj);
+        if (result.affectedRows === 0) {
+            return errorMsg.noUser(res);
+        }
+        return result;
+    },
+    deleteUserResetToken: async (res, userId) => {
+        console.log("deleteUserResetToken");
+        const result = await userRepo.deleteUserResetToken(res, userId);
+        if (result.affectedRows === 0) {
+            return errorMsg.noUser(res);
+        }
+        return result;
+    },
+    selectUserByResetToken: async (res, resetToken) => {
+        console.log("selectUserByResetToken");
+        console.log(resetToken);
+        const result = await userRepo.selectUserByResetToken(res, resetToken);
+        console.log(result);
+        if (result.length === 0) {
+            return errorMsg.noUser(res);
+        }
+        return result;
+    },
 }

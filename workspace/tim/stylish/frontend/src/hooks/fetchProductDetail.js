@@ -4,7 +4,7 @@ const elasticIp = process.env.REACT_APP_ELASTIC_IP;
 const GetProductDetail = async (id) => {
     try {
         const response = await axios.get(
-            `https://${elasticIp}/api/1.0/products/details`, {
+            `${elasticIp}/api/1.0/products/details`, {
             params: {
                 id,
             },

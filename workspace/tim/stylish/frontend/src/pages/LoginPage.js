@@ -3,7 +3,8 @@ import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import LoginForm from "../components/login/LoginForm";
 import SignupForm from "../components/login/SignupForm.js";
-import styled from 'styled-components';
+import ForgotPasswordForm from "../components/login/ForgotPasswordForm";
+import styled from "styled-components";
 
 const PageContainer = styled.div`
   display: flex;
@@ -21,20 +22,30 @@ const ContentContainer = styled.div`
 `;
 
 const LoginPage = () => {
-    const [showLogin, setShowLogin] = useState(true);
-    return (
-        <PageContainer>
-            <Header />
-            <ContentContainer>
-                {showLogin ? (
-                    <LoginForm setShowLogin={setShowLogin} showLogin={showLogin} />
-                ) : (
-                    <SignupForm setShowLogin={setShowLogin} showLogin={showLogin} />
-                )}
-            </ContentContainer>
-            <Footer />
-        </PageContainer>
-    );
+  const [showLogin, setShowLogin] = useState(true);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  return (
+    <PageContainer>
+      <Header />
+      <ContentContainer>
+        {!showForgotPassword ? (
+          showLogin ? (
+            <LoginForm
+              setShowLogin={setShowLogin}
+              showLogin={showLogin}
+              showForgotPassword={showForgotPassword}
+              setShowForgotPassword={setShowForgotPassword}
+            />
+          ) : (
+            <SignupForm setShowLogin={setShowLogin} showLogin={showLogin} />
+          )
+        ) : (
+          <ForgotPasswordForm setShowForgotPassword={setShowForgotPassword} />
+        )}
+      </ContentContainer>
+      <Footer />
+    </PageContainer>
+  );
 };
 
 export default LoginPage;
