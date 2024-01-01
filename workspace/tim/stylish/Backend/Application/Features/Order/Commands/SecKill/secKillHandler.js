@@ -104,12 +104,14 @@ module.exports = {
           order.userId
           //   loginUserId
         );
+        console.log("result", result);
 
         // Add your database update logic here
         // For example, update the order status to indicate successful purchase
 
-        await orderService.updateOrderIsPaid(res, true, result.insertId);
+        // await orderService.updateOrderIsPaid(res, true, result.insertId);
         finalResponse = await orderCheckRes.customize(result);
+        console.log("finalResponse", finalResponse);
 
         return finalResponse;
       }

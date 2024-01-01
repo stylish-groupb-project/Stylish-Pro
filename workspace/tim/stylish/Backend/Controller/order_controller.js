@@ -14,6 +14,7 @@ module.exports = {
       console.log(prime);
       console.log(order);
 
+      console.log("isSecKill", isSeckill);
       if (isSeckill) {
         const secKillResult = await secKillHandler.handle(
           res,
