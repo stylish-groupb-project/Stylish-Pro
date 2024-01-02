@@ -12,7 +12,21 @@ const chatBot_router = require('./Router/chatBot_router');
 const monitor_router = require('./Router/monitor_router');
 const auth_router = require('./Router/auth_router');
 app.use(cors());
-app.use(express.json());
+function excludeJsonMiddleware(req, res, next) {
+    if (req.path === '/line-webhook') {
+      next();
+    } else {
+      express.json()(req, res, next);
+    }
+}
+app.use(excludeJsonMiddleware);
+// app.use(express.json());
+
+// Line Bot
+// Line Bot
+const lineBotUtil = require('./utils/line_bot');
+const {line, config} = require('./utils/line_bot');
+
 
 app.use('/api/1.0/products', product_router);
 app.use('/api/1.0/user', user_router);
@@ -52,6 +66,20 @@ app.get('/.well-known/pki-validation/753A3038A7992A7112828484D232D6CA.txt', (req
     console.log(file);
     res.sendFile(file);
 });
+
+app.post('/line-webhook', line.middleware(config), async (req, res) => {
+    try {
+        console.log('Received LINE Webhook:', req.body);
+        for (const event of req.body.events) {
+            await lineBotUtil.handleEvent(event);
+        }
+        res.json({ success: true });
+    } catch (error) {
+        console.error(error);
+        res.status(500).end();
+    }
+});
+
 
 const server = http.createServer(app);
 const io = require("socket.io")(server, {
@@ -174,6 +202,6 @@ io.on('connection', (socket) => {
 
 
 
-server.listen(5000, () => {
+server.listen(3000, () => {
     console.log(`Server is running`);
 });
