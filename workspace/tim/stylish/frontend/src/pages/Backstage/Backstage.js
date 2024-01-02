@@ -9,12 +9,20 @@ const socketUrl = process.env.REACT_APP_SOCKET_URL;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  // width: 80%;
+  // padding-left: 10rem;
+  // align-items: center;
+  justify-content: center;
+  // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 `;
 
 const MessageWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   justify-content: center;
+  align-items: center;
+
 `;
 
 const UserWrapper = styled.ul`
@@ -23,6 +31,7 @@ const UserWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   border: 1px solid #d3d3d3;
+  border-top: none;
 `;
 
 const User = styled.li`
@@ -39,19 +48,21 @@ const ChatRoom = styled.div`
   width: 70%;
   height: 600px;
   border: 1px solid #d3d3d3;
+  border-top: none;
 `;
 
 const Form = styled.div`
   background: rgba(0, 0, 0, 0.15);
   padding: 0.25rem;
   position: fixed;
-  bottom: 220px;
+  bottom: 150px;
   left: 0;
   right: 0;
   display: flex;
   height: 3rem;
   box-sizing: border-box;
   backdrop-filter: blur(10px);
+  width: 100%;
 `;
 
 const Input = styled.input`
@@ -123,7 +134,7 @@ function Backstage() {
   };
 
   useEffect(() => {
-    socketRef.current = io(`${socketUrl}`, { path: '/api/socket.io'});
+    socketRef.current = io(`${socketUrl ? socketUrl : 'https://13.55.47.107'}`, { path: '/api/socket.io'});
     console.log(socketRef.current);
     socketRef.current.on('connect', () => {
       console.log('Connected to server');

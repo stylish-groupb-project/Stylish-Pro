@@ -178,17 +178,21 @@ const ProductDetail = () => {
                     id: data.id,
                     name: data.title,
                     image: data.main_image,
-                    color: selectedColorName,
+                    color: {
+                        colorName: selectedColorName,
+                        colorCode: selectedColor
+                    },
                     size: selectedSize,
                     quantity: count,
                     stock: selectedVariant.stock,
                     price: data.price,
                 };
+                console.log("localStorage :",productCartData)
                 const currentCartItems = JSON.parse(localStorage.getItem("cart") || "[]");
     
                 const checkCurrentItem = currentCartItems.findIndex(
                     (item) =>
-                        item.id === productCartData.id && item.color === productCartData.color && item.size === productCartData.size,
+                        item.id === productCartData.id && item.color.colorName === productCartData.color.colorName && item.color.colorCode === productCartData.color.colorCode && item.size === productCartData.size,
                 );
                 if (checkCurrentItem !== -1) {
                     currentCartItems[checkCurrentItem].quantity += productCartData.quantity;
@@ -206,7 +210,6 @@ const ProductDetail = () => {
         }
         return (
             <div className="product-detail-window">
-                {/* <div className="product-detail-container"> */}
                     <div className="product-detail">
                         <img src={data.main_image} alt={data.title} class="main-image" />
                         <div className="product-data-container">
@@ -259,11 +262,8 @@ const ProductDetail = () => {
                         <p className="story">{data.story}</p>
                         <div className="sub-images"> {imagesItems}</div>
                     </div>
-                {/* </div> */}
     
             </div>
-    
-    
         );
     
     }

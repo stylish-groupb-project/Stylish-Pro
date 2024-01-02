@@ -18,7 +18,7 @@ import { io } from 'socket.io-client';
 //   },
 // });
 // const socket = io('http://localhost', { path: '/api/socket.io'});
-const socketUrl = process.env.REACT_APP_SOCKET_URL;
+
 const Wrapper = styled.div``;
 // socket.on('connect', () => {
 //   console.log("socket.id",socket.id);
@@ -155,6 +155,7 @@ const InputButton = styled.img`
 `;
 
 const Chatbot = () => {
+  const socketUrl = process.env.REACT_APP_SOCKET_URL;
   const [chatBtnShow, setChatBtnShow] = useState(true);
   const [chatRoomShow, setChatRoomShow] = useState(false);
   const socketRef = useRef(null);
@@ -202,7 +203,7 @@ const Chatbot = () => {
     inputRef.current.value = '';
   };
   useEffect(() => {
-    socketRef.current = io(`${socketUrl}`, { path: '/api/socket.io'});
+    socketRef.current = io(`${socketUrl ? socketUrl : 'https://13.55.47.107'}`, { path: '/api/socket.io'});
     console.log(socketRef.current);
     socketRef.current.on('connect', () => {
       console.log('Connected to server');
@@ -216,6 +217,7 @@ const Chatbot = () => {
       console.log("threads:",response);
       setThreads(draft => draft.concat(response));
     });
+    
 
   }, []);
 

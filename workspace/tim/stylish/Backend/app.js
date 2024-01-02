@@ -117,6 +117,7 @@ io.on('connection', (socket) => {
         admins.set(socket.id, socket);
         console.log('Admin connected:', socket.id);
     });
+
     users.set(socket.id, socket);
     console.log('User connected:', socket.id);
 
@@ -125,6 +126,7 @@ io.on('connection', (socket) => {
             admins.forEach((adminSocket, _) => {
                 adminSocket.emit('message', data);
             });
+            
             //TODO: admin offline
         }
         if (data.from === 'admin') {
@@ -133,6 +135,7 @@ io.on('connection', (socket) => {
                 userSocket.emit('message', data);
             }
         }
+
         socket.emit('message', data);
     });
     // const data = {
