@@ -3,10 +3,10 @@ import flashIcon from "../../assets/images/flash.png";
 import { useNavigate } from "react-router-dom";
 
 const FlashBtn = styled.img`
-  width: 80px;
+  width: 70px;
   position: fixed;
   bottom: 80px;
-  right: 0px;
+  right: 5px;
   cursor: pointer;
   transform: ${(props) => props.transform};
   transition: transform 200ms cubic-bezier(0.5, 0, 0.5, 1);

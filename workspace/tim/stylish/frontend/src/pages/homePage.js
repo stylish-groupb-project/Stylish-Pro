@@ -8,6 +8,7 @@ import Footer from "../components/layout/Footer";
 import Products from "../components/product/Products";
 import Chatbot from "../components/chatBot/ChatBot";
 import Flash from "../components/flash/Flash";
+import LuckyDraw from "../components/luckyDraw/LuckyDraw";
 // import Main from './components/Main';
 // import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import React, { useState, useEffect } from "react";
@@ -153,6 +154,7 @@ const HomePageLayout = ({ endpoint }) => {
       </MainContent>
       <Chatbot />
       <Flash />
+      <LuckyDraw />
       <Footer />
     </>
   );
