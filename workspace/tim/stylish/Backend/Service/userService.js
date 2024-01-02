@@ -87,6 +87,14 @@ module.exports = {
         }
         return result;
     },
+    getProfileByEmail: async (res, email) => {
+        console.log("getProfileByEmail", email);
+        const result = await userRepo.selectUserByEmail(res, email);
+        if (result.length === 0) {
+            return errorMsg.noUser(res);
+        }
+        return result;
+    },
     resetPassword: async (res, userId, newPassword) => {
         const result = await userRepo.resetUserPassword(res, userId, newPassword);
         if (result.affectedRows === 0) {

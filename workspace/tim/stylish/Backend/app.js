@@ -71,7 +71,7 @@ app.post('/line-webhook', line.middleware(config), async (req, res) => {
     try {
         console.log('Received LINE Webhook:', req.body);
         for (const event of req.body.events) {
-            await lineBotUtil.handleEvent(event);
+            await lineBotUtil.handleEvent(res, event);
         }
         res.json({ success: true });
     } catch (error) {
@@ -205,6 +205,6 @@ io.on('connection', (socket) => {
 
 
 
-server.listen(3000, () => {
+server.listen(5000, () => {
     console.log(`Server is running`);
 });

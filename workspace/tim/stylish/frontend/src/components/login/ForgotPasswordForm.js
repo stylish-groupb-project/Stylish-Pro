@@ -70,7 +70,7 @@ const Button = styled.button`
   font-weight: normal;
   cursor: pointer;
   transition: opacity 0.3s ease;
-
+  width: 60%;
   &:disabled {
     opacity: 0.5;
   }

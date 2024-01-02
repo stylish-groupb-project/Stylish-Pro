@@ -26,4 +26,17 @@ module.exports = {
         }
 
     },
+    getOrderList: async(res, userId) => {
+        const connection = await connectionPromise;
+        try {
+            const selectQuery = 'SELECT * FROM orders WHERE user_id = ?';
+            const [result] = await connection.execute(selectQuery, [userId]);
+            return result;
+        } catch (error) {
+            console.error(error);
+            errorMsg.query(res)
+        } finally {
+            console.log('connection release');
+        }
+    },
 }

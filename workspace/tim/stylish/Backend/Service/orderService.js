@@ -56,6 +56,10 @@ module.exports = {
     },
     updateOrderIsPaid: async(res,status,orderId)=>{
         await orderRepo.updateOrderPaidStatus(res,status,orderId);
-    }
+    },
+    getOrderList: async(res,userId)=>{
+        const result = await orderRepo.getOrderList(res,userId);
+        return result;
+    },
 
 }
