@@ -6,6 +6,7 @@ const orderController = require('../Controller/order_controller');
 //post
 
 router.post('/checkout',auth.verifyToken, orderController.checkout);
-
+router.get('/manage',auth.verifyToken, orderController.manage);
+router.put('/manage/:orderId',auth.verifyToken, orderController.manageShip);
 
 module.exports = router;

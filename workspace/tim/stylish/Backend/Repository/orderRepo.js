@@ -39,4 +39,29 @@ module.exports = {
             console.log('connection release');
         }
     },
+    getAllOrder: async(res) => {
+        const connection = await connectionPromise;
+        try {
+            const selectQuery = 'SELECT * FROM orders';
+            const [result] = await connection.execute(selectQuery);
+            return result;
+        } catch (error) {
+            console.error(error);
+            errorMsg.query(res)
+        } finally {
+            console.log('connection release');
+        }
+    },
+    updateOrderShippingStatus: async(res, orderId, shippingStatus) => {
+        const connection = await connectionPromise;
+        try {
+            const updateQuery = 'UPDATE orders SET shipping_status = ? WHERE id = ?';
+            await connection.execute(updateQuery, [shippingStatus, orderId]);
+        } catch (error) {
+            console.error(error);
+            errorMsg.query(res)
+        } finally {
+            console.log('connection release');
+        }
+    }
 }

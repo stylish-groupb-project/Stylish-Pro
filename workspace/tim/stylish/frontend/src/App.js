@@ -10,6 +10,7 @@ import ThankyouPage from "./pages/ThankyouPage";
 import LoginPage from "./pages/LoginPage";
 import Backstage from "./pages/Backstage/Backstage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import AdminPage from "./pages/AdminPage";
 // import MonitorPage from "./pages/monitorPage";
 
 import { CartCountProvider } from "./contexts/CartCountManager";
@@ -28,6 +29,12 @@ const PrivateRoute = () => {
   const isLoggedIn = Cookies.get("token");
   return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
 };
+
+const AdminRoute = () => {
+  const isLoggedIn = Cookies.get("token");
+  const isAdmin = Cookies.get("isAdmin");
+  return isLoggedIn && isAdmin ? <Outlet /> : <Navigate to="/login" />;
+}
 
 const ResetPasswordRoute = () => {
   const isLoggedIn = Cookies.get("token");
@@ -69,6 +76,9 @@ function App() {
                 <Route path="/thankyou" element={<ThankyouPage />} />
               </Route>
               <Route path="/backstage" element={<Backstage />} />
+              <Route element={<PrivateRoute />}>
+                <Route path="/admin" element={<AdminPage />} />
+              </Route>
             </Routes>
           </BrowserRouter>
         </CartCountProvider>

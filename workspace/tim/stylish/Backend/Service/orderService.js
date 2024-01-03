@@ -61,5 +61,14 @@ module.exports = {
         const result = await orderRepo.getOrderList(res,userId);
         return result;
     },
+    getAllOrder: async(res)=>{
+        const result = await orderRepo.getAllOrder(res);
+        console.log(result);
+        return result;
+    },
+    updateOrderShippingStatus: async(res,orderId,shippingStatus)=>{
+        const result = await orderRepo.updateOrderShippingStatus(res,orderId,shippingStatus);
+        return result;
+    },
 
 }

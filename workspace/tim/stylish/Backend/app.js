@@ -45,8 +45,8 @@ app.use(
 app.use("/admin", express.static("admin"));
 
 app.get('/api/admin/checkout.html', (req, res) => {
-    console.log(path.join(__dirname, 'Backend', 'View', 'html', 'checkout.html'));
-    res.sendFile(path.join(__dirname, 'Backend', 'View', 'html', 'checkout.html'));
+    console.log(path.join(__dirname, 'View', 'html', 'checkout.html'));
+    res.sendFile(path.join(__dirname, 'View', 'html', 'checkout.html'));
 });
 
 

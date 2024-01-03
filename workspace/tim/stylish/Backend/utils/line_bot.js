@@ -95,6 +95,8 @@ module.exports = {
     }
 
     if (event.type === "message" && event.message.type === "text") {
+      console.log("handleTextMessageEvent:");
+      console.log(event);
       await handleTextMessageEvent(res, event);
     }
   },

@@ -1,6 +1,6 @@
 const userSignUpHandler = require("../Application/Features/UserInfo/Commands/UserSignUp/userSignUpHandler");
 const userSignInHandler = require("../Application/Features/UserInfo/Commands/UserSignIn/userSignInHandler");
-const userSignOauth = require("../Application/Features/UserInfo/Commands/UserSignOauth/userSignOauth");
+const userSignOauth = require("../Application/Features/UserInfo/Commands/UserSignOauth/userSignOauthHandler");
 const getUserProfileHandler = require("../Application/Features/UserInfo/Queries/GetUserProfile/getUserProfileHandler");
 const userForgetPasswordHandler = require("../Application/Features/UserInfo/Commands/UserForgetPassword/userForgetPasswordHandler");
 const userResetPasswordHandler = require("../Application/Features/UserInfo/Commands/UserResetPassword/userResetPasswordHandler");
