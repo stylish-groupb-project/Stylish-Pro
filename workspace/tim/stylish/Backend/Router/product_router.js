@@ -11,6 +11,7 @@ router.get("/accessories", productController.getAccessories);
 router.get("/flash", productController.getFlash);
 router.get("/search", productController.search);
 router.get("/details", productController.getProductDetail);
+router.get("/secKill", productController.getSecKill);
 
 //post
 

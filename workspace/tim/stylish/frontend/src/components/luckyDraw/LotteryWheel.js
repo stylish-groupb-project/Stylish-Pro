@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-const elasticIp = process.env.REACT_APP_ELASTIC_IP;
+const elasticIp = process.env.REACT_APP_ELASTIC_IP || "localhost";
 
 const LotteryWheel = () => {
   const navigate = useNavigate();
@@ -116,6 +116,7 @@ const LotteryWheel = () => {
   const [buttons] = useState([
     {
       radius: "45%",
+      pointer: true,
       imgs: [{ src: WheelBtn, width: "100%", top: "-130%" }],
     },
   ]);

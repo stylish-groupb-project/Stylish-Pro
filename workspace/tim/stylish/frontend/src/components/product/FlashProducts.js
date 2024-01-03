@@ -4,7 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useSearchParams } from "react-router-dom";
 import { fetchProducts } from "../../hooks/api";
-import ProductCard from "../productCard/ProductCard";
+import FlashProductCard from "../productCard/flashProductCard";
 
 const ProductsContainer = styled.div`
   //   max-width: 81.25rem;
@@ -41,7 +41,7 @@ const ProductWrapper = styled.div`
   margin-right: 0.5rem;
 `;
 
-function Products({ endpoint }) {
+function FlashProducts({ endpoint, secKillData }) {
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get("search");
   const { ref, inView } = useInView();
@@ -81,21 +81,45 @@ function Products({ endpoint }) {
     );
   }
 
+  const sortedData = data?.pages.slice().sort((a, b) => {
+    const aStartTime = secKillData.find(
+      (secKill) => secKill.product_id === a.id
+    )?.start_time;
+    const bStartTime = secKillData.find(
+      (secKill) => secKill.product_id === b.id
+    )?.start_time;
+
+    if (aStartTime && bStartTime) {
+      return new Date(aStartTime) - new Date(bStartTime);
+    }
+
+    return 0;
+  });
+
+  console.log(data?.pages);
   return (
     <ProductsContainer data-testid="products-container">
       {data?.pages.map((page, i) => (
         <ProductRow key={i}>
-          {page.data.map((product) => (
-            <ProductWrapper key={product.id} data-testid="product-cards">
-              <ProductCard product={product} />
-            </ProductWrapper>
-          ))}
+          {page.data.map((product) => {
+            const correspondingSecKill = secKillData.find(
+              (secKill) => secKill.product_id === product.id
+            );
+
+            return (
+              <ProductWrapper key={product.id} data-testid="product-cards">
+                <FlashProductCard
+                  product={product}
+                  secKillInfo={correspondingSecKill}
+                />
+              </ProductWrapper>
+            );
+          })}
         </ProductRow>
       ))}
-      {/* {isFetchingNextPage && <ProductsSkeleton />} */}
       <span ref={ref} />
     </ProductsContainer>
   );
 }
 
-export default Products;
+export default FlashProducts;

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import useTappay from "../../hooks/useTappay";
 import { CartCountContext } from "../../contexts/CartCountManager";
 import styled from "styled-components";
-const elasticIp = process.env.REACT_APP_ELASTIC_IP;
+const elasticIp = process.env.REACT_APP_ELASTIC_IP || "localhost";
 /* global TPDirect */
 
 const FormContainer = styled.form`

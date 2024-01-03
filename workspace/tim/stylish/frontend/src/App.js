@@ -14,6 +14,7 @@ import CheckoutPage from "./pages/checkoutPage";
 import ThankyouPage from "./pages/ThankyouPage";
 import LoginPage from "./pages/LoginPage";
 import Backstage from "./pages/Backstage/Backstage";
+import FlashPage from "./pages/FlashPage";
 // import MonitorPage from "./pages/monitorPage";
 
 import { CartCountProvider } from "./contexts/CartCountManager";
@@ -53,10 +54,7 @@ function App() {
                 path="/accessories"
                 element={<HomePageLayout endpoint="accessories" />}
               />
-              <Route
-                path="/flash"
-                element={<HomePageLayout endpoint="flash" />}
-              />
+              <Route path="/flash" element={<FlashPage endpoint="flash" />} />
 
               <Route
                 path="/search"
