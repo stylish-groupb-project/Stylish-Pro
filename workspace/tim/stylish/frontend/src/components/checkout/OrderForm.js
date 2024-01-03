@@ -232,6 +232,29 @@ const MobileDeliverySection = styled.div`
   }
 `;
 
+const CustomSelect = styled.select`
+  padding: 0.5rem 0;
+
+  @media (min-width: 1024px) {
+    width: 36rem;
+    padding: 0.5rem 0.5rem;
+    margin-top: 0;
+  }
+`;
+
+const SelectSection = styled.label`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 8px;
+  align-items: center;
+
+  @media (max-width: 1280px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`;
+
 const emailRegex =
   /(?<zipcode>(^\d{5}|^\d{3})?)(?<city>\D+[縣市])(?<district>\D+?(市區|鎮區|鎮市|[鄉鎮市區]))(?<others>.+)/;
 
@@ -258,6 +281,62 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
   const { count } = useContext(CartCountContext);
   const [totalAmount, setTotalAmount] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [prizes, setPrizes] = useState([]);
+  const [selectedPrize, setSelectedPrize] = useState(null);
+  const [adjustedFreight, setAdjustedFreight] = useState(60); // Default freight cost
+  const [discountedTotal, setDiscountedTotal] = useState(totalAmount);
+
+  useEffect(() => {
+    const fetchPrizes = async () => {
+      try {
+        const response = await axios.get(
+          `https://${elasticIp}/api/1.0/order/getAllPrizes`,
+          {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("token")}`,
+            },
+          }
+        );
+
+        setPrizes(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching prizes:", error);
+      }
+    };
+
+    fetchPrizes();
+  }, []); // Empty dependency array ensures the effect runs only once on mount
+
+  useEffect(() => {
+    let adjustedFreightValue = 60; // Default freight cost
+
+    if (selectedPrize) {
+      switch (selectedPrize.prize) {
+        case "免運卷":
+          adjustedFreightValue = 0; // Free shipping
+          break;
+        case "10元折價卷":
+          adjustedFreightValue -= 10;
+          break;
+        case "20元折價卷":
+          adjustedFreightValue -= 20;
+          break;
+        case "30元折價卷":
+          adjustedFreightValue -= 30;
+          break;
+        default:
+          break;
+      }
+    }
+
+    console.log(selectedPrize);
+    console.log(adjustedFreightValue);
+
+    setAdjustedFreight(adjustedFreightValue);
+    setDiscountedTotal(totalAmount + adjustedFreightValue);
+  }, [selectedPrize, totalAmount]);
+
   useTappay();
   useEffect(() => {
     const handleStorageChange = () => {
@@ -278,7 +357,6 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: zodResolver(schema) });
-  const freight = 0;
 
   const transformCartItems = (cartItems) => {
     //只有colorname
@@ -332,8 +410,8 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
           shipping: "delivery",
           payment: "credit_card",
           subtotal: totalAmount,
-          freight,
-          total: totalAmount + freight,
+          freight: adjustedFreight,
+          total: totalAmount + adjustedFreight,
           recipient: {
             name: values.name,
             phone: values.phoneNumber,
@@ -358,6 +436,22 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
         }
       );
       console.log(response.data.data);
+      console.log(selectedPrize.id);
+
+      if (selectedPrize && adjustedFreight !== 60) {
+        await axios.put(
+          `https://${elasticIp}/api/1.0/order/updatePrizeStatus/${selectedPrize.id}`,
+          {
+            used: 1,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("token")}`,
+            },
+          }
+        );
+      }
+
       //response.data.data.time
       navigate(
         `/thankyou?order_id=${response.data.data.number}&time=${values.time}`
@@ -472,6 +566,37 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
             </FormRow>
           </MaxWidthContainer>
         </Section>
+        <SectionTitle>折扣優惠</SectionTitle>
+        <Section>
+          <MaxWidthContainer>
+            <SelectSection>
+              <EachOrderLabel>優惠卷</EachOrderLabel>
+              <CustomSelect
+                id="prize"
+                {...register("prize")}
+                disabled={disabled}
+                value={selectedPrize ? selectedPrize.prize : ""}
+                onChange={(e) => {
+                  const selectedPrizeObject = prizes.find(
+                    (prize) => prize.prize === e.target.value
+                  );
+
+                  // If the default option is selected, treat it as no prize selected
+                  setSelectedPrize(
+                    e.target.value === "" ? null : selectedPrizeObject
+                  );
+                }}
+              >
+                <option value="">請選擇欲使用的優惠卷</option>
+                {prizes.map((prize) => (
+                  <option key={prize.id} value={prize.prize}>
+                    {prize.prize}
+                  </option>
+                ))}
+              </CustomSelect>
+            </SelectSection>
+          </MaxWidthContainer>
+        </Section>
         <SectionTitle>付款資料</SectionTitle>
         <Section>
           <MaxWidthContainer>
@@ -494,21 +619,21 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
             <PriceLabel>總金額</PriceLabel>
             <PriceDetails>
               <PriceLabel>NT.</PriceLabel>
-              <PriceAmount>{totalAmount}</PriceAmount>
+              <PriceAmount>{discountedTotal}</PriceAmount>
             </PriceDetails>
           </SummaryRow>
           <SummaryRow>
             <PriceLabel>運費</PriceLabel>
             <PriceDetails>
               <PriceLabel>NT.</PriceLabel>
-              <PriceAmount>{freight}</PriceAmount>
+              <PriceAmount>{adjustedFreight}</PriceAmount>
             </PriceDetails>
           </SummaryRow>
           <TotalRow>
             <PriceLabel>應付金額</PriceLabel>
             <PriceDetails>
               <PriceLabel>NT.</PriceLabel>
-              <PriceAmount>{totalAmount + freight}</PriceAmount>
+              <PriceAmount>{totalAmount + adjustedFreight}</PriceAmount>
             </PriceDetails>
           </TotalRow>
           <SubmitButton type="submit" disabled={disabled && loading}>

@@ -10,4 +10,16 @@ module.exports = {
     const result = await orderService.checkTodayPrize(res, loginUserId);
     return result;
   },
+  getAllUnusedPrizes: async (res, loginUserId) => {
+    const result = await orderService.getAllUnusedPrizes(res, loginUserId);
+    return result;
+  },
+  updatePrizeStatus: async (res, loginUserId, prizeId) => {
+    const result = await orderService.updatePrizeIsUsed(
+      res,
+      loginUserId,
+      prizeId
+    );
+    return result;
+  },
 };
