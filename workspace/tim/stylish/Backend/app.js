@@ -128,7 +128,7 @@ async function initialize() {
                             socket.emit('waiting', '排隊成功，請稍等真人為您服務');
                         } else {
                             socket.emit('busy', '目前系统忙碌，請稍後再試');
-                            socket.emit('waitingNumber', `現有「 ${counter*-1-1} 」人在排隊呦！`);
+                            socket.emit('waitingNumber', `現有「 ${counter*-1} 」人在排隊呦！`);
                             socket.emit('message', data);
                             return;
                         }
