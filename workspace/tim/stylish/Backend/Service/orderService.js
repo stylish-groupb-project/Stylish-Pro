@@ -19,7 +19,6 @@ module.exports = {
         subtotal: subtotal,
         freight: freight,
         total: total,
-        shipping_status: "Processing",
         user_id: userId,
       };
       console.log(orderObj);
@@ -74,35 +73,25 @@ module.exports = {
   updateOrderIsPaid: async (res, status, orderId) => {
     await orderRepo.updateOrderPaidStatus(res, status, orderId);
   },
-  insertNewPrize: async (res, dataObj, userId) => {
-    const { prize, time } = dataObj;
-
-    // Assuming `expirationDate` is set to 7 days from the obtained time
-    const expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 7);
-
-    const prizeDataObj = {
-      prize: prize,
-      used: 0, // Assuming the default value for 'used' is 0 (not used)
-      obtainedTime: time,
-      expirationDate: expirationDate.toISOString(),
-      userId: userId,
-    };
-
-    console.log(prizeDataObj);
-
-    await prizeRepo.insertNewPrize(res, prizeDataObj);
-  },
-  updatePrizeIsUsed: async (res, loginUserId, prizeId) => {
-    await prizeRepo.updatePrizeUsedStatus(res, loginUserId, prizeId);
-  },
-
-  checkTodayPrize: async (res, userId) => {
-    const result = await prizeRepo.checkTodayPrize(res, userId);
+  getOrderInfo: async (res, orderId) => {
+    const result = await orderRepo.getOrderInfo(res, orderId);
     return result;
   },
-  getAllUnusedPrizes: async (res, userId) => {
-    const result = await prizeRepo.getAllUnusedPrizesByUserId(res, userId);
+  getOrderList: async (res, userId) => {
+    const result = await orderRepo.getOrderList(res, userId);
+    return result;
+  },
+  getAllOrder: async (res) => {
+    const result = await orderRepo.getAllOrder(res);
+    console.log(result);
+    return result;
+  },
+  updateOrderShippingStatus: async (res, orderId, shippingStatus) => {
+    const result = await orderRepo.updateOrderShippingStatus(
+      res,
+      orderId,
+      shippingStatus
+    );
     return result;
   },
 };
