@@ -1,10 +1,8 @@
 module.exports = {
   inputEmpty: (res) => {
-    res
-      .status(400)
-      .json({
-        error: "Client error - Input feild (images?) should not be empty",
-      });
+    res.status(400).json({
+      error: "Client error - Input feild (images?) should not be empty",
+    });
   },
   query: (res) => {
     res.status(500).json({ error: "Server error - query failed" });
@@ -30,11 +28,9 @@ module.exports = {
       .json({ error: "Order detail - order req must have a product" });
   },
   variantProblem: (res) => {
-    res
-      .status(403)
-      .json({
-        error: "variant problem - the variant of this product goes wrong",
-      });
+    res.status(403).json({
+      error: "variant problem - the variant of this product goes wrong",
+    });
   },
   stockProblem: (res) => {
     res
@@ -42,12 +38,10 @@ module.exports = {
       .json({ error: "stock problem - the stock of this product goes wrong" });
   },
   roleProblem: (res) => {
-    res
-      .status(403)
-      .json({
-        error:
-          "role problem - the role of this product goes wrong(may not exist)",
-      });
+    res.status(403).json({
+      error:
+        "role problem - the role of this product goes wrong(may not exist)",
+    });
   },
   permissionDenied: (res) => {
     res.status(403).json({ error: "role problem - permission denied" });
