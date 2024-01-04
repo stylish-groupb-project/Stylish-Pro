@@ -6,9 +6,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import Swal from "sweetalert2";
-import styled from "styled-components";
+import styled from 'styled-components';
 
-const elasticIp = process.env.REACT_APP_ELASTIC_IP || "localhost";
+const elasticIp = process.env.REACT_APP_ELASTIC_IP;
 
 const FormContainer = styled.div`
   display: flex;
@@ -100,101 +100,106 @@ const SignUpLink = styled.button`
 `;
 
 const loginSchema = z.object({
-  email: z.string().email("Invalid email"),
-  password: z.string(),
+    email: z.string().email("Invalid email"),
+    password: z.string(),
 });
-const LoginForm = ({ setShowLogin, showLogin }) => {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: zodResolver(loginSchema) });
+const LoginForm = ({ setShowLogin, showLogin, showForgotPassword, setShowForgotPassword }) => {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({ resolver: zodResolver(loginSchema) });
 
-  const setCookies = (data) => {
-    const maxAge = { expires: 1 / 24 }; // 1hr
-    Cookies.set("token", data.access_token, maxAge);
-    Cookies.set("user_id", data.user.id.toString(), maxAge);
-    Cookies.set("user_name", data.user.name, maxAge);
-    Cookies.set("user_email", data.user.email, maxAge);
-    Cookies.set("user_picture", data.user.picture, maxAge);
-  };
-  const handleError = (error) => {
-    if (error?.response?.status === 404) {
-      Swal.fire("查無此用戶", "請更換email", "error");
+    const setCookies = (data) => {
+        const maxAge = { expires: 1 / 24 }; // 1hr
+        Cookies.set("token", data.access_token, maxAge);
+        Cookies.set("user_id", data.user.id.toString(), maxAge);
+        Cookies.set("user_name", data.user.name, maxAge);
+        Cookies.set("user_email", data.user.email, maxAge);
+        Cookies.set("user_picture", data.user.picture, maxAge);
     }
-    if (error?.response?.status >= 500 && error?.response?.status < 600) {
-      Swal.fire("Server Error", "請稍後再試或和我們的技術團隊聯絡", "error");
-    } else {
-      Swal.fire("登入失敗", `${error}`, "error");
-    }
-  };
-  const loginHandler = async (values) => {
-    setLoading(true);
-    try {
-      const response = await axios.post(
-        `https://${elasticIp}/api/1.0/user/signin`,
-        {
-          provider: "native",
-          email: values.email,
-          password: values.password,
+    const handleError = (error) => {
+        if (error?.response?.status === 404) {
+            Swal.fire("查無此用戶", "請更換email", "error");
         }
-      );
-      console.log(response.data);
-      const { access_token, user } = response.data.data;
-      setCookies({ access_token, user });
-      navigate(-1);
-    } catch (error) {
-      handleError(error);
+        if (error?.response?.status >= 500 && error?.response?.status < 600) {
+            Swal.fire("Server Error", "請稍後再試或和我們的技術團隊聯絡", "error");
+        } else {
+            Swal.fire("登入失敗", `${error}`, "error");
+        }
     }
-    setLoading(false);
-  };
-  //登入成功後
-  const showLoginHandler = () => {
-    setShowLogin(!showLogin);
-  };
+    const loginHandler = async (values) => {
+        setLoading(true);
+        try {
+            const response = await axios.post(`${elasticIp}/api/1.0/user/signin`, {
+                provider: "native",
+                email: values.email,
+                password: values.password,
+            });
+            console.log(response.data);
+            const { access_token, user } = response.data.data;
+            setCookies({ access_token, user });
+            navigate("/");
+        } catch (error) {
+            handleError(error);
+        }
+        setLoading(false);
+    }
+    //登入成功後
+    const showLoginHandler = () => {
+        setShowLogin(!showLogin);
+    }
 
-  return (
-    <FormContainer>
-      <Title>會員登入</Title>
-      <StyledForm method="post" onSubmit={handleSubmit(loginHandler)}>
-        {/* Email */}
-        <Label htmlFor="email">
-          <LabelText>電子郵件</LabelText>
-          <Input
-            type="email"
-            required
-            placeholder="例: test@test.com"
-            {...register("email")}
-          />
-          {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
-        </Label>
+    const showForgotPasswordHandler = () => {
+        setShowForgotPassword(!showForgotPassword);
+    }
 
-        {/* Password */}
-        <Label htmlFor="password">
-          <LabelText>密碼</LabelText>
-          <Input type="password" required {...register("password")} />
-          {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
-        </Label>
-
-        {/* Login Button */}
-        <Button type="submit" disabled={loading}>
-          登入
-        </Button>
-
-        {/* Google Login
+    return (
+        <FormContainer>
+          <Title>會員登入</Title>
+          <StyledForm method="post" onSubmit={handleSubmit(loginHandler)}>
+            {/* Email */}
+            <Label htmlFor="email">
+              <LabelText>電子郵件</LabelText>
+              <Input type="email" required placeholder="例: test@test.com" {...register("email")} />
+              {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
+            </Label>
+            
+            {/* Password */}
+            <Label htmlFor="password">
+              <LabelText>密碼</LabelText>
+              <Input type="password" required {...register("password")} />
+              {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
+            </Label>
+    
+            {/* Login Button */}
+            <Button type="submit" disabled={loading}>登入</Button>
+    
+            {/* Google Login
             <GoogleLoginButton onClick={() => login()} disabled={loading}>
               <GoogleLoginImage src={GoogleLoginButton} alt="google-login" />
             </GoogleLoginButton> */}
+    
+            {/* Signup Prompt */}
+            <SignUpPrompt>
+              尚未成為會員 ?
+              <SignUpLink onClick={showLoginHandler}>
+                會員註冊
+              </SignUpLink>
+            </SignUpPrompt>
+            <SignUpPrompt>
+              忘記密碼 ?
+              <SignUpLink onClick={showForgotPasswordHandler}>
+                忘記密碼
+              </SignUpLink>
+            </SignUpPrompt>
+          </StyledForm>
+        </FormContainer>
+      );
 
-        {/* Signup Prompt */}
-        <SignUpPrompt>
-          尚未成為會員 ?
-          <SignUpLink onClick={showLoginHandler}>會員註冊</SignUpLink>
-        </SignUpPrompt>
-      </StyledForm>
-    </FormContainer>
-  );
+
+
 };
 export default LoginForm;

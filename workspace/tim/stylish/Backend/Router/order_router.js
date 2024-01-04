@@ -23,5 +23,7 @@ router.get(
   auth.verifyToken,
   orderController.getAllUnusedPrizes
 );
+router.get('/manage',auth.verifyToken, orderController.manage);
+router.put('/manage/:orderId',auth.verifyToken, orderController.manageShip);
 
 module.exports = router;
