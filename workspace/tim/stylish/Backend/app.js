@@ -118,17 +118,17 @@ async function initialize() {
                 if (data.to === 'admin') {
                     const isUserWaiting = await redis.isSocketIdInList('waitingUsers', data.from);
                     if (!isUserWaiting) {
-                        counter-=1;
                         const list = await redis.getAllElementsFromList('waitingUsers');
                         const queueSize = list.length;
                         console.log("queueSize",queueSize);
                         if (queueSize < MAX_WAITING_USERS) {
+                            counter-=1;
                             await redis.addToList('waitingUsers', data.from);
                             await rabbitMQModule.sendMessageToQueue(channel, data.from);
                             socket.emit('waiting', '排隊成功，請稍等真人為您服務');
                         } else {
                             socket.emit('busy', '目前系统忙碌，請稍後再試');
-                            socket.emit('waitingNumber', `現有「 ${counter*-1-1} 」人在排隊呦！`);
+                            socket.emit('waitingNumber', `現有「 ${counter*-1} 」人在排隊呦！`);
                             socket.emit('message', data);
                             return;
                         }
@@ -156,6 +156,8 @@ async function initialize() {
                     socket.emit('noMoreCustomers', '目前沒有等待的用戶');
                 }else{
                     const messageData = await redis.getCacheByKey(`message:${checkForQueue}`);
+                    await redis.removeFromList('waitingUsers', checkForQueue);
+                    await redis.deleteCacheByKey(`message:${checkForQueue}`);
                         console.log("messageData:",messageData);
                         if (messageData) {
                             socket.emit('noMoreCustomers', '');
