@@ -3,9 +3,10 @@ require('dotenv').config();
 const {
     RABBITMQ_DEFAULT_USER,
     RABBITMQ_DEFAULT_PASSWORD,
+    RABBITMQ_HOST
 } = process.env;
 console.log("rabbitEnv: ",RABBITMQ_DEFAULT_PASSWORD);
-const rabbitMQURL = `amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASSWORD}@rabbitmq:5672`;
+const rabbitMQURL = `amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASSWORD}@${RABBITMQ_HOST}:5672`;
 
 async function connectRabbitMQ(retryCount = 15) {
     try {
