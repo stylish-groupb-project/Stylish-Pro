@@ -156,8 +156,8 @@ async function initialize() {
                     socket.emit('noMoreCustomers', '目前沒有等待的用戶');
                 }else{
                     const messageData = await redis.getCacheByKey(`message:${checkForQueue}`);
-                    await redis.removeFromList('waitingUsers', socket.id);
-                    await redis.deleteCacheByKey(`message:${socket.id}`);
+                    await redis.removeFromList('waitingUsers', checkForQueue);
+                    await redis.deleteCacheByKey(`message:${checkForQueue}`);
                         console.log("messageData:",messageData);
                         if (messageData) {
                             socket.emit('noMoreCustomers', '');
