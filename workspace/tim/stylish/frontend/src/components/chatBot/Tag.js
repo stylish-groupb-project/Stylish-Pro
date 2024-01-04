@@ -30,6 +30,12 @@ const ChatbotTag = styled.div`
   background-color: #ffffff;
   padding: 8px;
   cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: #7092aa;
+    color: #ffffff;
+  }
 `;
 
 const tags = [
