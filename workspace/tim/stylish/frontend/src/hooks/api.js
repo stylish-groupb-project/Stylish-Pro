@@ -14,31 +14,31 @@ export async function fetchProducts(endpoint, keyword, pageParam) {
   return response.data;
 }
 
-export async function GetProductDetail(id) {
-  try {
-    const response = await axios.get(
-      `https://${elasticIp}/api/1.0/products/details`,
-      {
-        params: {
-          id,
-        },
-      }
-    );
 
-    return response.data.data;
-  } catch (error) {
-    console.log(error);
-  }
-}
-export async function GetOrderList() {
-  try {
-    const response = await axios.get(`https://${elasticIp}/api/1.0/monitor`);
-    console.log(response.data);
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-}
+export async function GetProductDetail (id)  {
+    try {
+        const response = await axios.get(
+            `https://${elasticIp}/api/1.0/products/details`, {
+            params: {
+                id,
+            },
+        });
+        
+        return response.data.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+export async function GetOrderList ()  {
+    try {
+        const response = await axios.get(
+            `https://${elasticIp}/api/1.0/monitor`);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
 export async function getBotMessage(type) {
   try {
     const response = await axios.get(`https://${elasticIp}/api/1.0/chatBot`, {

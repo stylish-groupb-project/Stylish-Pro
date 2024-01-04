@@ -5,10 +5,13 @@ const MessageWrapper = styled.div`
   margin: 5px 20px;
   display: flex;
   flex-direction: column;
+
   ${props =>
     props.$source === 'admin'
       ? 'align-items: flex-start'
       : 'align-items: flex-end'};
+
+  // height: 550px;
 `;
 
 const ChatbotAvatar = styled.img`
@@ -30,20 +33,18 @@ const ContentBoxWrapper = styled.div`
 `;
 
 const Content = styled.div`
-  display: block;
-  line-height: 30px;
   padding: 10px;
-  font-size: 1.2rem;
-  margin: 0 5px;
+  line-height: 23px;
 `;
 
 
 export function SocketMessage({threads, socketId}) {
-
+  console.log("SocketComponent: ",threads);
+  console.log("socketID:",socketId);
   return (
     <>
       {threads
-        ?.filter(thread => thread.from === socketId || (thread.from === 'admin' && thread.to === socketId ))
+        ?.filter(thread => thread.from == socketId || (thread.from == 'admin' && thread.to == socketId ))
         ?.map(thread => {
         return (
           <MessageWrapper key={uuidv4()} $source={thread.from}>
