@@ -1,9 +1,10 @@
-const orderRepo = require('../Repository/orderRepo');
-const variantRepo = require('../Repository/variantRepo');
-const recipientRepo = require('../Repository/recipientRepo');
-const cartItemRepo = require('../Repository/cartItemRepo');
-const connectionPromise = require('../utils/db').connectionPromise;
-const errorMsg = require('../utils/error');
+const orderRepo = require("../Repository/orderRepo");
+const variantRepo = require("../Repository/variantRepo");
+const recipientRepo = require("../Repository/recipientRepo");
+const cartItemRepo = require("../Repository/cartItemRepo");
+const prizeRepo = require("../Repository/prizeRepo");
+const connectionPromise = require("../utils/db").connectionPromise;
+const errorMsg = require("../utils/error");
 module.exports = {
     insertNewOrder: async (res, dataObj , userId) => {
         const connection = await connectionPromise.getConnection();
@@ -56,6 +57,23 @@ module.exports = {
     },
     updateOrderIsPaid: async(res,status,orderId)=>{
         await orderRepo.updateOrderPaidStatus(res,status,orderId);
-    }
+    },
+    getOrderList: async(res,userId)=>{
+        const result = await orderRepo.getOrderList(res,userId);
+        return result;
+    },
+    getAllOrder: async(res)=>{
+        const result = await orderRepo.getAllOrder(res);
+        console.log(result);
+        return result;
+    },
+    updateOrderShippingStatus: async(res,orderId,shippingStatus)=>{
+        const result = await orderRepo.updateOrderShippingStatus(res,orderId,shippingStatus);
+        return result;
+    },
+    updateOrderShippingStatus: async(res,orderId,shippingStatus)=>{
+      const result = await orderRepo.updateOrderShippingStatus(res,orderId,shippingStatus);
+      return result;
+  },
 
 }

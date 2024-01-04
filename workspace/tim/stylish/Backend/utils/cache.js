@@ -1,9 +1,9 @@
-const Redis = require('ioredis');
-require('dotenv').config();
+const Redis = require("ioredis");
+require("dotenv").config();
 // const client = new Redis(6379, process.env.REDIS_HOST);
 const client = new Redis({
-    port: 6379,
-    host: process.env.REDIS_HOST,
+  port: 6379,
+  host: process.env.REDIS_HOST,
 });
 
 module.exports = {
@@ -91,7 +91,25 @@ module.exports = {
             console.log(err);
             throw err;
         }
-    }
-
-
-}
+    },
+   /**
+    * Call Lua script
+    * @param {string} script
+    * @param {number} numKeys
+    * @param {...string} args
+    * @returns
+    */
+   evalScript: async (script, numKeys, ...args) => {
+     try {
+       const result = await client.eval(script, numKeys, ...args);
+ 
+       return result;
+     } catch (err) {
+       console.log(err);
+       throw err;
+     }
+   }
+    
+  
+  
+};

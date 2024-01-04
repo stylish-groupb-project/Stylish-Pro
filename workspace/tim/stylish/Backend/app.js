@@ -12,14 +12,30 @@ const user_router = require('./Router/user_router');
 const order_router = require('./Router/order_router');
 const chatBot_router = require('./Router/chatBot_router');
 const monitor_router = require('./Router/monitor_router');
+const auth_router = require('./Router/auth_router');
 app.use(cors());
-app.use(express.json());
+function excludeJsonMiddleware(req, res, next) {
+    if (req.path === '/line-webhook') {
+      next();
+    } else {
+      express.json()(req, res, next);
+    }
+}
+app.use(excludeJsonMiddleware);
+// app.use(express.json());
+
+// Line Bot
+// Line Bot
+const lineBotUtil = require('./utils/line_bot');
+const {line, config} = require('./utils/line_bot');
+
 
 app.use('/api/1.0/products', product_router);
 app.use('/api/1.0/user', user_router);
 app.use('/api/1.0/order', order_router);
 app.use('/api/1.0/chatBot', chatBot_router);
 app.use('/api/1.0/monitor', monitor_router);
+app.use('/auth',auth_router);
 
 // app.use('/static',express.static(__dirname+'/static'));
 // test
@@ -31,8 +47,8 @@ app.use(
 app.use("/admin", express.static("admin"));
 
 app.get('/api/admin/checkout.html', (req, res) => {
-    console.log(path.join(__dirname, 'Backend', 'View', 'html', 'checkout.html'));
-    res.sendFile(path.join(__dirname, 'Backend', 'View', 'html', 'checkout.html'));
+    console.log(path.join(__dirname, 'View', 'html', 'checkout.html'));
+    res.sendFile(path.join(__dirname, 'View', 'html', 'checkout.html'));
 });
 
 
@@ -52,6 +68,20 @@ app.get('/.well-known/pki-validation/753A3038A7992A7112828484D232D6CA.txt', (req
     console.log(file);
     res.sendFile(file);
 });
+
+app.post('/line-webhook', line.middleware(config), async (req, res) => {
+    try {
+        console.log('Received LINE Webhook:', req.body);
+        for (const event of req.body.events) {
+            await lineBotUtil.handleEvent(res, event);
+        }
+        res.json({ success: true });
+    } catch (error) {
+        console.error(error);
+        res.status(500).end();
+    }
+});
+
 
 const server = http.createServer(app);
 const io = require("socket.io")(server, {
@@ -98,7 +128,7 @@ async function initialize() {
                             socket.emit('waiting', '排隊成功，請稍等真人為您服務');
                         } else {
                             socket.emit('busy', '目前系统忙碌，請稍後再試');
-                            socket.emit('waitingNumber', `現有「 ${counter*-1} 」人在排隊呦！`);
+                            socket.emit('waitingNumber', `現有「 ${counter*-1-1} 」人在排隊呦！`);
                             socket.emit('message', data);
                             return;
                         }

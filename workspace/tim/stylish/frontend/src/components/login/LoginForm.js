@@ -103,7 +103,7 @@ const loginSchema = z.object({
     email: z.string().email("Invalid email"),
     password: z.string(),
 });
-const LoginForm = ({ setShowLogin, showLogin }) => {
+const LoginForm = ({ setShowLogin, showLogin, showForgotPassword, setShowForgotPassword }) => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const {
@@ -133,7 +133,7 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
     const loginHandler = async (values) => {
         setLoading(true);
         try {
-            const response = await axios.post(`https://${elasticIp}/api/1.0/user/signin`, {
+            const response = await axios.post(`${elasticIp}/api/1.0/user/signin`, {
                 provider: "native",
                 email: values.email,
                 password: values.password,
@@ -141,7 +141,7 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
             console.log(response.data);
             const { access_token, user } = response.data.data;
             setCookies({ access_token, user });
-            navigate(-1);
+            navigate("/");
         } catch (error) {
             handleError(error);
         }
@@ -150,6 +150,10 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
     //登入成功後
     const showLoginHandler = () => {
         setShowLogin(!showLogin);
+    }
+
+    const showForgotPasswordHandler = () => {
+        setShowForgotPassword(!showForgotPassword);
     }
 
     return (
@@ -183,6 +187,12 @@ const LoginForm = ({ setShowLogin, showLogin }) => {
               尚未成為會員 ?
               <SignUpLink onClick={showLoginHandler}>
                 會員註冊
+              </SignUpLink>
+            </SignUpPrompt>
+            <SignUpPrompt>
+              忘記密碼 ?
+              <SignUpLink onClick={showForgotPasswordHandler}>
+                忘記密碼
               </SignUpLink>
             </SignUpPrompt>
           </StyledForm>

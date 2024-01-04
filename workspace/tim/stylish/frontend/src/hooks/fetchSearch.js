@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const elasticIp = process.env.REACT_APP_ELASTIC_IP;
+const elasticIp = process.env.REACT_APP_ELASTIC_IP || "localhost";
 
 const GetProductSearch = async (keyword, page = "0") => {
   try {

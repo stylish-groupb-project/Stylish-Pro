@@ -38,5 +38,29 @@ module.exports = {
     monitorProblem: (res) => {
         res.status(403).json({ error: 'Monitor problem' });
     },
+    failedToSendEmail: (res) => {
+      res.status(500).json({ error: 'Failed to send email' });
+  },
+  notNativeUser: (res) => {
+      res.status(403).json({ error: 'This is not a native user' });
+  },
+  noResetToken: (res) => {
+      res.status(403).json({ error: 'No reset token' });
+  },
+  tokenExpired: (res) => {
+      res.status(403).json({ error: 'Token expired' });
+  },
+  flashSaleNotFound: (res) => {
+    res.status(404).json({ error: "Flash Sale not found" });
+  },
+  flashSaleEnded: (res) => {
+    res.status(403).json({ error: "Flash Sale ended" });
+  },
+  flashSaleNotStarted: (res) => {
+    res.status(403).json({ error: "Flash Sale not started" });
+  },
+  flashSaleSoldOut: (res) => {
+    res.status(403).json({ error: "Flash Sale sold out" });
+  },
 
 }
