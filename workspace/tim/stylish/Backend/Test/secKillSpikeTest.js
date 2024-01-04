@@ -1,11 +1,11 @@
 import http from "k6/http";
 import { check } from "k6";
 
-const totalUsers = 2000;
+const totalUsers = 5000;
 const apiUrl = `https://localhost/api/1.0/order/checkout`;
 
 export const options = {
-  stages: [{ duration: "10s", target: totalUsers }],
+  stages: [{ duration: "1s", target: totalUsers }],
 };
 
 export default function () {
@@ -30,14 +30,14 @@ export default function () {
         },
         list: [
           {
-            id: 113,
+            id: 99,
             name: "日系暖男上衣",
             price: "90.00",
             color: {
               code: "000000",
               name: "Black",
             },
-            size: "M",
+            size: "S",
             qty: 1,
           },
         ],

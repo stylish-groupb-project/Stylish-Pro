@@ -43,7 +43,19 @@ const FlashPage = ({ endpoint }) => {
 
   const findClosestStartTime = (data) => {
     const now = Date.now();
-    const closestStartTime = data.reduce(
+
+    // Filter out flash sales that have already ended
+    const upcomingFlashSales = data.filter((item) => {
+      const startTime = new Date(item.start_time).getTime();
+      return startTime > now;
+    });
+
+    if (upcomingFlashSales.length === 0) {
+      return null; // No upcoming flash sales found
+    }
+
+    // Find the closest upcoming start time
+    const closestStartTime = upcomingFlashSales.reduce(
       (closest, item) => {
         const startTime = new Date(item.start_time).getTime();
         const timeDiff = Math.abs(startTime - now);
@@ -65,11 +77,13 @@ const FlashPage = ({ endpoint }) => {
     }))
     .filter(Boolean);
 
+  const limitedBannerImages = bannerImages.slice(0, 5);
+
   return (
     <>
       <Header />
       <MainContent>
-        <Slider slides={bannerImages} />
+        <Slider slides={limitedBannerImages} />
         <CountdownTitle targetTime={targetTime} /> {/* Use the new component */}
         <FlashProducts endpoint={endpoint} secKillData={secKillData} />
       </MainContent>

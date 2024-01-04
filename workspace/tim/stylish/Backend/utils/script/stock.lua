@@ -1,20 +1,10 @@
-local seckillKey = KEYS[1]
-local purchaseQuantity = tonumber(ARGV[1])
+if (redis.call('hexists', KEYS[1], KEYS[2]) == 1) then
+  local stock = tonumber(redis.call('hget', KEYS[1], KEYS[2]));
+  if (stock > 0) then
+      redis.call('hincrby', KEYS[1], KEYS[2], -1);
+      return stock;
+  end;
+  return 0;
+end;
 
-local jsonData = redis.call('GET', seckillKey)
-
-local seckillData = cjson.decode(jsonData)
-
-if seckillData and seckillData.amount then
-    local stock = tonumber(seckillData.amount)
-
-    if stock >= purchaseQuantity and purchaseQuantity > 0 then
-        seckillData.amount = stock - purchaseQuantity
-
-        redis.call('SET', seckillKey, cjson.encode(seckillData))
-
-        return seckillData.amount
-    end
-end
-
-return 0
+return 0;

@@ -1,28 +1,24 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
 import {
   ColorBlock,
   ColorContainer,
 } from "../../styled-components/ProductColor";
-// import { format } from "date-fns";
 import Countdown from "react-countdown";
 import "./productCard.css";
 
-const FlashProductCard = ({ product, secKillInfo }) => {
+const FlashProductCard = ({ product, secKillInfo, isClickable }) => {
   const navigate = useNavigate();
 
-  // const formattedTime = secKillInfo
-  //   ? formatDateTime(secKillInfo.start_time)
-  //   : "";
-
   const handleClick = () => {
-    navigate(`/products/${product.id}`);
+    if (isClickable) {
+      navigate(`/products/${product.id}`);
+    }
   };
 
   return (
     <div
-      className="product-card"
+      className={`product-card ${isClickable ? "clickable" : ""}`}
       onClick={handleClick}
       data-testid="product-card"
     >
@@ -58,18 +54,10 @@ const FlashProductCard = ({ product, secKillInfo }) => {
   );
 };
 
-// const formatDateTime = (dateTimeString) => {
-//   const dateTime = new Date(dateTimeString);
-//   const formattedDate = format(dateTime, "yyyy-MM-dd HH:mm:ss a");
-//   return formattedDate;
-// };
-
 const renderer = ({ days, hours, minutes, seconds, completed }) => {
   if (completed) {
-    // Render a completed state
-    return <span>Seckill Ended</span>;
+    return <span>搶購中</span>;
   } else {
-    // Render a countdown
     return (
       <span>
         {`${days} 天 `}

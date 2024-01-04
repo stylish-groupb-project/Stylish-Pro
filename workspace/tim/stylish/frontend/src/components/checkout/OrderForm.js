@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import useTappay from "../../hooks/useTappay";
 import { CartCountContext } from "../../contexts/CartCountManager";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 const elasticIp = process.env.REACT_APP_ELASTIC_IP || "localhost";
 /* global TPDirect */
 
@@ -436,7 +437,6 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
         }
       );
       console.log(response.data.data);
-      console.log(selectedPrize.id);
 
       if (selectedPrize && adjustedFreight !== 60) {
         await axios.put(
@@ -452,6 +452,7 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
         );
       }
 
+      localStorage.removeItem("cart");
       //response.data.data.time
       navigate(
         `/thankyou?order_id=${response.data.data.number}&time=${values.time}`
@@ -459,7 +460,34 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
       // navigate(`/thankyou?order_id=${1}&time=${values.time}`);
     } catch (error) {
       console.error(error);
-      alert("訂單提交失敗");
+
+      if (error.response) {
+        // 如果是 API 回應錯誤
+        const { status, data } = error.response;
+
+        switch (status) {
+          case 404:
+            // Flash Sale not found
+            Swal.fire({
+              icon: "error",
+              title: data.error,
+            });
+            break;
+          case 403:
+            // Flash Sale ended, Flash Sale not started, Flash Sale sold out
+            Swal.fire({
+              icon: "error",
+              title: data.error,
+            });
+            break;
+          default:
+            // other api issue
+            Swal.fire({
+              icon: "error",
+              title: "訂單提交失敗",
+            });
+        }
+      }
     }
     setLoading(false);
   };

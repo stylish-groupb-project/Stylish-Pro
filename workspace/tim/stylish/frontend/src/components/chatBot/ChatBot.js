@@ -26,7 +26,7 @@ const Wrapper = styled.div``;
 const ChatbotBtn = styled.img`
   width: 80px;
   position: fixed;
-  bottom: 140px;
+  bottom: 15px;
   right: 0px;
   cursor: pointer;
   transform: ${(props) => props.transform};
