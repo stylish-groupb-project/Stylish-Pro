@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import Cookies from "js-cookie";
 import Cart from "../Cart";
 
@@ -59,7 +59,7 @@ const Copyright = styled.p`
 
 const BottomLinkSection = styled.div`
   display: flex;
-//   position: fixed;
+  //   position: fixed;
   width: 100%;
   padding: 0.5rem 0;
   bottom: 0;
@@ -74,7 +74,6 @@ const BottomLink = styled.a`
   width: 50%;
   border-right: 1px solid #828282;
 
-
   &:last-child {
     border-right: none;
   }
@@ -88,7 +87,7 @@ const LinkText = styled.span`
 `;
 
 const SocialContainer = styled.div`
-    align-items: center;
+  align-items: center;
 `;
 
 function MobileFooter() {
@@ -100,7 +99,7 @@ function MobileFooter() {
           <FooterLink href="/">服務條款</FooterLink>
           <FooterLink href="/">隱私政策</FooterLink>
         </LinkColumn>
-        <LinkColumn style={{ marginRight: '1.875rem' }}>
+        <LinkColumn style={{ marginRight: "1.875rem" }}>
           <FooterLink href="/">聯絡我們</FooterLink>
           <FooterLink href="/">FAQ</FooterLink>
         </LinkColumn>
@@ -110,9 +109,7 @@ function MobileFooter() {
           <SocialIcon src={Facebook} alt="facebook-icon" />
         </div>
       </LinksContainer>
-      <Copyright>
-        © 2023. All rights reserved.
-      </Copyright>
+      <Copyright>© 2023. All rights reserved.</Copyright>
       <BottomLinkSection>
         <BottomLink href="/checkout">
           <Cart />

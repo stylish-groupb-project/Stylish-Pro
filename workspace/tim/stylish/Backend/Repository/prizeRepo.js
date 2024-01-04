@@ -29,18 +29,33 @@ module.exports = {
     }
   },
 
-  updatePrizeUsedStatus: async (res, used, prizeId) => {
+  updatePrizeUsedStatus: async (res, userId, prizeId) => {
     try {
       const connection = await connectionPromise;
-      const updatePrizeQuery = "UPDATE prizes SET used = ? WHERE id = ?";
-      await connection.execute(updatePrizeQuery, [used ? 1 : 0, prizeId]);
+      console.log("userId", userId);
+      console.log("prizeId", prizeId);
+
+      const updatePrizeQuery =
+        "UPDATE prizes SET used = 1 WHERE userId = ? AND id = ?";
+
+      const [result] = await connection.execute(updatePrizeQuery, [
+        userId,
+        prizeId,
+      ]);
+
+      if (result.affectedRows > 0) {
+        return { success: true, message: "Prize updated successfully" };
+      } else {
+        return { success: false, message: "Prize not found or already used" };
+      }
     } catch (error) {
       console.error(error);
-      errorMsg.query(res);
+      throw error;
     } finally {
       console.log("connection release");
     }
   },
+
   checkTodayPrize: async (res, userId) => {
     try {
       const connection = await connectionPromise;
@@ -63,6 +78,25 @@ module.exports = {
     } catch (error) {
       console.error(error);
       throw error;
+    }
+  },
+  getAllUnusedPrizesByUserId: async (res, userId) => {
+    try {
+      const connection = await connectionPromise;
+
+      const getAllUnusedPrizesQuery =
+        "SELECT * FROM prizes WHERE userId = ? AND used = 0";
+
+      const [result] = await connection.execute(getAllUnusedPrizesQuery, [
+        userId,
+      ]);
+
+      console.log(result);
+
+      return result;
+    } catch (error) {
+      console.error(error);
+      errorMsg.query(res);
     }
   },
 };

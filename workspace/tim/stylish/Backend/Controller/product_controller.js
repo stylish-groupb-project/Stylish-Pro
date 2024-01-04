@@ -2,6 +2,8 @@ const getProductDetailHandler = require("../Application/Features/Product/Queries
 const searchProductHandler = require("../Application/Features/Product/Queries/SearchProduct/searchProductHandler");
 const getFileredProductHandler = require("../Application/Features/Product/Queries/GetFilteredProduct/getFilteredProductHandler");
 const createProductHandler = require("../Application/Features/Product/Commands/CreateProduct/createProductHandler");
+const getSecKillHandler = require("../Application/Features/Product/Queries/GetSecKill/getSecKillHandler");
+
 module.exports = {
   addProduct: async (req, res) => {
     try {
@@ -99,6 +101,14 @@ module.exports = {
     try {
       const { id } = req.query;
       const response = await getProductDetailHandler.handle(res, id);
+      res.status(200).json(response);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  getSecKill: async (req, res) => {
+    try {
+      const response = await getSecKillHandler.handle(res);
       res.status(200).json(response);
     } catch (error) {
       console.log(error);

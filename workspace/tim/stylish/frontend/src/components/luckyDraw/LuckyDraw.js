@@ -22,6 +22,10 @@ const LotteryBtn = styled.img`
     border-radius: 9999px;
     box-shadow: -9px 10px 30px rgba(112, 112, 112, 0.35);
   }
+  &:hover {
+    transform: scale(1.2);
+    // Add any other styles you want to apply on hover
+  }
 `;
 
 const LuckyDraw = () => {

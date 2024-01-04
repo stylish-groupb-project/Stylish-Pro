@@ -52,4 +52,33 @@ module.exports = {
       console.log(error);
     }
   },
+  updatePrizeStatus: async (req, res) => {
+    try {
+      const loginUserId = req.decodedToken.id;
+      const prizeId = req.params.prizeId;
+      console.log(loginUserId);
+      console.log(prizeId);
+
+      const response = await prizeHandler.updatePrizeStatus(
+        res,
+        loginUserId,
+        prizeId
+      );
+      res.status(200).json(response);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
+
+  getAllUnusedPrizes: async (req, res) => {
+    try {
+      const loginUserId = req.decodedToken.id;
+
+      const response = await prizeHandler.getAllUnusedPrizes(res, loginUserId);
+      res.status(200).json(response);
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
