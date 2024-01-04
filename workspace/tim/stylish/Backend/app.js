@@ -118,11 +118,11 @@ async function initialize() {
                 if (data.to === 'admin') {
                     const isUserWaiting = await redis.isSocketIdInList('waitingUsers', data.from);
                     if (!isUserWaiting) {
-                        counter-=1;
                         const list = await redis.getAllElementsFromList('waitingUsers');
                         const queueSize = list.length;
                         console.log("queueSize",queueSize);
                         if (queueSize < MAX_WAITING_USERS) {
+                            counter-=1;
                             await redis.addToList('waitingUsers', data.from);
                             await rabbitMQModule.sendMessageToQueue(channel, data.from);
                             socket.emit('waiting', '排隊成功，請稍等真人為您服務');
