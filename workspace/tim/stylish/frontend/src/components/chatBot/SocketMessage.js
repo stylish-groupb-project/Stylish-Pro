@@ -30,8 +30,11 @@ const ContentBoxWrapper = styled.div`
 `;
 
 const Content = styled.div`
+  display: block;
+  line-height: 30px;
   padding: 10px;
-  line-height: 23px;
+  font-size: 1.2rem;
+  margin: 0 5px;
 `;
 
 

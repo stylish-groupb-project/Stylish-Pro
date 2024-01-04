@@ -6,9 +6,18 @@ import { SocketMessage } from './SocketMessage.js';
 import { io } from 'socket.io-client';
 import chatBotImg from '../../assets/images/chatbot-icon.png';
 import inputBtnImg from '../../assets/images/input-btn.png';
+import Swal from 'sweetalert2';
+import './nextBtnSwal.css';
 // const socket = io('https://emmalinstudio.com/');
 // const socket = io('http://localhost', { path: '/api/socket.io'});
 const socketUrl = process.env.REACT_APP_SOCKET_URL;
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: "sweet-alert-btn-success",
+    cancelButton: "sweet-alert-btn-danger"
+  },
+  buttonsStyling: false
+});
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -45,9 +54,13 @@ const GreenCircle = styled.div`
   border-radius: 9999px;
   background-color: #90ee90;
 `;
+const MessageBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 const NextBtn = styled.button`
-    width: 4rem;
-    height: 2rem;
+    width: 5rem;
+    height: 2.5rem;
     background: #D2BAAC;
     border-radius: 150px;
     display: flex;
@@ -56,6 +69,7 @@ const NextBtn = styled.button`
     border: none;
     font-weight: bold;
     color: #FFFFFF; 
+    font-size: 1.1rem;
     transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease; // 添加過渡效果
 
     &:hover {
@@ -66,9 +80,10 @@ const NextBtn = styled.button`
 `;
 const ChatRoom = styled.div`
   width: 100%;
-  // height: 550px;
+  height: 550px;
   background-color: #f4f4f4;
   box-shadow: 0 0 3em rgba(0, 0, 0, 0.15);
+  position: relative;
   // bottom: 122px;
   // right: 0;
   // z-index: 9999;
@@ -105,10 +120,10 @@ const MessageWrapper = styled.div`
   position: relative;
   height: 550px;
 `;
-const MessageBox = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+// const MessageBox = styled.div`
+//   display: flex;
+//   flex-direction: column;
+// `;
 
 // const UserWrapper = styled.ul`
 //   width: 30%;
@@ -183,9 +198,10 @@ const Input = styled.input`
   width: 100%;
   height: 100%;
   position: relative;
-  border-radius: 0px 0px 0px 24px;
+  border-radius: 0px 0px 24px 24px;
   padding: 0 47px 5px 14px;
   border: none;
+  font-size: 1.1rem;
   &:focus {
     outline: none;
   }
@@ -194,16 +210,29 @@ const Input = styled.input`
 const InputButton = styled.img`
   width: 27px;
   position: absolute;
-  right: 0;
+  right: 5px;
   top: 50%;
   margin-right: 8px;
   transform: translateY(-50%);
   cursor: pointer;
 `;
+const IsRequestMsgDiv = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #f4f4f4;
+  padding: 1rem 0;
+`;
+const IsRequestMsg = styled.span`
+  text-align: center;
+  color: #4a4a4a;
+`;
 
 function Backstage() {
   const [socketData, setSocketData] = useImmer([]);
   const [currUser, setCurrUser] = useState();
+  const [roomState, setRoomState] = useState("");
   const dummyRef = useRef();
   const inputRef = useRef();
   const socketRef = useRef(null);
@@ -231,7 +260,34 @@ function Backstage() {
     inputRef.current.value = '';
   };
   const handleNextBtn = () => {
-    socketRef.current.emit('consumeRequest');
+    swalWithBootstrapButtons.fire({
+      title: "Sure?",
+      text: "Won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        socketRef.current.emit('consumeRequest');
+        swalWithBootstrapButtons.fire({
+          title: "Deleted!",
+          text: "Next client comes.",
+          icon: "success"
+        });
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire({
+          title: "Cancelled",
+          text: "cancel :)",
+          icon: "error"
+        });
+      }
+    });
+    // socketRef.current.emit('consumeRequest');
   };
 
   useEffect(() => {
@@ -252,6 +308,11 @@ function Backstage() {
       setSocketData(draft => draft.concat(response));
       setCurrUser(response.from === 'admin' ? response.to : response.from);
     });
+    const handleNoMoreCustomers = (response) => {
+      console.log("NoMoreCustomers", response);
+      setRoomState(response);  // 直接设置状态
+    };
+    socketRef.current.on('noMoreCustomers', handleNoMoreCustomers);
   }, []);
   useEffect(() => {
     dummyRef.current.scrollIntoView({
@@ -273,48 +334,41 @@ function Backstage() {
       </HeadWrapper>
       <ChatRoom>
         <RoomHeaderWrapper>
-          <UserInfo>Test User</UserInfo>
+          <UserInfo>{currUser}</UserInfo>
         </RoomHeaderWrapper>
         <MessageWrapper>
-          <ChatRoom>
-            <SocketMessage
+          <MessageBox>
+            {roomState &&
+              <IsRequestMsgDiv>
+                <IsRequestMsg>{roomState}</IsRequestMsg>
+              </IsRequestMsgDiv>
+            }
+            {roomState == "" &&
+              <SocketMessage
               threads={socketData}
-              socketId={socketRef.current?.id}
+              socketId={currUser}
             ></SocketMessage>
+            }
             <div ref={dummyRef}></div>
-          </ChatRoom>
-          <InputWrapper>
-            <Input
-              ref={inputRef}
-              id="input"
-              placeholder="    輸入訊息"
-            />
-            <InputButton
-              src={inputBtnImg}
-              onClick={() => {
-                if (inputRef.current.value.trim() !== '') {
-                  handleSend(inputRef.current.value);
-                }
-              }}
-            />
-          </InputWrapper>
-          {/* <Form>
-            <Input
-              ref={inputRef}
-              id="input"
-              placeholder="請輸入訊息"
-              autocomplete="off"
-            />
-            <Button
-              onClick={() => {
-                if (inputRef.current.value.trim() !== '') {
-                  handleSend(inputRef.current.value);
-                }
-              }}>
-              Send
-            </Button>
-          </Form> */}
+          </MessageBox>
+          {/* <ChatRoom> */}
         </MessageWrapper>
+        <InputWrapper>
+          <Input
+            ref={inputRef}
+            id="input"
+            placeholder="    輸入訊息"
+          />
+          <InputButton
+            src={inputBtnImg}
+            onClick={() => {
+              if (inputRef.current.value.trim() !== '') {
+                handleSend(inputRef.current.value);
+              }
+            }}
+          />
+        </InputWrapper>
+        {/* </MessageWrapper> */}
       </ChatRoom>
 
     </Wrapper>

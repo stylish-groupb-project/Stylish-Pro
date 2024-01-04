@@ -12,6 +12,7 @@ export async function fetchProducts(endpoint, keyword, pageParam) {
     return response.data;
 }
 
+
 export async function GetProductDetail (id)  {
     try {
         const response = await axios.get(

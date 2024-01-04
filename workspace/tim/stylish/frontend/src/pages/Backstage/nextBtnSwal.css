@@ -1,0 +1,22 @@
+.sweet-alert-btn-success {
+    background-color: rgb(93, 206, 125);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 13px;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .sweet-alert-btn-danger {
+    background-color: rgb(215, 63, 63);
+    color: white;
+    padding: 1rem 2rem;
+    /* margin-left: 2rem; */
+    margin-right: 3rem;
+    border: none;
+    border-radius: 13px;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  

@@ -45,13 +45,13 @@ const ChatbotBtn = styled.img`
 `;
 
 const Chatroom = styled.div`
-  width: 350px;
-  height: 550px;
+  width: 450px;
+  height: 600px;
   position: fixed;
   background-color: #f4f4f4;
   box-shadow: 0 0 3em rgba(0, 0, 0, 0.15);
   bottom: 122px;
-  right: 0;
+  right: 2rem;
   z-index: 9999;
   transform: ${props => props.transform};
   transition: transform 500ms cubic-bezier(0.5, 0, 0.5, 1);
@@ -127,17 +127,18 @@ const MessageBox = styled.div`
 
 const InputWrapper = styled.div`
   width: 100%;
-  height: 40px;
+  height: 50px;
   position: absolute;
   bottom: 0;
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: 85%;
   height: 100%;
   position: relative;
-  border-radius: 0px 0px 0px 24px;
-  padding: 0 47px 5px 14px;
+  font-size: 1.1rem;
+  border-radius: 0px 0px 24px 24px;
+  padding: 0 47px 5px 20px;
   border: none;
   &:focus {
     outline: none;
@@ -147,7 +148,7 @@ const Input = styled.input`
 const InputButton = styled.img`
   width: 27px;
   position: absolute;
-  right: 0;
+  right: 5px;
   top: 50%;
   margin-right: 8px;
   transform: translateY(-50%);
@@ -223,7 +224,16 @@ const Chatbot = () => {
       const data = {
         from: 'admin',
         to: socketRef.current.id,
-        response,
+        message: response,
+      };
+      setThreads(draft => draft.concat(data));
+    });
+    socketRef.current.on('waitingNumber', response => {
+      console.log("waitingNumber:",response);
+      const data = {
+        from: 'admin',
+        to: socketRef.current.id,
+        message: response,
       };
       setThreads(draft => draft.concat(data));
     });
@@ -232,7 +242,7 @@ const Chatbot = () => {
       const data = {
         from: 'admin',
         to: socketRef.current.id,
-        response,
+        message: response,
       };
       setThreads(draft => draft.concat(data));
     });
@@ -251,14 +261,14 @@ const Chatbot = () => {
     <Wrapper>
       <ChatbotBtn
         src={chatbotIcon}
-        transform={chatBtnShow ? 'translateX(0%)' : 'translateX(100%)'}
+        transform={chatBtnShow ? 'translateX(0%)' : 'translateX(120%)'}
         onClick={() => {
           setChatBtnShow(false);
           window.setTimeout(() => setChatRoomShow(true), 400);
         }}
       />
       <Chatroom
-        transform={chatRoomShow ? 'translateX(0%)' : 'translateX(100%)'}>
+        transform={chatRoomShow ? 'translateX(0%)' : 'translateX(120%)'}>
         <HeaderWrapper>
           <IconWrapper>
             <Icon src={chatbotIcon} />
