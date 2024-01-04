@@ -7,7 +7,7 @@ const {
 console.log("rabbitEnv: ",RABBITMQ_DEFAULT_PASSWORD);
 const rabbitMQURL = `amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASSWORD}@rabbitmq:5672`;
 
-async function connectRabbitMQ(retryCount = 10) {
+async function connectRabbitMQ(retryCount = 15) {
     try {
         const connection = await amqp.connect(rabbitMQURL);
         const channel = await connection.createChannel();
@@ -18,7 +18,7 @@ async function connectRabbitMQ(retryCount = 10) {
         console.error("Failed to connect to RabbitMQ:", error);
         if (retryCount > 0) {
             console.log(`Retrying to connect (${retryCount})...`);
-            await new Promise(resolve => setTimeout(resolve, 4000)); // 等待5秒后重试
+            await new Promise(resolve => setTimeout(resolve, 5000)); // 等待5秒后重试
             return connectRabbitMQ(retryCount - 1);
         }
         throw error;
