@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
 import CartItem from "./CartItem";
 import { CartCountContext } from "../../contexts/CartCountManager";
@@ -13,24 +13,22 @@ const CartHeader = styled.div`
 `;
 
 const CartTitle = styled.span`
-    font-family: sans-serif;
-    font-weight: bold;
-    font-size: 1rem;
-    color: #3F3A3A;
-    width: 46%;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #3f3a3a;
+  width: 46%;
 
-    @media (max-width: 1280px){
-        padding-left: 1rem;
-        width: 100%;
-    }
-  
+  @media (max-width: 1280px) {
+    padding-left: 1rem;
+    width: 100%;
+  }
 `;
 
 const CartInfo = styled.div`
   display: none;
   min-width: 32.5rem;
 
-  
   @media (min-width: 1024px) {
     display: flex;
     justify-content: space-around;
@@ -46,20 +44,19 @@ const CartItemContainer = styled.div`
   padding-left: 1.875rem;
   padding-right: 1.875rem;
 
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     border: none;
     padding-top: 0;
     padding-left: 1rem;
     padding-right: 1rem;
   }
-
 `;
 
 const OrderWindow = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`
+`;
 
 const CheckoutItems = ({ setCartUpdate }) => {
   const [cartData, setCartData] = useState([]);
@@ -72,7 +69,7 @@ const CheckoutItems = ({ setCartUpdate }) => {
     };
     handleStorageChange();
   }, [count]);
-  console.log("Checkoutpage:",cartData);
+  console.log("Checkoutpage:", cartData);
   const cartItems = cartData.map((cartItem) => (
     <CartItem
       key={cartItem.id + cartItem.color.colorCode + cartItem.size}

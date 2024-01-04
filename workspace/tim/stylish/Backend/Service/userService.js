@@ -1,22 +1,29 @@
 // Service layer (負責關於資料庫相關的邏輯處理)
-const userRepo = require('../Repository/userRepo');
-const roleRepo = require('../Repository/roleRepo');
-const errorMsg = require('../utils/error');
-const connectionPromise = require('../utils/db').connectionPromise;
+const userRepo = require("../Repository/userRepo");
+const roleRepo = require("../Repository/roleRepo");
+const errorMsg = require("../utils/error");
+const connectionPromise = require("../utils/db").connectionPromise;
 module.exports = {
-    signUp: async (res, userIfoObj) => {
-        const connection = await connectionPromise.getConnection();
-        try {
-            //transaction 
-            const checkResult = await userRepo.selectUserByEmail(res, userIfoObj.email);
-            if (checkResult.length > 0) {
-                return errorMsg.emailExist(res);
-            }
+  signUp: async (res, userIfoObj) => {
+    const connection = await connectionPromise.getConnection();
+    try {
+      //transaction
+      const checkResult = await userRepo.selectUserByEmail(
+        res,
+        userIfoObj.email
+      );
+      if (checkResult.length > 0) {
+        return errorMsg.emailExist(res);
+      }
 
-            await connection.beginTransaction();
-            const insertResult = await userRepo.insertNewUser(res, userIfoObj, connection);
-            await roleRepo.addRoleToUser(res, 2 , insertResult.insertId , connection);
-            await connection.commit();
+      await connection.beginTransaction();
+      const insertResult = await userRepo.insertNewUser(
+        res,
+        userIfoObj,
+        connection
+      );
+      await roleRepo.addRoleToUser(res, 2, insertResult.insertId, connection);
+      await connection.commit();
 
             return insertResult;
 

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { useEffect } from "react";
+import styled from "styled-components";
+import { useEffect, useMemo } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useSearchParams } from "react-router-dom";
@@ -7,11 +7,11 @@ import { fetchProducts } from "../../hooks/api";
 import ProductCard from "../productCard/ProductCard";
 
 const ProductsContainer = styled.div`
-//   max-width: 81.25rem;
-//   margin: auto;
-//   margin-bottom: 3rem;
+  //   max-width: 81.25rem;
+  //   margin: auto;
+  //   margin-bottom: 3rem;
   margin: 0 1rem 3rem 1rem;
-// width: 100%
+  // width: 100%
   @media (min-width: 1024px) {
     margin-bottom: 6rem;
   }
@@ -20,7 +20,7 @@ const ProductsContainer = styled.div`
 const ProductRow = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
   margin-top: 1rem;
 `;
 
@@ -37,8 +37,8 @@ const ErrorMessage = styled.p`
 `;
 
 const ProductWrapper = styled.div`
-//   margin-left: 2.5rem;
-    margin-right: 0.5rem;
+  //   margin-left: 2.5rem;
+  margin-right: 0.5rem;
 `;
 
 function Products({ endpoint }) {
@@ -46,8 +46,14 @@ function Products({ endpoint }) {
   const keyword = searchParams.get("search");
   const { ref, inView } = useInView();
 
+  const queryKey = useMemo(
+    () => ["allProducts", keyword, endpoint],
+    [keyword, endpoint]
+  );
+
+  console.log(endpoint);
   const { data, status, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ["allProducts", keyword],
+    queryKey: queryKey,
     queryFn: ({ pageParam }) => fetchProducts(endpoint, keyword, pageParam),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.next_paging,
@@ -57,11 +63,11 @@ function Products({ endpoint }) {
     if (inView) {
       fetchNextPage();
     }
-  }, [fetchNextPage, inView]);
+  }, [fetchNextPage, inView, queryKey]);
 
-//   if (status === "pending") {
-//     return <ProductsSkeleton />;
-//   }
+  //   if (status === "pending") {
+  //     return <ProductsSkeleton />;
+  //   }
 
   if (status === "error") {
     return <ErrorMessage>500 Internal Server Error</ErrorMessage>;
