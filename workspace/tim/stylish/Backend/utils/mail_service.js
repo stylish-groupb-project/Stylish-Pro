@@ -1,7 +1,7 @@
 require("dotenv").config();
 const nodemailer = require("nodemailer");
 
-const frontendUrl = process.env.REACT_APP_ELASTIC_IP;
+const frontendUrl = "https://stylish-web-app-fe-7kaitd6nga-de.a.run.app";
 const mailOptions = {
   resetPassword: (name, resetLink) => {
     const subject = `Stylish - Reset Password`;
@@ -39,7 +39,7 @@ async function sendMailWithOption(options) {
 
 const sendResetLink = async (email, resetToken) => {
   console.log("sendResetLink");
-  const resetLink = `https://${frontendUrl}/reset-password?token=${resetToken}`;
+  const resetLink = `${frontendUrl}/reset-password?token=${resetToken}`;
   const [subject, html] = mailOptions.resetPassword(email, resetLink);
   const options = {
     from: process.env.SYSTEM_EMAIL,
