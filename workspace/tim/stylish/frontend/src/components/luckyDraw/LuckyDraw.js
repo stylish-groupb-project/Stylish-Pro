@@ -6,7 +6,7 @@ import LotteryModal from "./LotteryModal";
 const LotteryBtn = styled.img`
   width: 60px;
   position: fixed;
-  bottom: 20px;
+  bottom: 150px;
   right: 10px;
   cursor: pointer;
   transform: ${(props) => props.transform};
