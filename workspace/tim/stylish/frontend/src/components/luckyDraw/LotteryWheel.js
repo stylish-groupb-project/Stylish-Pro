@@ -172,8 +172,11 @@ const LotteryWheel = () => {
 
   const handleEnd = (prize) => {
     const prizeText = prize.fonts.map((font) => font.text).join("");
-    Swal.fire("恭喜你抽到 " + prizeText);
-    // API call to save the prize to the database
+    Swal.fire({
+      title: "恭喜你抽到 " + prizeText + " 🎉",
+      text: "優惠卷將於 7 天後過期，請儘速使用！",
+      icon: "Success",
+    });
 
     // Get the current time
     const currentTime = new Date().toISOString();
