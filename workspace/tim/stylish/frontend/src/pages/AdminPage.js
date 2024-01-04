@@ -89,7 +89,7 @@ const AdminPage = () => {
   useEffect(() => {
     const fetchOrderList = async () => {
       const res = await axios.get(
-        'https://${elasticIp}/api/1.0/order/manage',
+        `https://${elasticIp}/api/1.0/order/manage`,
         {
           headers: {
             Authorization: `Bearer ${Cookies.get("token")}`,
