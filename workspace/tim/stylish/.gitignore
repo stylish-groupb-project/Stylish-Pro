@@ -3,3 +3,4 @@ nginx.conf
 .env
 private/
 backup.sql
+1_4_backup.sql
