@@ -25,8 +25,8 @@ module.exports = {
     insertNewUser: async(res,userInfoObj, connection)=>{
         try {
             const {name , email, hashedPassword , provider , picture} = userInfoObj;
-            const signupQuery = 'INSERT INTO userInfo(name, email, password, provider , picture) VALUES(?,?,?,?,?)';
-            const [result] = await connection.execute(signupQuery, [name, email, hashedPassword, provider , picture]); 
+            const signupQuery = 'INSERT INTO userInfo(name, email, password, provider , picture, line_id) VALUES(?,?,?,?,?,?)';
+            const [result] = await connection.execute(signupQuery, [name, email, hashedPassword, provider , picture, null]);
             return result;     
         } catch (error) {
             console.error(error);
@@ -62,6 +62,17 @@ module.exports = {
           const { resetPasswordToken, resetPasswordExpire } = userInfoObj;
           const updateQuery = 'UPDATE user_reset_tokens SET reset_password_token = ?, reset_password_expire = ? WHERE user_id = ?';
           const [result] = await connection.execute(updateQuery, [resetPasswordToken, resetPasswordExpire, userId]);
+          return result;
+        } catch (error) {
+          console.error(error);
+          errorMsg.query(res);
+        }
+    },
+    updateLineId: async (res, lineId, userId) => {
+        const connection = connectionPromise;
+        try {
+          const updateQuery = 'UPDATE userInfo SET line_id = ? WHERE id = ?';
+          const [result] = await connection.execute(updateQuery, [lineId, userId]);
           return result;
         } catch (error) {
           console.error(error);

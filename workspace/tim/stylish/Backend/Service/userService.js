@@ -125,6 +125,14 @@ module.exports = {
         }
         return result;
     },
+    updateLineId: async (res, lineId, userId) => {
+        console.log("updateLineId");
+        const result = await userRepo.updateLineId(res, lineId, userId);
+        if (result.affectedRows === 0) {
+            return errorMsg.noUser(res);
+        }
+        return result;
+    },
     deleteUserResetToken: async (res, userId) => {
         console.log("deleteUserResetToken");
         const result = await userRepo.deleteUserResetToken(res, userId);
