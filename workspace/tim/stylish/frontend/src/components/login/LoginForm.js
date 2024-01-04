@@ -133,7 +133,7 @@ const LoginForm = ({ setShowLogin, showLogin, showForgotPassword, setShowForgotP
     const loginHandler = async (values) => {
         setLoading(true);
         try {
-            const response = await axios.post(`${elasticIp}/api/1.0/user/signin`, {
+            const response = await axios.post(`https://${elasticIp}/api/1.0/user/signin`, {
                 provider: "native",
                 email: values.email,
                 password: values.password,

@@ -58,6 +58,10 @@ module.exports = {
     updateOrderIsPaid: async(res,status,orderId)=>{
         await orderRepo.updateOrderPaidStatus(res,status,orderId);
     },
+    getOrderInfo: async(res,orderId)=>{
+        const result = await orderRepo.getOrderInfo(res,orderId);
+        return result;
+    },
     getOrderList: async(res,userId)=>{
         const result = await orderRepo.getOrderList(res,userId);
         return result;
@@ -71,9 +75,5 @@ module.exports = {
         const result = await orderRepo.updateOrderShippingStatus(res,orderId,shippingStatus);
         return result;
     },
-    updateOrderShippingStatus: async(res,orderId,shippingStatus)=>{
-      const result = await orderRepo.updateOrderShippingStatus(res,orderId,shippingStatus);
-      return result;
-  },
 
 }

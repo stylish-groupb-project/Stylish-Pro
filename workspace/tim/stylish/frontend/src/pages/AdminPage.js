@@ -69,7 +69,7 @@ const AdminPage = () => {
   const handleChangeShippingStatus = async (orderId, shippingStatus) => {
     try {
       const res = await axios.put(
-        `http://${elasticIp}/api/1.0/order/manage/${orderId}`,
+        `https://${elasticIp}/api/1.0/order/manage/${orderId}`,
         {
           shipping_status: shippingStatus,
         },
@@ -89,7 +89,7 @@ const AdminPage = () => {
   useEffect(() => {
     const fetchOrderList = async () => {
       const res = await axios.get(
-        'http://${elasticIp}/api/1.0/order/manage',
+        `https://${elasticIp}/api/1.0/order/manage`,
         {
           headers: {
             Authorization: `Bearer ${Cookies.get("token")}`,

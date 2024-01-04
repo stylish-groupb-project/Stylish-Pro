@@ -23,6 +23,13 @@ async function handleTextMessageEvent(res, event) {
   console.log("handleTextMessageEvent:");
   const messageText = event.message.text;
 
+  if (messageText === "Hi" || messageText === "Hello" || messageText === "哈囉" || messageText === "嗨" || messageText === "查詢訂單") {
+    await client.replyMessage(event.replyToken, {
+      type: "text",
+      text: "請輸入 gmail 來查詢訂單並追蹤訂單資訊呦～\n例如：test@gmail.com",
+    });
+    return;
+  }
   // 檢查是否符合訂單查詢格式
   const orderQueryRegex = /^(\d+) (.+)$/;
 
@@ -30,10 +37,14 @@ async function handleTextMessageEvent(res, event) {
 
   if (emailRegex.test(messageText)) {
     // 如果是合法的 email，則執行使用者名稱查詢邏輯
+    const clientLineId = event.source.userId;
+    console.log(clientLineId);
     const response = await userService.getProfileByEmail(res, messageText);
     if (response.length > 0) {
       const responseMessage = [];
 
+      await userService.updateLineId(res, clientLineId, response[0].id);
+      
       // 訂單查詢
       const orderList = await orderService.getOrderList(res, response[0].id);
       console.log(orderList);
@@ -65,7 +76,7 @@ async function handleTextMessageEvent(res, event) {
     }
   } else if (orderQueryRegex.test(messageText)) {
     // 如果符合訂單查詢格式，則執行訂單查詢邏輯
-    const [, orderId, username] = messageText.match(orderQueryRegex);
+    const [orderId, username] = messageText.match(orderQueryRegex);
     const orderInfo = await orderService.getOrderInfo(res, orderId, username);
 
     if (orderInfo) {
