@@ -13,7 +13,7 @@ module.exports = {
         user_id,
       } = orderDataObj;
       const insertOrderQuery =
-        "INSERT INTO orders(shipping_way, payment_way, subtotal,  freight,total, user_id , isPaid, shipping_status) VALUES(?,?,?,?,?,?,?,?)";
+        "INSERT INTO orders(shipping_way, payment_way, subtotal,  freight,total, shipping_status, user_id , isPaid) VALUES(?,?,?,?,?,?,?,?)";
       const [result] = await connection.execute(insertOrderQuery, [
         shipping_way,
         payment_way,
