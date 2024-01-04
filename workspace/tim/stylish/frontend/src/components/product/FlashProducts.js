@@ -40,6 +40,32 @@ const ProductWrapper = styled.div`
   //   margin-left: 2.5rem;
   margin-right: 0.5rem;
 `;
+// Define styles for different product states
+const SoldOutOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  z-index: 1;
+`;
+
+const CountdownOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(169, 169, 169, 0.2);
+  z-index: 1;
+`;
 
 function FlashProducts({ endpoint, secKillData }) {
   const [searchParams] = useSearchParams();
@@ -65,10 +91,6 @@ function FlashProducts({ endpoint, secKillData }) {
     }
   }, [fetchNextPage, inView, queryKey]);
 
-  //   if (status === "pending") {
-  //     return <ProductsSkeleton />;
-  //   }
-
   if (status === "error") {
     return <ErrorMessage>500 Internal Server Error</ErrorMessage>;
   }
@@ -81,22 +103,7 @@ function FlashProducts({ endpoint, secKillData }) {
     );
   }
 
-  const sortedData = data?.pages.slice().sort((a, b) => {
-    const aStartTime = secKillData.find(
-      (secKill) => secKill.product_id === a.id
-    )?.start_time;
-    const bStartTime = secKillData.find(
-      (secKill) => secKill.product_id === b.id
-    )?.start_time;
-
-    if (aStartTime && bStartTime) {
-      return new Date(aStartTime) - new Date(bStartTime);
-    }
-
-    return 0;
-  });
-
-  console.log(data?.pages);
+  console.log(data);
   return (
     <ProductsContainer data-testid="products-container">
       {data?.pages.map((page, i) => (
@@ -106,11 +113,27 @@ function FlashProducts({ endpoint, secKillData }) {
               (secKill) => secKill.product_id === product.id
             );
 
+            const isSoldOut = correspondingSecKill?.amount === 0;
+            const isCountdown =
+              correspondingSecKill &&
+              new Date(correspondingSecKill.start_time).getTime() > Date.now();
+
             return (
-              <ProductWrapper key={product.id} data-testid="product-cards">
+              <ProductWrapper
+                key={product.id}
+                data-testid="product-cards"
+                style={{ position: "relative", overflow: "hidden" }}
+              >
+                {isSoldOut && (
+                  <SoldOutOverlay>
+                    <span>已完售</span>
+                  </SoldOutOverlay>
+                )}
+                {isCountdown && <CountdownOverlay />}
                 <FlashProductCard
                   product={product}
                   secKillInfo={correspondingSecKill}
+                  isClickable={!isSoldOut && !isCountdown}
                 />
               </ProductWrapper>
             );
