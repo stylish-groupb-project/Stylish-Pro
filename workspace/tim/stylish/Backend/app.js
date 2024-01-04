@@ -15,7 +15,7 @@ const monitor_router = require('./Router/monitor_router');
 const auth_router = require('./Router/auth_router');
 app.use(cors());
 function excludeJsonMiddleware(req, res, next) {
-    if (req.path === '/line-webhook') {
+    if (req.path === '/api/line-webhook') {
       next();
     } else {
       express.json()(req, res, next);
