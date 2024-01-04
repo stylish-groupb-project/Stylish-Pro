@@ -15,7 +15,7 @@ const monitor_router = require('./Router/monitor_router');
 const auth_router = require('./Router/auth_router');
 app.use(cors());
 function excludeJsonMiddleware(req, res, next) {
-    if (req.path === '/line-webhook') {
+    if (req.path === '/api/line-webhook') {
       next();
     } else {
       express.json()(req, res, next);
@@ -69,7 +69,7 @@ app.get('/.well-known/pki-validation/753A3038A7992A7112828484D232D6CA.txt', (req
     res.sendFile(file);
 });
 
-app.post('/line-webhook', line.middleware(config), async (req, res) => {
+app.post('/api/line-webhook', line.middleware(config), async (req, res) => {
     try {
         console.log('Received LINE Webhook:', req.body);
         for (const event of req.body.events) {
