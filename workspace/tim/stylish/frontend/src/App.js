@@ -90,7 +90,7 @@ function App() {
               </Route>
               <Route path="/backstage" element={<Backstage />} />
               <Route element={<PrivateRoute />}>
-                <Route path="/admin" element={<AdminPage />} />
+                <Route path="/admin-order" element={<AdminPage />} />
               </Route>
             </Routes>
           </BrowserRouter>
