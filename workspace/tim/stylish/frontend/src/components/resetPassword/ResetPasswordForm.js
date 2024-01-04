@@ -92,7 +92,7 @@ const ResetPasswordForm = ({ resetToken }) => {
   const handleResetPassword = async (values) => {
     try {
       // Send a request to your API to reset the password
-      const res = await axios.post(`${elasticIp}/api/1.0/user/reset-password`, {
+      const res = await axios.post(`https://${elasticIp}/api/1.0/user/reset-password`, {
         resetToken: resetToken,
         newPassword: values.password,
       });

@@ -361,7 +361,7 @@ const OrderForm = ({ cartUpdate, setCartUpdate }) => {
 
             console.log(requestBody);
             //TODO: login 
-            const response = await axios.post(`${elasticIp}/api/1.0/order/checkout`, requestBody, {
+            const response = await axios.post(`https://${elasticIp}/api/1.0/order/checkout`, requestBody, {
                 headers: {
                     Authorization: `Bearer ${Cookies.get("token")}`,
                 },

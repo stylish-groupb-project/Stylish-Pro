@@ -6,7 +6,7 @@ const GetProductList = async (category = "all", page = "0") => {
   try {
     if(category !="search"){
         const response = await axios.get(
-            `${elasticIp}/api/1.0/products/${category}`,
+            `https://${elasticIp}/api/1.0/products/${category}`,
             {
               params: {
                 paging: page,

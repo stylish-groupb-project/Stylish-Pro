@@ -5,6 +5,8 @@ import Footer from "../components/layout/Footer";
 import Cookies from "js-cookie";
 import styled from "styled-components";
 
+const elasticIp = process.env.REACT_APP_ELASTIC_IP;
+
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -67,7 +69,7 @@ const AdminPage = () => {
   const handleChangeShippingStatus = async (orderId, shippingStatus) => {
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/1.0/order/manage/${orderId}`,
+        `http://${elasticIp}/api/1.0/order/manage/${orderId}`,
         {
           shipping_status: shippingStatus,
         },
@@ -87,7 +89,7 @@ const AdminPage = () => {
   useEffect(() => {
     const fetchOrderList = async () => {
       const res = await axios.get(
-        "http://localhost:5000/api/1.0/order/manage",
+        'http://${elasticIp}/api/1.0/order/manage',
         {
           headers: {
             Authorization: `Bearer ${Cookies.get("token")}`,

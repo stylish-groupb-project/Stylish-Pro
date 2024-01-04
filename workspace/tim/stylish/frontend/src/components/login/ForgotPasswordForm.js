@@ -86,7 +86,7 @@ const ForgotPasswordForm = ({ setShowForgotPassword }) => {
   const handleForgotPassword = async (values) => {
     try {
       // Send a request to your API to initiate the password reset
-      const res = await axios.post(`${elasticIp}/api/1.0/user/forgot-password`, {
+      const res = await axios.post(`https://${elasticIp}/api/1.0/user/forgot-password`, {
         email: values.email,
       });
       
