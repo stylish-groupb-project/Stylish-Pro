@@ -19,6 +19,7 @@ module.exports = {
         subtotal: subtotal,
         freight: freight,
         total: total,
+        shipping_status: "Processing",
         user_id: userId,
       };
       console.log(orderObj);
