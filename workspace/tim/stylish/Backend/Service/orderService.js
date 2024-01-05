@@ -92,8 +92,12 @@ module.exports = {
     console.log(prizeDataObj);
     await prizeRepo.insertNewPrize(res, prizeDataObj);
   },
-  updatePrizeIsUsed: async (res, used, prizeId) => {
-    await prizeRepo.updatePrizeUsedStatus(res, used, prizeId);
+  updatePrizeIsUsed: async (res, loginUserId, prizeId) => {
+    await prizeRepo.updatePrizeUsedStatus(res, loginUserId, prizeId);
+  },
+  getAllUnusedPrizes: async (res, userId) => {
+    const result = await prizeRepo.getAllUnusedPrizesByUserId(res, userId);
+    return result;
   },
   checkTodayPrize: async (res, userId) => {
     const result = await prizeRepo.checkTodayPrize(res, userId);
