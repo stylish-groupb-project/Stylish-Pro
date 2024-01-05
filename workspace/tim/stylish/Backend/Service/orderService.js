@@ -74,6 +74,34 @@ module.exports = {
   updateOrderIsPaid: async (res, status, orderId) => {
     await orderRepo.updateOrderPaidStatus(res, status, orderId);
   },
+  insertNewPrize: async (res, dataObj, userId) => {
+    const { prize, time } = dataObj;
+
+    // Assuming `expirationDate` is set to 7 days from the obtained time
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 7);
+
+    const prizeDataObj = {
+      prize: prize,
+      used: 0, // Assuming the default value for 'used' is 0 (not used)
+      obtainedTime: time,
+      expirationDate: expirationDate.toISOString(),
+      userId: userId,
+    };
+
+    console.log(prizeDataObj);
+    await prizeRepo.insertNewPrize(res, prizeDataObj);
+  },
+  updatePrizeIsUsed: async (res, used, prizeId) => {
+    await prizeRepo.updatePrizeUsedStatus(res, used, prizeId);
+  },
+  checkTodayPrize: async (res, userId) => {
+    const result = await prizeRepo.checkTodayPrize(res, userId);
+    return result;
+  },
+  updateOrderIsPaid: async (res, status, orderId) => {
+    await orderRepo.updateOrderPaidStatus(res, status, orderId);
+  },
   getOrderInfo: async (res, orderId) => {
     const result = await orderRepo.getOrderInfo(res, orderId);
     return result;
